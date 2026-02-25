@@ -94,8 +94,7 @@ O projeto foi pensado para evoluir do **básico ao avançado**, permitindo contr
 
 > Screenshots reais do aplicativo.
 
-
-::contentReference[oaicite:0]{index=0}
+<img width="1035" height="488" alt="Captura de Tela 2026-02-25 às 17 04 21" src="https://github.com/user-attachments/assets/099ca277-e6fa-4e5b-97af-6c877e48fe50" />
 
 
 ---
