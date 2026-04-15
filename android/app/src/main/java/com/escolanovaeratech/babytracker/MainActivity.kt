@@ -1,11 +1,10 @@
-package com.escolanovaeratech.babytracker.view
+package com.escolanovaeratech.babytracker
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.escolanovaeratech.babytracker.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
