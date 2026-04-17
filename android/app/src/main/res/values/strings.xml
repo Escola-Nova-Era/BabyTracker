@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BabyTracker</string>
+    <string name="title_activity_baby_tracker">BabyTracker</string>
+    <string name="title_activity_bottom_navigation">BottomNavigation</string>
 </resources>

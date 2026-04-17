@@ -44,6 +44,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.compose.ui.graphics)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    implementation("androidx.compose.material:material-icons-extended")
+
+
 
     // Gerenciamento de versões via BoM (Bill of Materials)
     val composeBom = platform("androidx.compose:compose-bom:2026.03.01")
@@ -59,8 +66,8 @@ dependencies {
     // Integração com Activity e Lifecycle
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
