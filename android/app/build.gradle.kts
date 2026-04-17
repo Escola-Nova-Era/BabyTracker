@@ -31,7 +31,11 @@ android {
     buildFeatures {
         // Ativando o Compose no projeto.
         compose = true
+        viewBinding = true
     }
+
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
