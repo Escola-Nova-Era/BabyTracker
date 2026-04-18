@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="light_blue_400">#FF29B6F6</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="gray_400">#FFBDBDBD</color>
-    <color name="gray_600">#FF757575</color>
+    <!-- Cores Primárias -->
+    <color name="primary_color">#7C5ACE</color>
+    <color name="primary_light">#9575CD</color>
+    <color name="primary_dark">#5E35B1</color>
+
+    <!-- Cores Secundárias -->
+    <color name="secondary_color">#4DB8A8</color>
+    <color name="secondary_light">#80CBC4</color>
+    <color name="secondary_dark">#00897B</color>
+
+    <!-- Cores de Acentos (Para elementos visuais, badges, cards) -->
+    <color name="accent_green">#66BB6A</color>
+    <color name="accent_orange">#FF9800</color>
+    <color name="accent_red">#EF5350</color>
+    <color name="accent_blue">#42A5F5</color>
+    <color name="accent_yellow">#FFC107</color>
+
+    <!-- Cores de Fundo -->
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_dark">#121212</color>
+    <color name="surface_color">#FFFFFF</color>
+    <color name="surface_dark">#1E1E1E</color>
+
+    <!-- Cores de Texto -->
+    <color name="text_primary">#2C2C2C</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_tertiary">#9E9E9E</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_hint">#BDBDBD</color>
+
+    <!-- Cores de Estado  (State colors → para status críticos (erro, sucesso))-->
+    <color name="success_color">#4CAF50</color>
+    <color name="error_color">#B00020</color>
+    <color name="warning_color">#FFC107</color>
+    <color name="info_color">#2196F3</color>
+
+    <!-- Cores de Divider/Border -->
+    <color name="divider_color">#E0E0E0</color>
+    <color name="divider_color_dark">#424242</color>
+    <color name="border_color">#BDBDBD</color>
+
+    <!-- Cores para Gráfico -->
+    <color name="chart_bar_1">#FF9800</color>
+    <color name="chart_bar_2">#42A5F5</color>
+
 </resources>
