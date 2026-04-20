@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+    implementation("androidx.compose.material:material-icons-extended")
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
     // Gerenciamento de versões via BoM (Bill of Materials)
