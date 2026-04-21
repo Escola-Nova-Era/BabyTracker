@@ -13,9 +13,21 @@
         android:layout_height="wrap_content"
         android:text="Baby Tracker"
         style="@style/TextHeadlineLarge"
-        android:textColor="?attr/android:textColorPrimary"/>
+        android:textColor="?attr/android:textColorPrimary" />
 
-    <!-- CARD SIMULADO -->
+    <!-- CONTAINER -->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- COMPOSE VIEW -->
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- CARD -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +49,6 @@
             android:text="10:30 AM - Bottle"
             style="@style/TextBodyMedium"
             android:textColor="?attr/android:textColorSecondary"/>
-
     </LinearLayout>
 
     <!-- BOTÃO -->
