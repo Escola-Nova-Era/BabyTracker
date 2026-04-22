@@ -157,12 +157,10 @@ struct CreateAccountView: View {
                                         Image("google-logo")
                                             .resizable()
                                             .frame(width: 28, height: 28)
-                                        
+
                                         Text("Continue with Google")
                                             .font(.system(size: 16, weight: .semibold))
                                             .foregroundStyle(AppColors.textPrimary)
-                                        
-                                        Spacer()
                                     }
                                     .padding(.horizontal, AppSpacing.medium)
                                     .frame(maxWidth: .infinity)
@@ -185,13 +183,10 @@ struct CreateAccountView: View {
                                             .font(.system(size: 16, weight: .semibold))
                                             .foregroundStyle(.white)
                                             .frame(width: 28, height: 28)
-                                    
-                                        
+
                                         Text("Continue with Apple")
                                             .font(.system(size: 16, weight: .semibold))
                                             .foregroundStyle(.white)
-                                        
-                                        Spacer()
                                     }
                                     .padding(.horizontal, AppSpacing.medium)
                                     .frame(maxWidth: .infinity)
