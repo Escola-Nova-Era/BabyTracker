@@ -92,11 +92,25 @@ The database is designed for scalability and flexibility.
 
 ## 🔐 Authentication
 
-The API includes a secure authentication system:
+The API includes a complete authentication system:
 
-* Password hashing using **bcrypt**
-* User registration endpoint
-* JWT authentication (in progress)
+- User registration
+- Login with email and password
+- Social login
+- JWT-based authentication
+- Protected routes using middleware
+
+### 📌 Endpoints
+
+POST /auth/register  
+POST /auth/login  
+POST /auth/social  
+
+### 🔑 Authorization
+
+Protected routes require a valid JWT token in the header:
+
+Authorization: Bearer <token>
 
 ---
 
