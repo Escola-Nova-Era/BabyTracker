@@ -18,6 +18,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/insights", insightsRoutes);
 app.use("/api/home", homeRoutes);
 
+// middleware de erro (sempre por último)
 app.use(errorMiddleware);
 
 export default app;
