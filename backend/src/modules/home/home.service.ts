@@ -7,7 +7,7 @@ type HomeResponse = {
   summary: {
     totalActivities: number;
   };
-  lastActivity: null;
+  lastActivity: any | null;
 };
 
 export const getHomeData = async (userId: string): Promise<HomeResponse> => {
@@ -25,8 +25,8 @@ export const getHomeData = async (userId: string): Promise<HomeResponse> => {
       name: user.name,
     },
     summary: {
-      totalActivities: 0, 
+      totalActivities: 0, // placeholder por enquanto
     },
-    lastActivity: null, 
+    lastActivity: null, // placeholder por enquanto
   };
 };
