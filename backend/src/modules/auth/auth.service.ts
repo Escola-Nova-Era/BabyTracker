@@ -1,39 +1,60 @@
-import { prisma } from "../../lib/prisma";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { env } from "../../config/env";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { prisma } from '../../lib/prisma';
 
-export const loginUser = async (email: string, password: string) => {
-  // 1. Buscar usuário
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+// Contrato exclusivo para o Registro 
+interface RegisterDTO {
+    name: string; 
+    email: string;
+    password: string;
+}
 
-  if (!user || !user.password) {
-    throw { status: 401, message: "Invalid credentials" };
-  }
+// Contrato exclusivo para o Login 
+interface LoginDTO {
+    email: string;
+    password: string;
+}
 
-  // 2. Comparar senha
-  const isPasswordValid = await bcrypt.compare(password, user.password);
+export class AuthService {
+    async register({ name, email, password }: RegisterDTO) {
+        
+        const userExists = await prisma.user.findUnique({ where: { email } });
+        if (userExists) {
+            throw new Error('Email já registrado');
+        }
 
-  if (!isPasswordValid) {
-    throw { status: 401, message: "Invalid credentials" };
-  }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        if (!name) throw new Error('Nome é obrigatório para registro');
 
-  // 3. Gerar token
-  const token = jwt.sign(
-    { userId: user.id },
-    env.jwtSecret,
-    { expiresIn: "7d" }
-  );
+        const user = await prisma.user.create({
+            data: { name, email, password: hashedPassword },
+        });
 
-  // 4. Retornar resposta
-  return {
-    token,
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    },
-  };
-};
+        return { id: user.id, name: user.name, email: user.email };
+    }
+
+    // O Login aceita apenas email e senha
+    async login({ email, password }: LoginDTO) {
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            throw new Error('Email ou senha inválidos');
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error('Email ou senha inválidos');
+        }
+
+        const secret = process.env.JWT_SECRET;
+        if (!secret) {
+            throw new Error('Chave secreta para JWT não configurada');
+        }
+
+        const token = jwt.sign({ userId: user.id }, secret, { expiresIn: '1d' });
+        
+        return { 
+            user: { id: user.id, name: user.name, email: user.email },
+            token 
+        };
+    }   
+}
