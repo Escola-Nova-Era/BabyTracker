@@ -1,51 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/background_light">
+    android:background="@color/screen_background"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Baby Tracker"
-        style="@style/TextHeadlineLarge"
-        android:textColor="?attr/android:textColorPrimary" />
-
-    <FrameLayout
-        android:id="@+id/container"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/surface_color">
+        <View
+            android:id="@+id/topGlow"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:background="@drawable/bg_top_glow"
+            android:importantForAccessibility="no"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Feeding"
-            style="@style/TextTitleLarge"
-            android:textColor="?attr/android:textColorPrimary"/>
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:text="Today's Timeline"
+            android:textColor="@color/text_primary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btnFilter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDate"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="10:30 AM - Bottle"
-            style="@style/TextBodyMedium"
-            android:textColor="?attr/android:textColorSecondary"/>
-    </LinearLayout>
+            android:layout_marginTop="4dp"
+            android:text="January 27, 2025"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/btnFilter"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Activity TESTE"
-        android:layout_marginTop="24dp"/>
+        <ImageButton
+            android:id="@+id/btnFilter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_filter_button"
+            android:contentDescription="@string/filter"
+            android:padding="10dp"
+            android:src="@android:drawable/arrow_down_float"
+            android:tint="@color/text_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_lista"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingStart="18dp"
+            android:paddingTop="18dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"
+            tools:listitem="@layout/recycler_view_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
