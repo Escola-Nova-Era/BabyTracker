@@ -1,15 +1,15 @@
 import { Router } from 'express';
 import { AuthController } from './auth.controller';
 
-// Inicializando o Router do Express
+// Inicializando o Router
 const authRouter = Router();
 
-// Criando uma instância do AuthController
+// Instância do controller
 const authController = new AuthController();
 
-// Definindo as rotas para registro e login
+// Rotas
 authRouter.post('/register', authController.register);
 authRouter.post('/login', authController.login);
 
-// Exportando o Router para ser usado na aplicação
+// Exportando
 export default authRouter;
