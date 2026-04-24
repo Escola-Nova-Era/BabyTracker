@@ -1,5 +1,4 @@
 import { prisma } from "../../lib/prisma";
-import { getInsights } from "../insights/insights.service";
 
 type HomeResponse = {
   user: {
@@ -8,10 +7,7 @@ type HomeResponse = {
   summary: {
     totalActivities: number;
   };
-  lastActivity: {
-    type: string;
-    date: Date;
-  } | null;
+  lastActivity: null;
 };
 
 export const getHomeData = async (userId: string): Promise<HomeResponse> => {
@@ -24,20 +20,13 @@ export const getHomeData = async (userId: string): Promise<HomeResponse> => {
     throw { status: 404, message: "User not found" };
   }
 
-  const insights = await getInsights(userId);
-
   return {
     user: {
       name: user.name,
     },
     summary: {
-      totalActivities: insights.totalActivities,
+      totalActivities: 0, 
     },
-    lastActivity: insights.lastActivity
-      ? {
-          type: insights.lastActivity.type,
-          date: insights.lastActivity.createdAt,
-        }
-      : null,
+    lastActivity: null, 
   };
 };
