@@ -97,8 +97,7 @@ fun LoginScreen() {
         // 3. Column Principal
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -157,6 +156,7 @@ fun LoginScreen() {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
                         .padding(horizontal = 24.dp, vertical = 32.dp)
                 ) {
 

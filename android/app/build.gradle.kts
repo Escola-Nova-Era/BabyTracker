@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.3.20" // esta versao ja gerencia a compatibilidade do compilador automaticamente com a versao do Kotlin.
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.compose.material.icons)
+    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
 
     // Integração com Activity e Lifecycle
     implementation(libs.androidx.activity.compose)
