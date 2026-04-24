@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./modules/auth/auth.routes";
 import healthRoutes from "./modules/health/health.routes";
+import authRoutes from "./modules/auth/auth.routes";
 import { errorMiddleware } from "./middlewares/error.middleware";
 
 const app = express();
@@ -12,6 +13,9 @@ app.use(express.json());
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);
 
+app.use("/api/auth", authRoutes);
+
+// middleware de erro (sempre por último)
 app.use(errorMiddleware);
 
 export default app;
