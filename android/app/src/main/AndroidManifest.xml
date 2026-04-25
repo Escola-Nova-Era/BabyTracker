@@ -19,6 +19,9 @@
             android:label="@string/title_activity_navigation_bar"
             android:theme="@style/Theme.BabyTracker" />
         <activity
+            android:name=".home.ui.TelaHomePrincipal"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
