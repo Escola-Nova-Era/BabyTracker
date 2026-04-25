@@ -12,7 +12,6 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Título -->
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
@@ -31,7 +30,6 @@
             android:textSize="14sp"
             android:textColor="#8A8A8A" />
 
-        <!-- Card principal -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardBabyInfo"
             android:layout_width="match_parent"
@@ -79,7 +77,6 @@
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
 
-                <!-- Linha de infos -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -200,7 +197,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Settings -->
         <TextView
             android:id="@+id/tvSettings"
             android:layout_width="wrap_content"
@@ -211,7 +207,6 @@
             android:textSize="22sp"
             android:textColor="#1E1E1E" />
 
-        <!-- Item 1 -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardEditProfile"
             android:layout_width="match_parent"
@@ -265,7 +260,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Item 2 -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardNotifications"
             android:layout_width="match_parent"
@@ -319,7 +313,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Item 3 -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardExportData"
             android:layout_width="match_parent"
@@ -372,7 +365,7 @@
                     android:src="@android:drawable/ic_media_next" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-        <!-- Item 1 -->
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/carHelpSupport"
             android:layout_width="match_parent"
@@ -426,7 +419,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
