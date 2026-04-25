@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">BabyTracker</string>
-    <string name="title_activity_navigation_bar">NavigationBar</string>
+    <string name="category_account" />
+    <string name="settings_edit_profile" />
+    <string name="settings_export_data" />
+    <string name="settings_help" />
+    <string name="category_app_preferences" />
+    <string name="settings_notifications" />
+    <string name="settings_language" />
+    <string name="value_language_english" />
+    <string name="app_version" />
+    <string name="settings_sign_out" />
+    <string name="born_march_15_2024">Born March 15, 2024</string>
+    <string name="emma_rose">Emma Rose</string>
+    <string name="your_baby_s_information">Your baby\'s information</string>
 </resources>
