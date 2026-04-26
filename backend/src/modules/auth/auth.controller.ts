@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { AuthService } from './auth.service';
+import { Request, Response } from "express";
+import { AuthService } from "./auth.service";
 
 export class AuthController {
   private authService: AuthService;
@@ -8,16 +8,14 @@ export class AuthController {
     this.authService = new AuthService();
   }
 
-  // REGISTER
   register = async (req: Request, res: Response): Promise<Response> => {
     try {
       const { name, email, password } = req.body;
 
-      // validação básica
       if (!name || !email || !password) {
-        return res.status(400).json({
-          error: 'Nome, email e senha são obrigatórios',
-        });
+        return res
+          .status(400)
+          .json({ error: "Nome, email e senha são obrigatórios" });
       }
 
       const user = await this.authService.register({
@@ -28,47 +26,35 @@ export class AuthController {
 
       return res.status(201).json(user);
     } catch (error: any) {
-      if (error.message === 'Email já registrado') {
+      if (error.message === "Email já registrado") {
         return res.status(409).json({ error: error.message });
       }
 
-      if (error.message === 'Nome é obrigatório para registro') {
-        return res.status(400).json({ error: error.message });
-      }
-
-      console.error('Erro no registro:', error);
-      return res.status(500).json({
-        error: 'Ocorreu um erro ao registrar o usuário.',
-      });
+      console.error("Erro no register:", error);
+      return res.status(500).json({ error: "Erro ao registrar usuário" });
     }
   };
 
-  // LOGIN
   login = async (req: Request, res: Response): Promise<Response> => {
     try {
       const { email, password } = req.body;
 
       if (!email || !password) {
-        return res.status(400).json({
-          error: 'Email e senha são obrigatórios',
-        });
+        return res
+          .status(400)
+          .json({ error: "Email e senha são obrigatórios" });
       }
 
-      const result = await this.authService.login({
-        email,
-        password,
-      });
+      const result = await this.authService.login({ email, password });
 
       return res.status(200).json(result);
     } catch (error: any) {
-      if (error.message === 'Email ou senha inválidos') {
+      if (error.message === "Email ou senha inválidos") {
         return res.status(401).json({ error: error.message });
       }
 
-      console.error('Erro no login:', error);
-      return res.status(500).json({
-        error: 'Ocorreu um erro ao realizar o login.',
-      });
+      console.error("Erro no login:", error);
+      return res.status(500).json({ error: "Erro no login" });
     }
   };
 }

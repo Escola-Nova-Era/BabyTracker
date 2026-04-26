@@ -1,15 +1,34 @@
-import { Router } from 'express';
-import { AuthController } from './auth.controller';
+/**
+ * @swagger
+ * /api/auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             name: Vitor
+ *             email: vitor@email.com
+ *             password: 123456
+ *     responses:
+ *       201:
+ *         description: User created
+ */
+
+import { Router } from "express";
+import { AuthController } from "./auth.controller";
 
 // Inicializando o Router
-const authRouter = Router();
+const router = Router();
 
-// Instância do controller
+// Instanciando o controller
 const authController = new AuthController();
 
 // Rotas
-authRouter.post('/register', authController.register);
-authRouter.post('/login', authController.login);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
 
-// Exportando
-export default authRouter;
+// Export
+export default router;

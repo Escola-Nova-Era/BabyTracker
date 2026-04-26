@@ -1,18 +1,10 @@
-import { Request, Response, NextFunction } from "express";
-import { getHomeData } from "./home.service";
+import { Request, Response } from "express";
 
-export const getHome = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const userId = req.user.userId;
-
-    const data = await getHomeData(userId);
-
-    res.status(200).json(data);
-  } catch (error) {
-    next(error);
+export class HomeController {
+  public getHome(req: Request, res: Response): Response {
+    return res.status(200).json({
+      message: "Welcome to BabyTracker API 🚀",
+      status: "running",
+    });
   }
-};
+}
