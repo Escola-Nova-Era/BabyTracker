@@ -1,70 +1,79 @@
-import { Request, Response } from "express";
-import { AuthService } from "./auth.service";
+import { Request, Response, NextFunction } from "express";
+import {
+  registerUser,
+  loginUser,
+  forgotPassword,
+  resetPassword,
+} from "./auth.service";
 
-export class AuthController {
-  private authService: AuthService;
+// REGISTER
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { name, email, password } = req.body;
 
-  constructor() {
-    this.authService = new AuthService();
+    const user = await registerUser(name, email, password);
+
+    return res.status(201).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+  } catch (error) {
+    next(error);
   }
+};
 
-  // REGISTER
-  register = async (req: Request, res: Response): Promise<Response> => {
-    try {
-      const { name, email, password } = req.body;
+// LOGIN
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, password } = req.body;
 
-      // validação básica
-      if (!name || !email || !password) {
-        return res.status(400).json({
-          error: "Nome, email e senha são obrigatórios",
-        });
-      }
+    const result = await loginUser(email, password);
 
-      const user = await this.authService.register({
-        name,
-        email,
-        password,
-      });
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
 
-      return res.status(201).json(user);
-    } catch (error: any) {
-      if (error.message === "Email já registrado") {
-        return res.status(409).json({ error: error.message });
-      }
+// FORGOT PASSWORD
+export const forgotPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email } = req.body;
 
-      console.error("Erro no registro:", error);
-      return res.status(500).json({
-        error: "Ocorreu um erro ao registrar o usuário.",
-      });
-    }
-  };
+    const result = await forgotPassword(email);
 
-  // LOGIN
-  login = async (req: Request, res: Response): Promise<Response> => {
-    try {
-      const { email, password } = req.body;
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
 
-      if (!email || !password) {
-        return res.status(400).json({
-          error: "Email e senha são obrigatórios",
-        });
-      }
+// RESET PASSWORD
+export const resetPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { token, newPassword } = req.body;
 
-      const result = await this.authService.login({
-        email,
-        password,
-      });
+    const result = await resetPassword(token, newPassword);
 
-      return res.status(200).json(result);
-    } catch (error: any) {
-      if (error.message === "Email ou senha inválidos") {
-        return res.status(401).json({ error: error.message });
-      }
-
-      console.error("Erro no login:", error);
-      return res.status(500).json({
-        error: "Ocorreu um erro ao realizar o login.",
-      });
-    }
-  };
-}
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
