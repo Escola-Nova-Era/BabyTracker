@@ -25,7 +25,7 @@ app.use("/api/insights", insightsRoutes);
 // SWAGGER
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// ERROS
+// middleware de erro (sempre por último)
 app.use(errorMiddleware);
 
 export default app;

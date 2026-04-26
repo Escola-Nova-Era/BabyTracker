@@ -2,61 +2,83 @@ import { prisma } from "../../lib/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "supersecret"; // depois você joga isso pro .env
+// DTOs
+interface RegisterDTO {
+  name: string;
+  email: string;
+  password: string;
+}
 
-export const registerUser = async (
-  name: string,
-  email: string,
-  password: string
-) => {
-  const userExists = await prisma.user.findUnique({
-    where: { email },
-  });
+interface LoginDTO {
+  email: string;
+  password: string;
+}
 
-  if (userExists) {
-    throw new Error("User already exists");
-  }
+export class AuthService {
+  async register({ name, email, password }: RegisterDTO) {
+    const userExists = await prisma.user.findUnique({
+      where: { email },
+    });
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+    if (userExists) {
+      throw new Error("Email já registrado");
+    }
 
-  const user = await prisma.user.create({
-    data: {
-      name,
-      email,
-      password: hashedPassword,
-    },
-  });
+    if (!name) {
+      throw new Error("Nome é obrigatório");
+    }
 
-  return user;
-};
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-export const loginUser = async (email: string, password: string) => {
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
 
-  if (!user) {
-    throw new Error("Invalid credentials");
-  }
-
-  const passwordMatch = await bcrypt.compare(password, user.password);
-
-  if (!passwordMatch) {
-    throw new Error("Invalid credentials");
-  }
-
-  const token = jwt.sign(
-    { userId: user.id },
-    JWT_SECRET,
-    { expiresIn: "7d" }
-  );
-
-  return {
-    token,
-    user: {
+    return {
       id: user.id,
       name: user.name,
       email: user.email,
-    },
-  };
-};
+    };
+  }
+
+  async login({ email, password }: LoginDTO) {
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new Error("Email ou senha inválidos");
+    }
+
+    const isValid = await bcrypt.compare(password, user.password);
+
+    if (!isValid) {
+      throw new Error("Email ou senha inválidos");
+    }
+
+    const secret = process.env.JWT_SECRET;
+
+    if (!secret) {
+      throw new Error("JWT_SECRET não configurado");
+    }
+
+    const token = jwt.sign(
+      { userId: user.id },
+      secret,
+      { expiresIn: "1d" }
+    );
+
+    return {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+      token,
+    };
+  }
+}

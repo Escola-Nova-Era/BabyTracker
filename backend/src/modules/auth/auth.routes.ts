@@ -18,11 +18,17 @@
  */
 
 import { Router } from "express";
-import { register, login } from "./auth.controller";
+import { AuthController } from "./auth.controller";
 
+// Inicializando o Router
 const router = Router();
 
-router.post("/register", register);
-router.post("/login", login);
+// Instanciando o controller
+const authController = new AuthController();
 
+// Rotas
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+
+// Export
 export default router;
