@@ -1,6 +1,6 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { prisma } from '../../lib/prisma';
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { prisma } from "../../lib/prisma";
 
 // DTOs
 interface RegisterDTO {
@@ -16,16 +16,14 @@ interface LoginDTO {
 
 export class AuthService {
   async register({ name, email, password }: RegisterDTO) {
-    const userExists = await prisma.user.findUnique({
-      where: { email },
-    });
+    const userExists = await prisma.user.findUnique({ where: { email } });
 
     if (userExists) {
-      throw new Error('Email já registrado');
+      throw new Error("Email já registrado");
     }
 
     if (!name) {
-      throw new Error('Nome é obrigatório');
+      throw new Error("Nome é obrigatório");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,30 +44,28 @@ export class AuthService {
   }
 
   async login({ email, password }: LoginDTO) {
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) {
-      throw new Error('Email ou senha inválidos');
+      throw new Error("Email ou senha inválidos");
     }
 
-    const isValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if (!isValid) {
-      throw new Error('Email ou senha inválidos');
+    if (!isPasswordValid) {
+      throw new Error("Email ou senha inválidos");
     }
 
     const secret = process.env.JWT_SECRET;
 
     if (!secret) {
-      throw new Error('JWT_SECRET não configurado');
+      throw new Error("JWT_SECRET não configurado");
     }
 
     const token = jwt.sign(
       { userId: user.id },
       secret,
-      { expiresIn: '1d' }
+      { expiresIn: "1d" }
     );
 
     return {

@@ -4,7 +4,7 @@ import { AuthController } from "./auth.controller";
 // Inicializando o Router
 const authRouter = Router();
 
-// Instanciando o controller
+// Instância do controller
 const authController = new AuthController();
 
 // Rotas
