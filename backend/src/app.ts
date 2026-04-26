@@ -13,10 +13,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ROTAS
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/insights", insightsRoutes);
-app.use("/api/home", homeRoutes);
+app.use("/api", homeRoutes);
 
 // middleware de erro (sempre por último)
 app.use(errorMiddleware);
