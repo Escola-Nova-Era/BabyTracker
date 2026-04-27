@@ -8,7 +8,6 @@
     android:background="@drawable/screen_border"
     tools:context=".home.ui.TelaHomePrincipal">
 
-    <!-- Linha guia da primeira parte -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_section1"
         android:layout_width="wrap_content"
@@ -16,7 +15,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
-    <!-- Linha guia da segunda parte -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_section2"
         android:layout_width="wrap_content"
