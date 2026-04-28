@@ -58,6 +58,12 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+    // Implementação necessária para utilização do Material Icons no Compose
+    implementation(libs.androidx.compose.material.icons.extended)
+    // Implementação necessária para utilização do Navigation Suite do Material3
+    implementation(libs.androidx.material3.adaptive.navigation.suite)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
