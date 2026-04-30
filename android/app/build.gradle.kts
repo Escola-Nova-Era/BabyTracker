@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Gerenciamento de versões via BoM (Bill of Materials)
     val composeBom = platform("androidx.compose:compose-bom:2026.03.01")
