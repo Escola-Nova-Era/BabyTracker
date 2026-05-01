@@ -42,6 +42,28 @@ enum AppColors {
     // Verde suave para elementos positivos ou estados amigáveis
     static let mint = Color(red: 196.0/255, green: 239.0/255, blue: 220.0/255)
     
+    // MARK: Variações suaves extras
+
+    // Blue
+    static let blueSoft = Color(red: 214.0/255, green: 238.0/255, blue: 250.0/255)
+    static let blueMuted = Color(red: 186.0/255, green: 226.0/255, blue: 245.0/255)
+
+    // Green
+    static let greenSoft = Color(red: 220.0/255, green: 243.0/255, blue: 230.0/255)
+    static let greenMuted = Color(red: 196.0/255, green: 230.0/255, blue: 208.0/255)
+
+    // Purple
+    static let purpleSoft = Color(red: 229.0/255, green: 220.0/255, blue: 250.0/255)
+    static let purpleMuted = Color(red: 210.0/255, green: 196.0/255, blue: 242.0/255)
+
+    // Orange
+    static let orangeSoft = Color(red: 255.0/255, green: 232.0/255, blue: 214.0/255)
+    static let orangeMuted = Color(red: 250.0/255, green: 214.0/255, blue: 181.0/255)
+
+    // Yellow
+    static let yellowSoft = Color(red: 255.0/255, green: 244.0/255, blue: 204.0/255)
+    static let yellowMuted = Color(red: 250.0/255, green: 232.0/255, blue: 170.0/255)
+    
     // MARK: Hierarquia de texto
     
     // Texto principal forte
