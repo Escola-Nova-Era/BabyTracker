@@ -57,6 +57,7 @@ dependencies {
 
     // Integração com Activity e Lifecycle
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Implementação necessária para utilização do Material Icons no Compose
