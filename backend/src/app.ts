@@ -14,14 +14,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ROTAS
-app.use("/api", homeRoutes);
-app.use("/api/auth", authRoutes);
+
 app.use("/api/health", healthRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/insights", insightsRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api", homeRoutes);
 
-// ERROR HANDLER
+
 app.use(errorMiddleware);
 
 export default app;
