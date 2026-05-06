@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ActivityType {
+  FEEDING
+  SLEEP
+  HYGIENE
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  babies    Baby[]
+}
+
+model Baby {
+  id        String   @id @default(uuid())
+  name      String
+  birthDate DateTime
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+
+  activities Activity[]
+}
+
+model Activity {
+  id        String       @id @default(uuid())
+  type      ActivityType
+  note      String?
+  createdAt DateTime     @default(now())
+
+  babyId String
+  baby   Baby @relation(fields: [babyId], references: [id])
+}

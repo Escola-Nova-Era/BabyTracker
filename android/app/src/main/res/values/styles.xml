@@ -1,7 +1,92 @@
 <resources>
 
-    <style name="Widget.Theme.BabyTracker.MyView" parent="">
-        <item name="android:background">@color/gray_400</item>
-        <item name="exampleColor">@color/light_blue_400</item>
+    <!-- DISPLAY → títulos grandes (telas principais) -->
+    <style name="TextDisplayLarge">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">40sp</item>
     </style>
+
+    <style name="TextDisplayMedium">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">36sp</item>
+    </style>
+
+    <style name="TextDisplaySmall">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">32sp</item>
+    </style>
+
+
+    <!-- HEADLINE → títulos de seção -->
+    <style name="TextHeadlineLarge">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">28sp</item>
+    </style>
+
+    <style name="TextHeadlineMedium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">26sp</item>
+    </style>
+
+    <style name="TextHeadlineSmall">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">24sp</item>
+    </style>
+
+
+    <!-- TITLE → títulos de cards -->
+    <style name="TextTitleLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">22sp</item>
+    </style>
+
+    <style name="TextTitleMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">20sp</item>
+    </style>
+
+    <style name="TextTitleSmall">
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">18sp</item>
+    </style>
+
+
+    <!-- BODY → texto principal -->
+    <style name="TextBodyLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
+    </style>
+
+    <style name="TextBodyMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20sp</item>
+    </style>
+
+    <style name="TextBodySmall">
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">18sp</item>
+    </style>
+
+
+    <!-- LABEL → textos pequenos -->
+    <style name="TextLabelLarge">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextLabelMedium">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextLabelSmall">
+        <item name="android:textSize">11sp</item>
+    </style>
+
 </resources>

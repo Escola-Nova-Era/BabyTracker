@@ -5,9 +5,7 @@ plugins {
 
 android {
     namespace = "com.escolanovaeratech.babytracker"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.escolanovaeratech.babytracker"
@@ -31,11 +29,7 @@ android {
     buildFeatures {
         // Ativando o Compose no projeto.
         compose = true
-        viewBinding = true
     }
-
-
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -48,6 +42,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Gerenciamento de versões via BoM (Bill of Materials)
     val composeBom = platform("androidx.compose:compose-bom:2026.03.01")
@@ -63,6 +58,12 @@ dependencies {
     // Integração com Activity e Lifecycle
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Implementação necessária para utilização do Material Icons no Compose
+    implementation(libs.androidx.compose.material.icons.extended)
+    // Implementação necessária para utilização do Navigation Suite do Material3
+    implementation(libs.androidx.material3.adaptive.navigation.suite)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

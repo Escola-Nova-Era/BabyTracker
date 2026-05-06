@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores para Dark Mode -->
+
+    <!-- Cores Primárias -->
+    <color name="primary_color">#9575CD</color>
+    <color name="primary_light">#B39DDB</color>
+    <color name="primary_dark">#5E35B1</color>
+
+    <!-- Cores Secundárias -->
+    <color name="secondary_color">#80CBC4</color>
+    <color name="secondary_light">#B2DFDB</color>
+    <color name="secondary_dark">#00897B</color>
+
+    <!-- Cores de Acentos (mantém) -->
+    <color name="accent_green">#66BB6A</color>
+    <color name="accent_orange">#FF9800</color>
+    <color name="accent_red">#EF5350</color>
+    <color name="accent_blue">#42A5F5</color>
+    <color name="accent_yellow">#FFC107</color>
+
+    <!-- Cores de Fundo -->
+    <color name="background_light">#121212</color>
+    <color name="background_dark">#121212</color>
+    <color name="surface_color">#1E1E1E</color>
+    <color name="surface_dark">#1E1E1E</color>
+
+    <!-- Cores de Texto -->
+    <color name="text_primary">#E0E0E0</color>
+    <color name="text_secondary">#BDBDBD</color>
+    <color name="text_tertiary">#757575</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_hint">#616161</color>
+
+    <!-- Cores de Estado -->
+    <color name="success_color">#66BB6A</color>
+    <color name="error_color">#CF6679</color>
+    <color name="warning_color">#FFC107</color>
+    <color name="info_color">#42A5F5</color>
+
+    <!-- Cores de Divider/Border -->
+    <color name="divider_color">#424242</color>
+    <color name="divider_color_dark">#424242</color>
+    <color name="border_color">#616161</color>
+
+    <!-- Cores para Gráfico -->
+    <color name="chart_bar_1">#FFB74D</color>
+    <color name="chart_bar_2">#64B5F6</color>
+</resources>

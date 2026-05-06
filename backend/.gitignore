@@ -1,0 +1,62 @@
+# Dependencies
+/node_modules
+
+# Environment variables (SENSÍVEL 🚨)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build / dist
+/dist
+/build
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Generated Prisma Client (opcional ignorar)
+node_modules/.prisma
+
+# Coverage
+/coverage
+
+# Temporary files
+tmp/
+temp/
+
+# Debug files
+*.pid
+*.seed
+*.pid.lock
+
+# Docker (se usar depois)
+.dockerignore
+
+# Local config
+*.local
+
+# Test environment
+.env.test
+
+# Misc
+*.tgz
+
+# Optional: uploads / user files
+/uploads
