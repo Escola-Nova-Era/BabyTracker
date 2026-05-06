@@ -16,16 +16,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ROTAS
-app.use("/api", homeRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/health", healthRoutes);
-app.use("/api/insights", insightsRoutes);
 
-// SWAGGER
+app.use("/api/health", healthRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/insights", insightsRoutes);
+app.use("/api", homeRoutes);
+
+
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// middleware de erro (sempre por último)
+
 app.use(errorMiddleware);
 
 export default app;
