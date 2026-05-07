@@ -13,11 +13,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
 fun BarrarInferior(
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     BottomAppBar(
@@ -28,30 +31,31 @@ fun BarrarInferior(
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { navController.navigate("Screen1")}) {
                 Icon(
                     imageVector = Icons.Default.Home,
-                    contentDescription = null
+                    contentDescription = "Home"
                 )
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate("Screen2")}) {
                 Icon(
                     imageVector = Icons.Default.BarChart,
-                    contentDescription = null
+                    contentDescription = "Insights"
                 )
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate("Screen3")}) {
                 Icon(
                     imageVector = Icons.Default.History,
-                    contentDescription = null
+                    contentDescription = "Timeline"
                 )
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate("Screen4")}) {
                 Icon(
                     imageVector = Icons.Default.Person,
-                    contentDescription = null
+                    contentDescription = "Profile"
                 )
             }
         }
     }
 }
+
