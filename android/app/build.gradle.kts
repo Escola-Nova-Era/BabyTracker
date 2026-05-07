@@ -54,7 +54,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
 
     // Integração com Activity e Lifecycle
