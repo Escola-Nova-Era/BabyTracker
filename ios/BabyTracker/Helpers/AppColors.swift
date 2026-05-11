@@ -55,6 +55,7 @@ enum AppColors {
     // Purple
     static let purpleSoft = Color(red: 229.0/255, green: 220.0/255, blue: 250.0/255)
     static let purpleMuted = Color(red: 210.0/255, green: 196.0/255, blue: 242.0/255)
+    static let lavander = Color(red: 145/255, green: 129/255, blue: 202/255)
 
     // Orange
     static let orangeSoft = Color(red: 255.0/255, green: 232.0/255, blue: 214.0/255)
@@ -88,5 +89,3 @@ enum AppColors {
     // Cor de sucesso
     static let success = Color(red: 105.0/255, green: 189.0/255, blue: 145.0/255)
 }
-
-
