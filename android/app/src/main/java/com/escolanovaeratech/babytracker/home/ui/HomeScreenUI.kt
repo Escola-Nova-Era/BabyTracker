@@ -1,42 +1,100 @@
 package com.escolanovaeratech.babytracker.home.ui
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.escolanovaeratech.babytracker.R
 
 @Composable
 fun HomeScreenUI() {
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
 
-        Text(
-            text = "QUICK ACTIONS",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 12.dp)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
         )
 
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(16.dp)
+        ) {
 
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                ActionButton("Add Feeding", Color(0xFF1573BF), Modifier.weight(1f))
-                ActionButton("Add Diaper", Color(0xFF43AB47), Modifier.weight(1f))
-            }
+            Text(
+                text = stringResource(R.string.quick_actions),
+                style = MaterialTheme.typography.headlineMedium
+            )
 
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                ActionButton("Sleep/Wake", Color(0xFF8951EB), Modifier.weight(1f))
-                ActionButton("Add Bath", Color(0xFFFF5722), Modifier.weight(1f))
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+
+                    ActionButton(
+                        text = stringResource(R.string.add_feeding),
+                        color = Color(0xFF1573BF),
+                        iconRes = R.drawable.ic_bottle,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    ActionButton(
+                        stringResource(R.string.add_diaper),
+                        color = Color(0xFF43AB47),
+                        iconRes = R.drawable.ic_heart,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+
+                    ActionButton(
+                        stringResource(R.string.sleep_wake),
+                        color = Color(0xFF8951EB),
+                        iconRes = R.drawable.ic_moon,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    ActionButton(
+                        stringResource(R.string.add_bath),
+                        color = Color(0xFFFF5722),
+                        iconRes = R.drawable.ic_bath,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
         }
     }
@@ -46,26 +104,32 @@ fun HomeScreenUI() {
 fun ActionButton(
     text: String,
     color: Color,
-    icon: Modifier,
+    iconRes: Int,
     modifier: Modifier = Modifier
 ) {
+
     Button(
         onClick = { },
-        modifier = modifier.height(90.dp),
-        shape = RoundedCornerShape(16.dp),
+        modifier = modifier.height(100.dp),
+        shape = RoundedCornerShape(18.dp),
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
             contentColor = Color.White
         )
     ) {
+
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
 
             Icon(
-                painter = painterResource(id = icon),
-                contentDescription = null,
-                modifier = Modifier.size(25.dp)
+                painter = painterResource(id = iconRes),
+                contentDescription = text,
+                modifier = Modifier.size(28.dp),
+                tint = Color.White
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -73,9 +137,9 @@ fun ActionButton(
             Text(
                 text = text,
                 fontSize = 14.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = Color.White
             )
         }
     }
 }
-
