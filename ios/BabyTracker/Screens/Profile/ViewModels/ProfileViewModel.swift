@@ -1,9 +1,3 @@
-//
-//  ProfileViewModel.swift
-//  BabyTracker
-//
-//  Created by Madu on 1/5/26.
-//
 import Foundation
 import Combine
 import SwiftUI

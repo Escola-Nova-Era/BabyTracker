@@ -142,8 +142,3 @@ struct ProfileView: View {
         }
     }
 }
-
-#Preview ("Dark") {
-    ProfileView()
-        .preferredColorScheme(.dark)
-}

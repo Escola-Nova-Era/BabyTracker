@@ -1,10 +1,3 @@
-//
-//  SettingsCard.swift
-//  BabyTracker
-//
-//  Created by Madu on 1/5/26.
-//
-
 import SwiftUI
 
 struct SettingsCard: View {
@@ -47,4 +40,3 @@ struct SettingsCard: View {
         .buttonStyle(PlainButtonStyle())
     }
 }
-

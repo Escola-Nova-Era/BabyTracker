@@ -1,9 +1,3 @@
-//
-//  ProfileItem.swift
-//  BabyTracker
-//
-//  Created by Madu on 7/5/26.
-//
 import SwiftUI
 
 struct ProfileItem: Identifiable {

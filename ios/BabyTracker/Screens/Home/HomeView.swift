@@ -107,8 +107,3 @@ struct HomeView: View {
         .navigationBarHidden(true)
     }
 }
-
-#Preview("Dark") {
-    HomeView()
-        .preferredColorScheme(.dark)
-}

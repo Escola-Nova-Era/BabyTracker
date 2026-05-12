@@ -1,7 +1,3 @@
-//
-//  AppColors.swift
-//  BabyTracker
-
 import SwiftUI
 
 // Catálogos central de cores do app

@@ -1,9 +1,3 @@
-//
-//  SettingsItem.swift
-//  BabyTracker
-//
-//  Created by Madu on 1/5/26.
-//
 import SwiftUI
 
 struct SettingsItem: Identifiable {
@@ -14,8 +8,3 @@ struct SettingsItem: Identifiable {
     let tint: [Color]
     let tintIcon: Color
 }
-
-
-/*#Preview {
-    SettingsItem()
-}*/
