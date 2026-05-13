@@ -60,7 +60,7 @@ fun IconWithBackground(
         Icon(
             painter = painter,
             contentDescription = contentDescription,
-            tint = Color.White, // Using white for better contrast on background
+            tint = SurfaceColor
             modifier = Modifier.size(size * 0.6f)
         )
     }
@@ -86,7 +86,7 @@ fun SettingsItem(
             contentDescription = title,
             size = 40.dp,
             brush = brush,
-            iconTint = iconTint
+            iconTint = iconTint,
         )
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -97,14 +97,14 @@ fun SettingsItem(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.bodyLarge,
+                style = AppTypography.labelLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
+                color = SurfaceDark
             )
             Text(
                 text = subtitle,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface
+                style = AppTypography.bodySmall,
+                color = SurfaceDark
             )
         }
 
@@ -112,7 +112,7 @@ fun SettingsItem(
             imageVector = Icons.AutoMirrored.Outlined.ArrowForwardIos,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
-            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            tint = TextSecondary
         )
     }
 }
@@ -121,13 +121,13 @@ fun SettingsItem(
 @Preview(showBackground = true)
 @Composable
 fun SettingsItemPreview() {
-    BabyTrackerTheme {
+    BabyTrackingTheme {
         SettingsItem(
             title = "Account",
             icon = R.drawable.ic_account,
             subtitle = "example",
             brush = gradientGreen,
-            iconTint = tintGreen
+            iconTint = SurfaceColor
         )
     }
 }
