@@ -9,18 +9,18 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.ui.theme.BabyTrackerTheme
+import com.example.componentetelaperfil.ui.theme.BabyTrackerTheme
+import com.example.componentetelaperfil.R
+import com.example.componentetelaperfil.ui.theme.CardShapeLarge
+import com.example.componentetelaperfil.ui.theme.SurfaceColor
 
 @Composable
 fun SettingsCard() {
     Card(
-        shape = MaterialTheme.shapes.large,
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = CardShapeLarge,
+        colors = CardDefaults.cardColors(containerColor = SurfaceColor),
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
@@ -31,7 +31,7 @@ fun SettingsCard() {
                 icon = R.drawable.ic_account,
                 subtitle = "Update name, birth date and info",
                 brush = gradientOrange,
-                iconTint = tintOrange
+                iconTint = SurfaceColor
             )
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
             SettingsItem(
@@ -39,7 +39,7 @@ fun SettingsCard() {
                 icon = R.drawable.ic_notifications,
                 subtitle = "Sleep and feeding reminders" ,
                 brush = gradientBlue,
-                iconTint = tintBlue
+                iconTint = SurfaceColor
             )
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
             SettingsItem(
@@ -47,7 +47,7 @@ fun SettingsCard() {
                 icon = R.drawable.ic_privacy,
                 subtitle = "Download tracking history",
                 brush = gradientGreen,
-                iconTint = tintGreen
+                iconTint = SurfaceColor
             )
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
             SettingsItem(
@@ -55,7 +55,8 @@ fun SettingsCard() {
                 icon = R.drawable.ic_help,
                 subtitle = "Get help and contact support" ,
                 brush = gradientPurple,
-                iconTint = tintPurple
+                iconTint = SurfaceColor
+
             )
         }
     }
@@ -64,7 +65,7 @@ fun SettingsCard() {
 @Preview(showBackground = true)
 @Composable
 fun SettingsCardPreview() {
-    BabyTrackerTheme() {
+    BabyTrackingTheme {
         SettingsCard()
     }
 }
