@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -28,7 +27,6 @@ android {
     }
     buildFeatures {
         // Ativando o Compose no projeto.
-        viewBinding = true
         compose = true
     }
     compileOptions {
@@ -43,7 +41,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.material3.adaptive.navigation.suite)
 
     // Gerenciamento de versões via BoM (Bill of Materials)
     val composeBom = platform("androidx.compose:compose-bom:2026.03.01")

@@ -45,4 +45,25 @@
     <color name="chart_bar_1">#FF9800</color>
     <color name="chart_bar_2">#42A5F5</color>
 
+    <color name="screen_background">#FFF8F9FD</color>
+    <color name="card_stroke">#FFF0F1F6</color>
+    <color name="timeline_line">#FFFFD8DF</color>
+
+    <color name="feed_bubble">#FFFFF2DE</color>
+    <color name="feed_dot">#FFFFC56B</color>
+    <color name="sleep_bubble">#FFF4EEFF</color>
+    <color name="sleep_dot">#FF956EFF</color>
+    <color name="diaper_bubble">#FFEAF2FF</color>
+    <color name="diaper_dot">#FF62A2FF</color>
+    <color name="breast_bubble">#FFFFF0E1</color>
+    <color name="breast_dot">#FFFF9A2F</color>
+    <color name="bath_bubble">#FFFFEAF4</color>
+    <color name="bath_dot">#FFFF74BE</color>
+
+    <color name="tag_yellow_bg">#FFFFF3D9</color>
+    <color name="tag_yellow_text">#FFD88A17</color>
+    <color name="tag_blue_bg">#FFEAF2FF</color>
+    <color name="tag_blue_text">#FF4D8EED</color>
+    <color name="meta_bg">#FFFBFCFF</color>
+
 </resources>
