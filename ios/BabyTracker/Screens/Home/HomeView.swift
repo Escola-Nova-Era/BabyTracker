@@ -78,7 +78,7 @@ struct HomeView: View {
                         .background(AppColors.surface)
                         .cornerRadius(20)
                         
-                      Text("TODAY'S, SUMMARY")
+                      Text("TODAY'S SUMMARY")
                             .font(.system(size: 14, weight: .semibold))
                             .foregroundStyle(AppColors.textSecondary)
                         
