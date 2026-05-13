@@ -27,7 +27,7 @@ struct ProfileView: View {
                         
                         // --- SETTINGS LIST ---
                         VStack(alignment: .leading, spacing: AppSpacing.large) {
-                            Text("TODAY'S SUMMARY")
+                            Text("SETTINGS")
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundStyle(AppColors.textSecondary)
                                 .padding(.top, AppSpacing.medium)
