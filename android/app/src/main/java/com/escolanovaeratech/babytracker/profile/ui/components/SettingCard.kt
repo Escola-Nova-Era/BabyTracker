@@ -11,10 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.componentetelaperfil.ui.theme.BabyTrackerTheme
-import com.example.componentetelaperfil.R
-import com.example.componentetelaperfil.ui.theme.CardShapeLarge
-import com.example.componentetelaperfil.ui.theme.SurfaceColor
+import com.escolanovaeratech.babytracker.theme.CardShapeLarge
+import com.escolanovaeratech.babytracker.theme.SurfaceColor
+import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.ui.theme.BabyTrackerTheme
+
 
 @Composable
 fun SettingsCard() {

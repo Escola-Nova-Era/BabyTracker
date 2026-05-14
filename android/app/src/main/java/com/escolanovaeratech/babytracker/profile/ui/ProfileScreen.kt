@@ -1,4 +1,4 @@
-package com.example.componentetelaperfil.ui
+package com.escolanovaeratech.babytracker.profile.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,11 +29,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.componentetelaperfil.R
-import com.example.componentetelaperfil.ui.theme.AppTypography
-import com.example.componentetelaperfil.ui.theme.BabyTrackerTheme
-import com.example.componentetelaperfil.ui.theme.SurfaceColor
-import com.example.componentetelaperfil.ui.theme.SurfaceDark
+import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.profile.ui.components.ProfileCard
+import com.escolanovaeratech.babytracker.profile.ui.components.SettingsCard
+import com.escolanovaeratech.babytracker.theme.AppTypography
+import com.escolanovaeratech.babytracker.theme.SurfaceColor
+import com.escolanovaeratech.babytracker.theme.SurfaceDark
+import com.escolanovaeratech.babytracker.ui.theme.BabyTrackerTheme
+
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier) {
     Box(

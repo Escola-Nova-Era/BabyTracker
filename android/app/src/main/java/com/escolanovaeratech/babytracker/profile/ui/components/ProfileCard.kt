@@ -27,11 +27,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.componentetelaperfil.R
-import com.example.componentetelaperfil.ui.theme.AppTypography
-import com.example.componentetelaperfil.ui.theme.BabyTrackerTheme
-import com.example.componentetelaperfil.ui.theme.CardShapeLarge
-import com.example.componentetelaperfil.ui.theme.SurfaceColor
+import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.profile.ui.backgroundCard
+import com.escolanovaeratech.babytracker.theme.CardShapeLarge
+import com.escolanovaeratech.babytracker.theme.AppTypography
+import com.escolanovaeratech.babytracker.theme.SurfaceColor
+import com.escolanovaeratech.babytracker.ui.theme.BabyTrackerTheme
 
 @Composable
 fun ProfileCard() {
@@ -51,7 +52,7 @@ fun ProfileCard() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.baby),
+                    painter = painterResource(id = R.drawable.img_baby),
                     contentDescription = null,
                     modifier = Modifier
                         .size(90.dp)

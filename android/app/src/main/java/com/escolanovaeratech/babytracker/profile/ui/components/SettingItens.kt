@@ -17,15 +17,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.escolanovaeratech.babytracker.R
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.automirrored.outlined.ArrowForwardIos
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.componentetelaperfil.R
-import com.example.componentetelaperfil.ui.theme.BabyTrackerTheme
-import com.example.componentetelaperfil.ui.theme.White
+import com.escolanovaeratech.babytracker.ui.theme.BabyTrackerTheme
+
 
 @Composable
 fun SettingsItem(
@@ -85,7 +86,7 @@ fun SettingsItemPreview() {
     BabyTrackerTheme() {
         SettingsItem(
             title = "Account",
-            icon = R.drawable.ic_account,
+            icon = R.drawable.ic_account_box,
             subtitle = "example",
             brush = gradientGreen,
             iconTint = White
