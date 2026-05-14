@@ -1,4 +1,4 @@
-package com.example.componentetelaperfil.ui.components
+package com.escolanovaeratech.babytracker.profile.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
