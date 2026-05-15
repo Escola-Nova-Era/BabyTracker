@@ -3,6 +3,7 @@ package com.escolanovaeratech.babytracker.home.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +27,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.ui.theme.BathOrange
+import com.escolanovaeratech.babytracker.ui.theme.DiaperGreen
+import com.escolanovaeratech.babytracker.ui.theme.FeedingBlue
+import com.escolanovaeratech.babytracker.ui.theme.SleepPurple
 
 @Composable
 fun HomeScreenUI() {
@@ -52,6 +57,8 @@ fun HomeScreenUI() {
                 style = MaterialTheme.typography.headlineMedium
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
@@ -63,14 +70,14 @@ fun HomeScreenUI() {
 
                     ActionButton(
                         text = stringResource(R.string.add_feeding),
-                        color = Color(0xFF1573BF),
+                        color = FeedingBlue,
                         iconRes = R.drawable.ic_bottle,
                         modifier = Modifier.weight(1f)
                     )
 
                     ActionButton(
-                        stringResource(R.string.add_diaper),
-                        color = Color(0xFF43AB47),
+                        text = stringResource(R.string.add_diaper),
+                        color = DiaperGreen,
                         iconRes = R.drawable.ic_heart,
                         modifier = Modifier.weight(1f)
                     )
@@ -82,15 +89,15 @@ fun HomeScreenUI() {
                 ) {
 
                     ActionButton(
-                        stringResource(R.string.sleep_wake),
-                        color = Color(0xFF8951EB),
+                        text = stringResource(R.string.sleep_wake),
+                        color = SleepPurple,
                         iconRes = R.drawable.ic_moon,
                         modifier = Modifier.weight(1f)
                     )
 
                     ActionButton(
-                        stringResource(R.string.add_bath),
-                        color = Color(0xFFFF5722),
+                        text = stringResource(R.string.add_bath),
+                        color = BathOrange,
                         iconRes = R.drawable.ic_bath,
                         modifier = Modifier.weight(1f)
                     )
@@ -112,7 +119,7 @@ fun ActionButton(
         onClick = { },
         modifier = modifier.height(100.dp),
         shape = RoundedCornerShape(18.dp),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp),
+        contentPadding = PaddingValues(0.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = color,
             contentColor = Color.White
