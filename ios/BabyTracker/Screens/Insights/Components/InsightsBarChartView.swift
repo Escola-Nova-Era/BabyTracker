@@ -11,7 +11,7 @@ struct InsightsBarChartView: View {
     private enum Layout {
         static let sectionSpacing: CGFloat = 8
         static let axisToBarsSpacing: CGFloat = 10
-        static let yAxisWidth: CGFloat = 20
+        static let yAxisWidth: CGFloat = 40
         static let barGap: CGFloat = 10
         static let barColumnWidth: CGFloat = 24
         static let minBarHeight: CGFloat = 4
