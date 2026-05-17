@@ -15,4 +15,9 @@
     <string name="your_baby_s_information">Your baby\'s information</string>
     <string name="title_activity_navigation_bar">NavigationBar</string>
     <string name="filter">Filtrar timeline</string>
+    <string name="quick_actions">QUICK ACTIONS</string>
+    <string name="add_feeding">Add Feeding</string>
+    <string name="add_diaper">Add Diaper</string>
+    <string name="sleep_wake">Sleep/Wake</string>
+    <string name="add_bath">Add Bath</string>
 </resources>
