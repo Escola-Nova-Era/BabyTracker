@@ -15,7 +15,7 @@ struct TrackingView: View {
                         HStack(alignment: .top) {
                             VStack (alignment: .leading, spacing: AppSpacing.xxSmall) {
                                 Text("Today's Timeline")
-                                    .font(.system(size: 26, weight: .bold))
+                                    .font(.system(size: 24, weight: .bold))
                                     .foregroundStyle(AppColors.textPrimary)
                                 
                                 Text("January 26, 2026")
