@@ -4,7 +4,7 @@ struct InsightsHeaderCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
             Text("Great Progress!")
-                .font(.system(size: 22, weight: .bold))
+                .font(.system(size: 22, weight: .semibold))
                 .foregroundStyle(.white)
             Text("Emma's pattems are developping beautifull. Her feedind and sleep routines show healthy consistency.")
                 .font(.system(size: 14, weight: .regular))
@@ -21,8 +21,4 @@ struct InsightsHeaderCard: View {
         )
         .cornerRadius(20)
     }
-}
-
-#Preview {
-    InsightsHeaderCard()
 }
