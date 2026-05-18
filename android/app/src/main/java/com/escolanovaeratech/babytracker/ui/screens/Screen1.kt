@@ -20,7 +20,7 @@ fun Screen1() {
         Text(
             text = "Screen 1",
             style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary
+
         )
     }
 }
