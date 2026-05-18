@@ -1,6 +1,5 @@
 package com.escolanovaeratech.babytracker.theme
 
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -86,7 +85,7 @@ private val DarkColorScheme = darkColorScheme(
  * @param dynamicColor Se true, usa cores dinâmicas do Android 12+ (ignorado por padrão)
  */
 @Composable
-fun BabyTrackingTheme(
+fun BabyTrackerTheme(
     darkTheme: Boolean = false,
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit

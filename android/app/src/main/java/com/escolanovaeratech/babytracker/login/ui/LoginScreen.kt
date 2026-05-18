@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.theme.BabyTrackingTheme
+import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
 import com.escolanovaeratech.babytracker.theme.PrimaryLight
 import com.escolanovaeratech.babytracker.theme.SecondaryLight
 import com.escolanovaeratech.babytracker.theme.TextPrimary
@@ -438,7 +438,7 @@ fun LoginScreen() {
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    BabyTrackingTheme {
+    BabyTrackerTheme {
         LoginScreen()
     }
 }
