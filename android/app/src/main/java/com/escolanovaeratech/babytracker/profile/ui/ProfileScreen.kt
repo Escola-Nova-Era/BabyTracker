@@ -35,7 +35,7 @@ import com.escolanovaeratech.babytracker.profile.ui.components.SettingsCard
 import com.escolanovaeratech.babytracker.theme.AppTypography
 import com.escolanovaeratech.babytracker.theme.SurfaceColor
 import com.escolanovaeratech.babytracker.theme.SurfaceDark
-import com.escolanovaeratech.babytracker.ui.theme.BabyTrackerTheme
+import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
 
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier) {
