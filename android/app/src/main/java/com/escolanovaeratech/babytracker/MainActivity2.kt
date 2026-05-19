@@ -3,23 +3,18 @@ package com.escolanovaeratech.babytracker
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.escolanovaeratech.babytracker.navigation.BabyTrackerAppNavGraph
-import com.escolanovaeratech.babytracker.theme.BabyTrackingTheme
-import com.escolanovaeratech.babytracker.ui.components.BarrarInferior
+import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
+import com.escolanovaeratech.babytracker.ui.components.BarraInferior
 
 
 
@@ -29,7 +24,7 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            BabyTrackingTheme {
+            BabyTrackerTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -46,7 +41,7 @@ fun BabyTrackerApp() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            BarrarInferior(navController = navController)
+            BarraInferior(navController = navController)
         }
     ) { innerPadding ->
         BabyTrackerAppNavGraph(
