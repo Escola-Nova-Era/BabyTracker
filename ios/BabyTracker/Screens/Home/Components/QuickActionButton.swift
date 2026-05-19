@@ -4,10 +4,6 @@ struct QuickActionButton: View {
     
     let item: ActionButton
     
-//    let title: String
-//    let icon: String
-//    let colors: [Color]
-    
     var body: some View {
         
         Button { }
@@ -27,13 +23,4 @@ struct QuickActionButton: View {
         }
         .buttonStyle(.plain)
     }
-}
-
-#Preview {
-    QuickActionButton(
-        item: ActionButton(
-        title: "Last Feeding",
-        icon: "drop.fill",
-        colors: AppColors.yellowMuted
-    ))
 }
