@@ -26,4 +26,9 @@
     <string name="BabyWeight">3.65kg</string>
     <string name="height">Height</string>
     <string name="BabyHeight">58cm</string>
+    <string name="quick_actions">QUICK ACTIONS</string>
+    <string name="add_feeding">Add Feeding</string>
+    <string name="add_diaper">Add Diaper</string>
+    <string name="sleep_wake">Sleep/Wake</string>
+    <string name="add_bath">Add Bath</string>
 </resources>
