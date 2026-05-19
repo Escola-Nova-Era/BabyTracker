@@ -1,5 +1,6 @@
-package com.escolanovaeratech.babytracker.home.ui
+package com.escolanovaeratech.babytracker
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// 1. O COMPONENTE REUTILIZÁVEL (O CARD)
+
 @Composable
 fun DashboardCard(
     title: String,
@@ -80,15 +82,14 @@ fun DashboardCard(
             Box(
                 modifier = Modifier
                     .size(36.dp)
-                    .background(Color.White, shape = RoundedCornerShape(50))
-                    .padding(6.dp),
+                    .background(Color.White, shape = RoundedCornerShape(50)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     painter = painterResource(id = iconResId),
                     contentDescription = title,
                     tint = iconColor,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
@@ -98,8 +99,7 @@ fun DashboardCard(
 // 2. O GRID QUE JUNTA OS 4 CARDS (A SEÇÃO COMPLETA)
 @Composable
 fun SummaryGrid() {
-    // Usando uma imagem nativa do sistema Android para não depender de pacotes externos ou arquivos locais que possam falhar
-    val defaultAndroidIcon = android.R.drawable.ic_menu_info_details
+    val defaultAndroidIcon = R.drawable.ic_menu_info_details
 
     Column(
         modifier = Modifier
@@ -125,7 +125,7 @@ fun SummaryGrid() {
                 title = "Last Feeding",
                 value = "2h ago",
                 subtitle = "120 ml",
-                backgroundColor = Color(0xFFE3F2FD), // Azul pastel
+                backgroundColor = Color(0xFFE3F2FD),
                 iconResId = defaultAndroidIcon,
                 iconColor = Color(0xFF2196F3),
                 modifier = Modifier.weight(1f)
@@ -134,7 +134,7 @@ fun SummaryGrid() {
                 title = "Last Diaper",
                 value = "45m ago",
                 subtitle = "Pee",
-                backgroundColor = Color(0xFFE8F5E9), // Verde pastel
+                backgroundColor = Color(0xFFE8F5E9),
                 iconResId = defaultAndroidIcon,
                 iconColor = Color(0xFF4CAF50),
                 modifier = Modifier.weight(1f)
@@ -150,7 +150,7 @@ fun SummaryGrid() {
                 title = "Sleep Status",
                 value = "Awake",
                 subtitle = "3h 20 min",
-                backgroundColor = Color(0xFFF3E5F5), // Roxo pastel
+                backgroundColor = Color(0xFFF3E5F5),
                 iconResId = defaultAndroidIcon,
                 iconColor = Color(0xFF9C27B0),
                 modifier = Modifier.weight(1f)
@@ -159,7 +159,7 @@ fun SummaryGrid() {
                 title = "Last Bath",
                 value = "Yesterday",
                 subtitle = "7:30 PM",
-                backgroundColor = Color(0xFFFFFDE7), // Amarelo pastel
+                backgroundColor = Color(0xFFFFFDE7),
                 iconResId = defaultAndroidIcon,
                 iconColor = Color(0xFFFBC02D),
                 modifier = Modifier.weight(1f)
@@ -168,11 +168,10 @@ fun SummaryGrid() {
     }
 }
 
-// 3. A PREVIEW (O que desenha a interface na lateral do Android Studio)
 @Preview(showBackground = true, name = "Resumo de Hoje")
 @Composable
 fun SummaryGridPreview() {
-    androidx.compose.material3.MaterialTheme {
+    MaterialTheme {
         SummaryGrid()
     }
 }

@@ -3,18 +3,11 @@ package com.escolanovaeratech.babytracker.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BarChart
-import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-
-
 
 @Composable
 fun BarrarInferior(
@@ -24,32 +17,32 @@ fun BarrarInferior(
         modifier = modifier
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
+            // Usando os ícones nativos que não dependem do pacote externo "material.icons"
             IconButton(onClick = {}) {
                 Icon(
-                    imageVector = Icons.Default.Home,
-                    contentDescription = null
+                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_view),
+                    contentDescription = "Home"
                 )
             }
             IconButton(onClick = {}) {
                 Icon(
-                    imageVector = Icons.Default.BarChart,
-                    contentDescription = null
+                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_sort_by_size),
+                    contentDescription = "Gráficos"
                 )
             }
             IconButton(onClick = {}) {
                 Icon(
-                    imageVector = Icons.Default.History,
-                    contentDescription = null
+                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_recent_history),
+                    contentDescription = "Histórico"
                 )
             }
             IconButton(onClick = {}) {
                 Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = null
+                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_my_calendar),
+                    contentDescription = "Perfil"
                 )
             }
         }

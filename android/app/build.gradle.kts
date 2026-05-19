@@ -48,11 +48,13 @@ dependencies {
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
-    // Dependências principais do Compose (As bibliotecas abaixo usarão as versões definidas pelo BoM automaticamente)
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui.tooling.preview)
-    debugImplementation(libs.androidx.ui.tooling)
+    // Dependências principais do Compose (Forçando a importação explícita dos pacotes de UI, Gráficos e Foundation)
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
 
     // Integração com Activity e Lifecycle
     implementation(libs.androidx.activity.compose)

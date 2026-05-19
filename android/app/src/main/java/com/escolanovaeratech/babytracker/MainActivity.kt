@@ -16,19 +16,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Configuração de Insets para não sobrepor as barras do sistema
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+       // ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+         //   val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+           // v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            //insets
         }
 
         // Injetando o Compose na View XML
-        val composeView = findViewById<ComposeView>(R.id.compose_view)
-        composeView.setContent {
-            BabyTrackerTheme {
+        //val composeView = findViewById<ComposeView>(R.id.compose_view)
+        //composeView.setContent {
+           // BabyTrackerTheme {
                 // Chamando sua lógica de navegação adaptativa
-                BabyTrackerApp()
+             //   BabyTrackerApp()
             }
-        }
-    }
-}
+        //}
+    //}
+//}
