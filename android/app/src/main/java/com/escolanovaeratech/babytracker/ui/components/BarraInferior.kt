@@ -8,9 +8,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+
 
 @Composable
 fun BarrarInferior(
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     BottomAppBar(
@@ -20,31 +25,31 @@ fun BarrarInferior(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            // Usando os ícones nativos que não dependem do pacote externo "material.icons"
-            IconButton(onClick = {}) {
+            IconButton(onClick = { navController.navigate("Screen1")}) {
                 Icon(
-                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_view),
+                    imageVector = Icons.Default.Home,
                     contentDescription = "Home"
                 )
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate("Screen2")}) {
                 Icon(
-                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_sort_by_size),
-                    contentDescription = "Gráficos"
+                    imageVector = Icons.Default.BarChart,
+                    contentDescription = "Insights"
                 )
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate("Screen3")}) {
                 Icon(
-                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_recent_history),
-                    contentDescription = "Histórico"
+                    imageVector = Icons.Default.History,
+                    contentDescription = "Timeline"
                 )
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigate("Screen4")}) {
                 Icon(
-                    painter = androidx.compose.ui.res.painterResource(id = android.R.drawable.ic_menu_my_calendar),
-                    contentDescription = "Perfil"
+                    imageVector = Icons.Default.Person,
+                    contentDescription = "Profile"
                 )
             }
         }
     }
 }
+

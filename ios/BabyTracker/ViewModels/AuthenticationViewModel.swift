@@ -1,7 +1,3 @@
-//
-//  AuthenticationViewModel.swift
-//  BabyTracker
-
 import Foundation
 import Combine
 

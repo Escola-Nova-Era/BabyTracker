@@ -46,9 +46,8 @@ fun DashboardCard(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Coluna da Esquerda: Textos
             Column(
@@ -61,7 +60,60 @@ fun DashboardCard(
                     color = Color.Gray,
                     fontWeight = FontWeight.Medium
                 )
-                Column {
+            }
+            // --- FIM DO HEADER ---
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            // --- INÍCIO DO CARTÃO BRANCO ---
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f), // Ocupa toda a altura disponível
+                shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
+                color = Color.White
+            ) {
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 24.dp, vertical = 32.dp)
+                ) {
+
+                    // 1. Campo: Parent Name
+                    Text(
+                        text = "Parent Name",
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color = TextPrimary
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = parentName,
+                        onValueChange = { parentName = it },
+                        placeholder = { Text("Enter your name", color = TextHint) },
+                        leadingIcon = {
+                            Icon(
+                                Icons.Outlined.Person,
+                                contentDescription = "Person Icon",
+                                tint = TextSecondary
+                            )
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = DividerColor,
+                            focusedBorderColor = PrimaryLight,
+                            unfocusedContainerColor = Color(0xFFF8F9FA),
+                            focusedContainerColor = Color(0xFFF8F9FA)
+                        ),
+                        singleLine = true
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // 2. Campo: Email
                     Text(
                         text = value,
                         fontSize = 18.sp,

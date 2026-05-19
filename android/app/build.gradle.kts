@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.3.20" // esta versao ja gerencia a compatibilidade do compilador automaticamente com a versao do Kotlin.
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -42,23 +42,30 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Gerenciamento de versões via BoM (Bill of Materials)
     val composeBom = platform("androidx.compose:compose-bom:2026.03.01")
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
-    // Dependências principais do Compose (Forçando a importação explícita dos pacotes de UI, Gráficos e Foundation)
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    // Dependências principais do Compose (As bibliotecas abaixo usarão as versões definidas pelo BoM automaticamente)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
 
     // Integração com Activity e Lifecycle
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Implementação necessária para utilização do Material Icons no Compose
+    implementation(libs.androidx.compose.material.icons.extended)
+    // Implementação necessária para utilização do Navigation Suite do Material3
+    implementation(libs.androidx.material3.adaptive.navigation.suite)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

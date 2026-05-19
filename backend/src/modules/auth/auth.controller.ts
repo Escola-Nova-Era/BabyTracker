@@ -1,70 +1,79 @@
-import { Request, Response } from 'express';
-import { AuthService } from './auth.service';
+import { Request, Response, NextFunction } from "express";
+import {
+  registerUser,
+  loginUser,
+  forgotPassword,
+  resetPassword,
+} from "./auth.service";
 
-export class AuthController {
-    private authService: AuthService;
+// REGISTER
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { name, email, password } = req.body;
 
-    constructor() {
-        this.authService = new AuthService();
-    }
+    const user = await registerUser(name, email, password);
 
-    register = async (req: Request, res: Response) => {
-        try {
-            // Extração dos dados do corpo da requisição
-            const { name, email, password } = req.body;
+    return res.status(201).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
-            // Defesa(Fail-fast) para garantir que o 'name' seja enviado, mesmo que o TypeScript já exija iss
-            if (!name || !email || !password) {
-                // 400 Bad Request
-                return res.status(400).json({ error: 'Nome, email e senha são obrigatórios' });
-            }
+// LOGIN
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, password } = req.body;
 
-            // Execução: passando os dados limpos apra regra de negócio
-            const user = await this.authService.register({ name, email, password });
+    const result = await loginUser(email, password);
 
-            // Sucesso: retornando o usuário criado
-            return res.status(201).json(user);
-        } catch (error: any) {
-            // Defesa (tratamento semântico)
-            if (error.message === 'Email já registrado') {
-                // 409 Conflict: o recurso já existe
-                return res.status(409).json({ error: error.message });
-            }
-            if (error.message === 'Nome é obrigatório para registro') {
-                return res.status(400).json({ error: error.message });
-            }
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
 
-            // Defesa (anti-vazamento): logando o erro internamente e retornando uma mensagem genérica
-            console.error('Erro no registro:', error);
-            return res.status(500).json({ error: 'Ocorreu um erro ao registrar o usuário.' });
-        }
-    }
+// FORGOT PASSWORD
+export const forgotPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email } = req.body;
 
-    // Login
-    login = async (req: Request, res: Response): Promise<Response> => {
-        try {
-            const { email, password } = req.body;
+    const result = await forgotPassword(email);
 
-            // Defesa (Fail-fast) para garantir que o 'email' e 'password' sejam enviados
-            if (!email || !password) {
-                return res.status(400).json({ error: 'Email e senha são obrigatórios' });
-            }
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
 
-            // O Service faz a busca, o hash e gera o JWT
-            const result = await this.authService.login({ email, password });
+// RESET PASSWORD
+export const resetPasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { token, newPassword } = req.body;
 
-            // 200 OK: retornando o token e os dados do usuário
-            return res.status(200).json(result);
-        } catch (error: any) {
-            // Defesa (segurança de credenciais)
-            if (error.message === 'Email ou senha inválidos') {
-                // 401 Unauthorized: credenciais incorretas
-                return res.status(401).json({ error: error.message });
-            }
+    const result = await resetPassword(token, newPassword);
 
-            // Fallback de erro grave
-            console.error('Erro no login:', error);
-            return res.status(500).json({ error: 'Ocorreu um erro ao realizar o login.' });
-        }
-    }
-}
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -1,15 +1,16 @@
-import { Router } from 'express';
-import { AuthController } from './auth.controller';
+import { Router } from "express";
+import {
+  register,
+  login,
+  forgotPasswordController,
+  resetPasswordController,
+} from "./auth.controller";
 
-// Inicializando o Router do Express
-const authRouter = Router();
+const router = Router();
 
-// Criando uma instância do AuthController
-const authController = new AuthController();
+router.post("/register", register);
+router.post("/login", login);
+router.post("/forgot-password", forgotPasswordController);
+router.post("/reset-password", resetPasswordController);
 
-// Definindo as rotas para registro e login
-authRouter.post('/register', authController.register);
-authRouter.post('/login', authController.login);
-
-// Exportando o Router para ser usado na aplicação
-export default authRouter;
+export default router;

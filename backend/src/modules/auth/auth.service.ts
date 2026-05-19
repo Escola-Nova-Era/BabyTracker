@@ -1,60 +1,111 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { prisma } from '../../lib/prisma';
+import { prisma } from "../../lib/prisma";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-// Contrato exclusivo para o Registro 
-interface RegisterDTO {
-    name: string; 
-    email: string;
-    password: string;
-}
+const JWT_SECRET = "supersecret";
+const RESET_SECRET = "resetsecret";
+const RESET_EXPIRES_IN = "15m";
 
-// Contrato exclusivo para o Login 
-interface LoginDTO {
-    email: string;
-    password: string;
-}
+// REGISTER
+export const registerUser = async (
+  name: string,
+  email: string,
+  password: string
+) => {
+  const existingUser = await prisma.user.findUnique({
+    where: { email },
+  });
 
-export class AuthService {
-    async register({ name, email, password }: RegisterDTO) {
-        
-        const userExists = await prisma.user.findUnique({ where: { email } });
-        if (userExists) {
-            throw new Error('Email já registrado');
-        }
+  if (existingUser) {
+    throw new Error("User already exists");
+  }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        if (!name) throw new Error('Nome é obrigatório para registro');
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await prisma.user.create({
-            data: { name, email, password: hashedPassword },
-        });
+  const user = await prisma.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+    },
+  });
 
-        return { id: user.id, name: user.name, email: user.email };
-    }
+  return user;
+};
 
-    // O Login aceita apenas email e senha
-    async login({ email, password }: LoginDTO) {
-        const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) {
-            throw new Error('Email ou senha inválidos');
-        }
+// LOGIN
+export const loginUser = async (email: string, password: string) => {
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            throw new Error('Email ou senha inválidos');
-        }
+  if (!user) {
+    throw new Error("Invalid credentials");
+  }
 
-        const secret = process.env.JWT_SECRET;
-        if (!secret) {
-            throw new Error('Chave secreta para JWT não configurada');
-        }
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        const token = jwt.sign({ userId: user.id }, secret, { expiresIn: '1d' });
-        
-        return { 
-            user: { id: user.id, name: user.name, email: user.email },
-            token 
-        };
-    }   
-}
+  if (!isPasswordValid) {
+    throw new Error("Invalid credentials");
+  }
+
+  const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
+    expiresIn: "7d",
+  });
+
+  return {
+    token,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    },
+  };
+};
+
+// FORGOT PASSWORD
+export const forgotPassword = async (email: string) => {
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
+    return {
+      message: "If the email exists, a reset link has been sent",
+    };
+  }
+
+  const token = jwt.sign(
+    { userId: user.id },
+    RESET_SECRET,
+    { expiresIn: RESET_EXPIRES_IN }
+  );
+
+  return {
+    message: "If the email exists, a reset link has been sent",
+    resetToken: token,
+  };
+};
+
+// RESET PASSWORD
+export const resetPassword = async (
+  token: string,
+  newPassword: string
+) => {
+  try {
+    const decoded = jwt.verify(token, RESET_SECRET) as { userId: string };
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await prisma.user.update({
+      where: { id: decoded.userId },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    return { message: "Password updated successfully" };
+  } catch {
+    throw new Error("Invalid or expired token");
+  }
+};
