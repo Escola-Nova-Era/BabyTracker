@@ -15,6 +15,17 @@
     <string name="your_baby_s_information">Your baby\'s information</string>
     <string name="title_activity_navigation_bar">NavigationBar</string>
     <string name="filter">Filtrar timeline</string>
+    <string name="profileLabel">Profile</string>
+    <string name="profileSubheader">Your baby\'s information</string>
+    <string name="settingsLabel">SETTINGS</string>
+    <string name="BabyName">Emmy Rose</string>
+    <string name="BabyBirthDate">Born on March 15, 2024</string>
+    <string name="age">Age</string>
+    <string name="BabyAge">11 Weeks</string>
+    <string name="weight">Weight</string>
+    <string name="BabyWeight">3.65kg</string>
+    <string name="height">Height</string>
+    <string name="BabyHeight">58cm</string>
     <string name="quick_actions">QUICK ACTIONS</string>
     <string name="add_feeding">Add Feeding</string>
     <string name="add_diaper">Add Diaper</string>
