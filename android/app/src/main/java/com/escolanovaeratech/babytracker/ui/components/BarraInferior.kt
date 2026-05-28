@@ -35,7 +35,7 @@ fun BarraInferior(
                     contentDescription = "Home"
                 )
             }
-            IconButton(onClick = {navController.navigate("Screen2")}) {
+            IconButton(onClick = {navController.navigate("Timeline")}) {
                 Icon(
                     imageVector = Icons.Default.BarChart,
                     contentDescription = "Insights"
