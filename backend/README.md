@@ -1,185 +1,412 @@
 # 🍼 Baby Tracking API
 
-A scalable, production-ready backend API designed to track and manage baby activities such as feeding, sleep, and hygiene.
+A scalable, production-ready backend API designed to track and manage baby activities such as feeding, sleep, hygiene, and other daily routines.
 
-This is an **open-source educational project**, developed as part of a collaborative learning environment, simulating real-world backend development.
-
-Built following real-world backend architecture principles, this project focuses on **scalability**, **clean code**, and **team collaboration**.
+This project is being developed in a collaborative environment following real-world backend engineering practices.
 
 ---
 
-## 🚀 Overview
+# 🚀 Overview
 
-The **Baby Tracking API** is part of a collaborative project developed by a team of developers.
+The Baby Tracking API provides authentication, user management, profile access, insights, and infrastructure for future baby activity tracking features.
 
-It allows parents and caregivers to track essential baby routines while providing developers with a **hands-on experience in building production-like backend systems**.
+The project focuses on:
 
-This project simulates a real-world environment where developers:
-- Work with structured tasks
-- Collaborate through Git workflows
-- Build scalable APIs
-- Follow professional coding standards
+* Clean Architecture
+* Modular Design
+* Scalability
+* Team Collaboration
+* Professional Backend Standards
 
 ---
 
-## ⚡ Quick Start
+# ⚙️ Tech Stack
+
+* Node.js
+* Express
+* TypeScript
+* PostgreSQL
+* Prisma ORM
+* JWT Authentication
+* bcrypt
+* Swagger / OpenAPI
+
+---
+
+# 🧠 Architecture
+
+The project follows a modular architecture:
+
+```txt
+src/
+├── config/
+├── lib/
+├── middlewares/
+├── modules/
+│   ├── auth/
+│   ├── health/
+│   ├── home/
+│   ├── insights/
+│   └── profile/
+├── app.ts
+└── server.ts
+```
+
+Each module contains:
+
+* Controller
+* Service
+* Routes
+
+---
+
+# 🔐 Authentication
+
+The API uses JWT authentication.
+
+Protected routes require:
+
+```http
+Authorization: Bearer YOUR_TOKEN
+```
+
+---
+
+# 🛠️ Installation
+
+Clone repository:
 
 ```bash
-git clone <your-repo-url>
+git clone <repository-url>
+```
+
+Enter project folder:
+
+```bash
 cd backend
+```
+
+Install dependencies:
+
+```bash
 npm install
-cp .env.example .env
+```
+
+---
+
+# 📄 Environment Variables
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=your_database_url
+JWT_SECRET=your_jwt_secret
+RESET_SECRET=your_reset_secret
+PORT=3000
+```
+
+---
+
+# 🗄️ Prisma Setup
+
+Generate Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+Run migrations:
+
+```bash
 npx prisma migrate dev
+```
+
+---
+
+# ▶️ Run Project
+
+Development:
+
+```bash
 npm run dev
-🧠 Architecture
+```
 
-This project follows a modular and layered architecture:
+Production:
 
-Controller Layer → Handles HTTP requests and responses
-Service Layer → Contains business logic
-Database Layer (Prisma) → Handles data access
-📁 Folder Structure
-src/
-├── config/        # Environment configuration
-├── lib/           # Prisma client instance
-├── modules/       # Feature-based modules
-│   ├── auth/
-│   ├── user/
-│   ├── activity/
-│   └── health/
-├── middlewares/   # Global middlewares
-├── app.ts         # Express app setup
-└── server.ts      # Server entry point
-⚙️ Tech Stack
-Node.js
-Express
-TypeScript
-PostgreSQL (Neon)
-Prisma ORM
-JWT Authentication
-bcrypt (password hashing)
-🗄️ Database Design
+```bash
+npm run build
+npm start
+```
 
-The database is designed for scalability and flexibility.
+---
 
-Relationships
-A User can have multiple Babies
-A Baby can have multiple Activities
-Models
-User
-Baby
-Activity
-Activity Types
-FEEDING
-SLEEP
-HYGIENE
-🔐 Authentication
+# 📚 API Documentation
 
-The API includes a complete authentication system:
+Base URL:
 
-User registration
-Login with email and password
-Social login
-JWT-based authentication
-Protected routes using middleware
-📌 Endpoints
-POST /auth/register
-POST /auth/login
-POST /auth/social
-🔑 Authorization
-
-Protected routes require a valid JWT token:
-
-Authorization: Bearer <token>
-🔑 Login Example
-
-The login endpoint validates user credentials using bcrypt and returns a JWT token.
-
-Request
-POST /auth/login
-Response
-{
-  "user": {
-    "id": "uuid",
-    "email": "user@email.com"
-  },
-  "token": "jwt_token_here"
-}
-📡 API
-Base URL
+```txt
 http://localhost:3000/api
-Health Check
-GET /health
-Response
+```
+
+---
+
+# 🏠 Home
+
+### GET /api/home
+
+Returns API status.
+
+### Response
+
+```json
+{
+  "message": "Welcome to BabyTracker API 🚀",
+  "status": "running"
+}
+```
+
+---
+
+# 🩺 Health Check
+
+### GET /api/health
+
+Returns API health status.
+
+### Response
+
+```json
 {
   "status": "ok",
   "message": "API is running"
 }
-Register User
-POST /auth/register
-Body
+```
+
+---
+
+# 🔐 Auth
+
+## Register
+
+### POST /api/auth/register
+
+### Body
+
+```json
 {
   "name": "Vitor",
   "email": "vitor@email.com",
   "password": "123456"
 }
-Response
+```
+
+### Response
+
+```json
 {
   "id": "uuid",
   "name": "Vitor",
   "email": "vitor@email.com"
 }
-🛠️ Setup
-1. Install dependencies
-npm install
-2. Environment variables
+```
 
-Create a .env file based on .env.example:
+---
 
-PORT=3000
-DATABASE_URL=your_database_url
-JWT_SECRET=your_secret_key
-3. Run migrations
-npx prisma migrate dev --name init
-4. Generate Prisma Client
-npx prisma generate
-5. Start the server
-npm run dev
-🧪 Testing
+## Login
 
-You can test the API using:
+### POST /api/auth/login
 
-Postman
-Insomnia
-Thunder Client (VS Code)
-📈 Roadmap
-✅ User registration
-✅ Login with JWT authentication
-🔄 Social authentication improvements
-🔄 Refresh tokens
-👶 Baby management endpoints
-📝 Activity tracking endpoints
-📊 Analytics (sleep patterns, feeding frequency)
-📄 Swagger API documentation
-🧪 Automated tests (Jest)
-🤝 Contributing
+### Body
 
-This is an open-source educational project, and contributions are welcome.
+```json
+{
+  "email": "vitor@email.com",
+  "password": "123456"
+}
+```
 
-Fork the repository
-Create a new branch (feature/your-feature)
-Commit your changes
-Open a Pull Request
-🧠 Key Learning Points
+### Response
 
-This project demonstrates:
+```json
+{
+  "token": "jwt_token",
+  "user": {
+    "id": "uuid",
+    "name": "Vitor",
+    "email": "vitor@email.com"
+  }
+}
+```
 
-Clean backend architecture
-Modular design
-Real-world API structure
-Database modeling with Prisma
-Secure authentication practices
-Team collaboration using Git workflows
-📄 License
+---
 
-This project is open-source and available under the MIT License.
+## Forgot Password
+
+### POST /api/auth/forgot-password
+
+### Body
+
+```json
+{
+  "email": "vitor@email.com"
+}
+```
+
+### Response
+
+```json
+{
+  "message": "If the email exists, a reset link has been sent",
+  "resetToken": "reset_token"
+}
+```
+
+---
+
+## Reset Password
+
+### POST /api/auth/reset-password
+
+### Body
+
+```json
+{
+  "token": "reset_token",
+  "newPassword": "12345678"
+}
+```
+
+### Response
+
+```json
+{
+  "message": "Password updated successfully"
+}
+```
+
+---
+
+# 👤 Profile
+
+### GET /api/profile
+
+Protected route.
+
+### Headers
+
+```http
+Authorization: Bearer jwt_token
+```
+
+### Response
+
+```json
+{
+  "id": "uuid",
+  "name": "Vitor",
+  "email": "vitor@email.com"
+}
+```
+
+---
+
+# 📊 Insights
+
+### GET /api/insights
+
+Protected route.
+
+### Headers
+
+```http
+Authorization: Bearer jwt_token
+```
+
+### Response
+
+```json
+{
+  "totalActivities": 0,
+  "activitiesByType": [],
+  "lastActivity": null
+}
+```
+
+---
+
+# 🔑 Authentication Flow
+
+1. Register a user
+
+```http
+POST /api/auth/register
+```
+
+2. Login
+
+```http
+POST /api/auth/login
+```
+
+3. Copy JWT token
+
+4. Use token in protected routes
+
+```http
+Authorization: Bearer jwt_token
+```
+
+---
+
+# 📄 Swagger
+
+Swagger is configured and available locally:
+
+```txt
+http://localhost:3000/api/docs
+```
+
+---
+
+# ✅ Features Implemented
+
+* User Registration
+* User Login
+* JWT Authentication
+* Password Recovery
+* Password Reset
+* Protected Routes
+* Profile Endpoint
+* Insights Endpoint
+* Home Endpoint
+* Health Check Endpoint
+* Global Error Middleware
+* Prisma Integration
+* PostgreSQL Integration
+* Swagger Setup
+
+---
+
+# 🚧 Next Features
+
+* Baby CRUD
+* Activity CRUD
+* Social Login Improvements
+* Refresh Tokens
+* Email Integration
+* Analytics Dashboard
+* Automated Tests
+* CI/CD Pipeline
+
+---
+
+# 👨‍💻 Team Project
+
+This project is being developed collaboratively as part of a backend learning and simulation environment using professional development workflows.
+
+---
+
+# 📄 License
+
+MIT License
+
