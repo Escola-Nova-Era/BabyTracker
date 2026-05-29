@@ -19,8 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.ui.theme.BabyTrackerTheme
+
+
 
 class NavigationBar : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,6 @@ class NavigationBar : ComponentActivity() {
 @Composable
 fun BabyTrackerApp() {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
-
     NavigationSuiteScaffold(
         navigationSuiteItems = {
             AppDestinations.entries.forEach {
@@ -70,8 +71,8 @@ enum class AppDestinations(
     val icon: Int,
 ) {
     HOME("Home", R.drawable.ic_home),
-    HISTORY("Histórico", R.drawable.ic_history), // Certifique-se de ter este ícone em res/drawable
-    HEALTH("Saúde", R.drawable.ic_health_metrics), // Certifique-se de ter este ícone
+    HISTORY("Histórico", R.drawable.ic_history),
+    HEALTH("Saúde", R.drawable.ic_health_metrics),
     PROFILE("Perfil", R.drawable.ic_account_box),
 }
 

@@ -35,14 +35,3 @@ struct SummaryCard: View {
         .cornerRadius(16)
     }
 }
-
-#Preview {
-    SummaryCard(item: SummaryItem(
-        title: "Last feed",
-        value: "2h ago",
-        detail: "120 ml",
-        icon: "arrow.up",
-        tint: [AppColors.yellowSoft, AppColors.yellowMuted],
-        tintIcon: AppColors.orangeSoft
-    ))
-}
