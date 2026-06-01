@@ -8,13 +8,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun BarrarInferior(
+fun BarraInferior(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -31,7 +29,7 @@ fun BarrarInferior(
                     contentDescription = "Home"
                 )
             }
-            IconButton(onClick = {navController.navigate("Screen2")}) {
+            IconButton(onClick = {navController.navigate("Timeline")}) {
                 Icon(
                     imageVector = Icons.Default.BarChart,
                     contentDescription = "Insights"

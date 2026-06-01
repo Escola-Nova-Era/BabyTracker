@@ -24,6 +24,43 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
+import com.escolanovaeratech.babytracker.theme.PrimaryLight
+import com.escolanovaeratech.babytracker.theme.SecondaryLight
+import com.escolanovaeratech.babytracker.theme.TextPrimary
+import com.escolanovaeratech.babytracker.theme.TextSecondary
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import com.escolanovaeratech.babytracker.theme.DividerColor
+import com.escolanovaeratech.babytracker.theme.TextHint
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 
 // 1. O COMPONENTE REUTILIZÁVEL (O CARD)
@@ -223,8 +260,8 @@ fun SummaryGrid() {
 // 3. A PREVIEW (O que desenha a interface na lateral do Android Studio)
 @Preview(showBackground = true, name = "Resumo de Hoje")
 @Composable
-fun SummaryGridPreview() {
-    androidx.compose.material3.MaterialTheme {
-        SummaryGrid()
+fun LoginScreenPreview() {
+    BabyTrackerTheme {
+        LoginScreen()
     }
 }
