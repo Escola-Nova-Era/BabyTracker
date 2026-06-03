@@ -12,7 +12,7 @@ struct HomeView: View {
                     colors: [AppColors.backgroundBottom, AppColors.backgroundTop],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
-                )
+               )
                     .ignoresSafeArea()
                 
                 ScrollView {
