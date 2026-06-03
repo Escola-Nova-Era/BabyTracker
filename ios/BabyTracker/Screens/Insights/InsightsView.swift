@@ -34,3 +34,7 @@ struct InsightsView: View {
         }
     }
 }
+
+#Preview {
+    InsightsView()
+}
