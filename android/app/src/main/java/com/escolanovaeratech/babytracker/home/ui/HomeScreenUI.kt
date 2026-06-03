@@ -27,11 +27,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.ui.theme.BathOrange
-import com.escolanovaeratech.babytracker.ui.theme.DiaperGreen
-import com.escolanovaeratech.babytracker.ui.theme.FeedingBlue
-import com.escolanovaeratech.babytracker.ui.theme.SleepPurple
-
+import com.escolanovaeratech.babytracker.theme.AccentOrange
+import com.escolanovaeratech.babytracker.theme.AccentGreen
+import com.escolanovaeratech.babytracker.theme.AccentBlue
+import com.escolanovaeratech.babytracker.theme.PrimaryColor
 @Composable
 fun HomeScreenUI() {
 
@@ -70,14 +69,14 @@ fun HomeScreenUI() {
 
                     ActionButton(
                         text = stringResource(R.string.add_feeding),
-                        color = FeedingBlue,
+                        color = AccentBlue,
                         iconRes = R.drawable.ic_bottle,
                         modifier = Modifier.weight(1f)
                     )
 
                     ActionButton(
                         text = stringResource(R.string.add_diaper),
-                        color = DiaperGreen,
+                        color = AccentGreen,
                         iconRes = R.drawable.ic_heart,
                         modifier = Modifier.weight(1f)
                     )
@@ -90,14 +89,14 @@ fun HomeScreenUI() {
 
                     ActionButton(
                         text = stringResource(R.string.sleep_wake),
-                        color = SleepPurple,
+                        color = PrimaryColor,
                         iconRes = R.drawable.ic_moon,
                         modifier = Modifier.weight(1f)
                     )
 
                     ActionButton(
                         text = stringResource(R.string.add_bath),
-                        color = BathOrange,
+                        color = AccentOrange,
                         iconRes = R.drawable.ic_bath,
                         modifier = Modifier.weight(1f)
                     )
