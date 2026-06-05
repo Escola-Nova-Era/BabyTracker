@@ -6,7 +6,7 @@ import {
   resetPassword,
 } from "./auth.service";
 
-// REGISTER
+
 export const register = async (
   req: Request,
   res: Response,
@@ -27,7 +27,7 @@ export const register = async (
   }
 };
 
-// LOGIN
+
 export const login = async (
   req: Request,
   res: Response,
@@ -44,7 +44,7 @@ export const login = async (
   }
 };
 
-// FORGOT PASSWORD
+
 export const forgotPasswordController = async (
   req: Request,
   res: Response,
@@ -61,7 +61,7 @@ export const forgotPasswordController = async (
   }
 };
 
-// RESET PASSWORD
+
 export const resetPasswordController = async (
   req: Request,
   res: Response,
