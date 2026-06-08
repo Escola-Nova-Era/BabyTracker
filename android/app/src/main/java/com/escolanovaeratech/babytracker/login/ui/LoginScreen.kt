@@ -1,25 +1,24 @@
-package com.escolanovaeratech.babytracker.login.ui
+package com.escolanovaeratech.babytracker.home.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -64,80 +63,39 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 
-
+// 1. O COMPONENTE REUTILIZÁVEL (O CARD)
 @Composable
-fun LoginScreen() {
-    // Variáveis de estado para guardar o texto dos inputs
-    var parentName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) } // Controla o olhinho da senha
-
-
-    // 1. Definindo os gradientes
-    // Gradiente suave de fundo (Rosa claro para Branco)
-
-    val backgroundGradient = Brush.horizontalGradient(
-        colors = listOf(
-            Color(0xFFFFF0F5), // Rosa bem clarinho
-            Color.White
-        )
-    )
-
-    val brandGradient = Brush.linearGradient(
-        colors = listOf(PrimaryLight, SecondaryLight)
-    )
-
-    // 2. Box Raiz: Ocupa toda a tela e aplica o fundo
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(backgroundGradient)
+fun DashboardCard(
+    title: String,
+    value: String,
+    subtitle: String,
+    backgroundColor: Color,
+    iconResId: Int,
+    iconColor: Color,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(110.dp),
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = backgroundColor)
     ) {
-        // 3. Column Principal
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Spacer(modifier = Modifier.height(64.dp))
-
-            // --- INÍCIO DO HEADER ---
+            // Coluna da Esquerda: Textos
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(horizontal = 24.dp)
+                modifier = Modifier.fillMaxHeight(),
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(72.dp)
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(brandGradient)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baby_logo),
-                        contentDescription = "Baby Tracker Logo",
-                        tint = Color.White,
-                        modifier = Modifier.size(40.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
                 Text(
-                    text = "Create Account",
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = TextPrimary
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = "Join us on this beautiful journey",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = TextSecondary
+                    text = title,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Medium
                 )
             }
             // --- FIM DO HEADER ---
@@ -194,248 +152,113 @@ fun LoginScreen() {
 
                     // 2. Campo: Email
                     Text(
-                        text = "Email",
-                        style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = TextPrimary
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    OutlinedTextField(
-                        value = email,
-                        onValueChange = { email = it },
-                        placeholder = { Text("your@email.com", color = TextHint) },
-                        leadingIcon = {
-                            Icon(
-                                Icons.Outlined.Email,
-                                contentDescription = "Email Icon",
-                                tint = TextSecondary
-                            )
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            unfocusedBorderColor = DividerColor,
-                            focusedBorderColor = PrimaryLight,
-                            unfocusedContainerColor = Color(0xFFF8F9FA),
-                            focusedContainerColor = Color(0xFFF8F9FA)
-                        ),
-                        singleLine = true
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // 3. Campo: Password
-                    Text(
-                        text = "Password",
-                        style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = TextPrimary
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    OutlinedTextField(
-                        value = password,
-                        onValueChange = { password = it },
-                        placeholder = { Text("Create password", color = TextHint) },
-                        leadingIcon = {
-                            Icon(
-                                Icons.Outlined.Lock,
-                                contentDescription = "Lock Icon",
-                                tint = TextSecondary
-                            )
-                        },
-                        trailingIcon = {
-                            IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                                Icon(
-                                    imageVector = if (passwordVisible) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff,
-                                    contentDescription = null,
-                                    tint = TextSecondary
-                                )
-                            }
-                        },
-                        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            unfocusedBorderColor = DividerColor,
-                            focusedBorderColor = PrimaryLight,
-                            unfocusedContainerColor = Color(0xFFF8F9FA),
-                            focusedContainerColor = Color(0xFFF8F9FA)
-                        ),
-                        singleLine = true
+                        text = value,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
                     Text(
-                        text = "At least 8 characters",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = TextSecondary,
-                        modifier = Modifier.padding(top = 4.dp, start = 4.dp)
+                        text = subtitle,
+                        fontSize = 11.sp,
+                        color = Color.Gray
                     )
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    // 4. Termos de Uso (Checkbox + Texto Misto)
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically // Alinha tudo no meio da linha
-                    ) {
-                        var checked by remember { mutableStateOf(false) }
-                        Checkbox(
-                            checked = checked,
-                            onCheckedChange = { checked = it },
-                            colors = CheckboxDefaults.colors(checkedColor = PrimaryLight)
-                        )
-                        // buildAnnotatedString permite ter várias cores e estilos no mesmo Text!
-                        Text(
-                            text = buildAnnotatedString {
-                                withStyle(style = SpanStyle(color = TextSecondary)) { append("I agree to the ") }
-                                withStyle(
-                                    style = SpanStyle(
-                                        color = PrimaryLight,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-                                ) { append("Terms of Service") }
-                                withStyle(style = SpanStyle(color = TextSecondary)) { append(" and ") }
-                                withStyle(
-                                    style = SpanStyle(
-                                        color = PrimaryLight,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-                                ) { append("Privacy Policy") }
-                            },
-                            style = MaterialTheme.typography.labelSmall,
-                            lineHeight = 16.sp // Evita que o texto quebre de forma estranha
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    // 5. Botão "Create Account"
-                    Button(
-                        onClick = { /* Ação de criar conta */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp)
-                            .background(
-                                brandGradient,
-                                shape = RoundedCornerShape(16.dp)
-                            ), // Aplica o gradiente no fundo
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent), // Deixa o fundo original transparente para o gradiente brilhar
-                        elevation = null
-                    ) {
-                        Text(
-                            text = "Create Account",
-                            color = Color.White,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(32.dp))
-
-                    // 6. Separador "OR SIGN UP WITH"
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        HorizontalDivider(
-                            modifier = Modifier.weight(1f),
-                            color = DividerColor
-                        ) // Linha esquerda
-                        Text(
-                            text = "OR SIGN UP WITH",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = TextHint,
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        )
-                        HorizontalDivider(
-                            modifier = Modifier.weight(1f),
-                            color = DividerColor
-                        ) // Linha direita
-                    }
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    // 7. Botão do Google
-                    OutlinedButton(
-                        onClick = { /* Ação Google */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        border = BorderStroke(1.dp, DividerColor)
-                    ) {
-                        // Usamos tint = Color.Unspecified para o ícone manter suas cores originais (SVG do Google)
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_google),
-                            contentDescription = "Google",
-                            modifier = Modifier.size(24.dp),
-                            tint = Color.Unspecified
-                        )
-                        Spacer(modifier = Modifier.width(12.dp))
-                        Text(
-                            text = "Continue with Google",
-                            color = TextPrimary,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 16.sp
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // 8. Botão da Apple
-                    Button(
-                        onClick = { /* Ação Apple */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_apple),
-                            contentDescription = "Apple",
-                            modifier = Modifier.size(24.dp),
-                            tint = Color.White
-                        )
-                        Spacer(modifier = Modifier.width(12.dp))
-                        Text(
-                            text = "Continue with Apple",
-                            color = Color.White,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 16.sp
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(32.dp))
-
-                    // 9. Rodapé de Login
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "Already have an account? ",
-                            color = TextSecondary,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Text(
-                            text = "Sign In",
-                            color = PrimaryLight,
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(24.dp))
                 }
             }
 
-
+            // Lado Direito: O Ícone estilizado com fundo circular branco
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .background(Color.White, shape = RoundedCornerShape(50))
+                    .padding(6.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = iconResId),
+                    contentDescription = title,
+                    tint = iconColor,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
         }
     }
 }
 
-// 4. Preview: Para vermos o resultado sem rodar o app no emulador
-@Preview(showBackground = true)
+// 2. O GRID QUE JUNTA OS 4 CARDS (A SEÇÃO COMPLETA)
+@Composable
+fun SummaryGrid() {
+    // Usando uma imagem nativa do sistema Android para não depender de pacotes externos ou arquivos locais que possam falhar
+    val defaultAndroidIcon = android.R.drawable.ic_menu_info_details
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // Título da Seção
+        Text(
+            text = "TODAY'S SUMMARY",
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Gray,
+            modifier = Modifier.padding(bottom = 4.dp)
+        )
+
+        // Primeira Linha (Alimentação e Fralda)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            DashboardCard(
+                title = "Last Feeding",
+                value = "2h ago",
+                subtitle = "120 ml",
+                backgroundColor = Color(0xFFE3F2FD), // Azul pastel
+                iconResId = defaultAndroidIcon,
+                iconColor = Color(0xFF2196F3),
+                modifier = Modifier.weight(1f)
+            )
+            DashboardCard(
+                title = "Last Diaper",
+                value = "45m ago",
+                subtitle = "Pee",
+                backgroundColor = Color(0xFFE8F5E9), // Verde pastel
+                iconResId = defaultAndroidIcon,
+                iconColor = Color(0xFF4CAF50),
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        // Segunda Linha (Sono e Banho)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            DashboardCard(
+                title = "Sleep Status",
+                value = "Awake",
+                subtitle = "3h 20 min",
+                backgroundColor = Color(0xFFF3E5F5), // Roxo pastel
+                iconResId = defaultAndroidIcon,
+                iconColor = Color(0xFF9C27B0),
+                modifier = Modifier.weight(1f)
+            )
+            DashboardCard(
+                title = "Last Bath",
+                value = "Yesterday",
+                subtitle = "7:30 PM",
+                backgroundColor = Color(0xFFFFFDE7), // Amarelo pastel
+                iconResId = defaultAndroidIcon,
+                iconColor = Color(0xFFFBC02D),
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+}
+
+// 3. A PREVIEW (O que desenha a interface na lateral do Android Studio)
+@Preview(showBackground = true, name = "Resumo de Hoje")
 @Composable
 fun LoginScreenPreview() {
     BabyTrackerTheme {
