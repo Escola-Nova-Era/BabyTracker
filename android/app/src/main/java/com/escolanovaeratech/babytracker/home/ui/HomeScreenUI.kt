@@ -48,12 +48,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
-import com.escolanovaeratech.babytracker.theme.BathOrange
-import com.escolanovaeratech.babytracker.theme.DiaperGreen
-import com.escolanovaeratech.babytracker.theme.FeedingBlue
-import com.escolanovaeratech.babytracker.theme.SleepPurple
-
+import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.theme.AccentOrange
+import com.escolanovaeratech.babytracker.theme.AccentGreen
+import com.escolanovaeratech.babytracker.theme.AccentBlue
+import com.escolanovaeratech.babytracker.theme.PrimaryColor
 @Composable
 fun HomeScreenUI() {
     Scaffold(
@@ -351,22 +350,45 @@ fun QuickActionsSection() {
                 )
             }
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                ActionButton(
-                    text = "Sleep/Wake",
-                    color = SleepPurple,
-                    imageVector = Icons.Default.Bedtime,
-                    modifier = Modifier.weight(1f)
-                )
-                ActionButton(
-                    text = "Add Bath",
-                    color = BathOrange,
-                    imageVector = Icons.Default.Bathtub,
-                    modifier = Modifier.weight(1f)
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+
+                    ActionButton(
+                        text = stringResource(R.string.add_feeding),
+                        color = AccentBlue,
+                        iconRes = R.drawable.ic_bottle,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    ActionButton(
+                        text = stringResource(R.string.add_diaper),
+                        color = AccentGreen,
+                        iconRes = R.drawable.ic_heart,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+
+                    ActionButton(
+                        text = stringResource(R.string.sleep_wake),
+                        color = PrimaryColor,
+                        iconRes = R.drawable.ic_moon,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    ActionButton(
+                        text = stringResource(R.string.add_bath),
+                        color = AccentOrange,
+                        iconRes = R.drawable.ic_bath,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
         }
     }

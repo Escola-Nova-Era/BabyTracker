@@ -6,7 +6,7 @@ const JWT_SECRET = "supersecret";
 const RESET_SECRET = "resetsecret";
 const RESET_EXPIRES_IN = "15m";
 
-// REGISTER
+
 export const registerUser = async (
   name: string,
   email: string,
@@ -33,7 +33,7 @@ export const registerUser = async (
   return user;
 };
 
-// LOGIN
+
 export const loginUser = async (email: string, password: string) => {
   const user = await prisma.user.findUnique({
     where: { email },
@@ -63,7 +63,7 @@ export const loginUser = async (email: string, password: string) => {
   };
 };
 
-// FORGOT PASSWORD
+
 export const forgotPassword = async (email: string) => {
   const user = await prisma.user.findUnique({
     where: { email },
@@ -75,11 +75,9 @@ export const forgotPassword = async (email: string) => {
     };
   }
 
-  const token = jwt.sign(
-    { userId: user.id },
-    RESET_SECRET,
-    { expiresIn: RESET_EXPIRES_IN }
-  );
+  const token = jwt.sign({ userId: user.id }, RESET_SECRET, {
+    expiresIn: RESET_EXPIRES_IN,
+  });
 
   return {
     message: "If the email exists, a reset link has been sent",
@@ -87,7 +85,7 @@ export const forgotPassword = async (email: string) => {
   };
 };
 
-// RESET PASSWORD
+
 export const resetPassword = async (
   token: string,
   newPassword: string
