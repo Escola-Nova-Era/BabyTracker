@@ -1,8 +1,8 @@
 package com.escolanovaeratech.babytracker
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -19,7 +19,7 @@ import com.escolanovaeratech.babytracker.ui.components.BarraInferior
 
 
 
-class MainActivity2 : AppCompatActivity() {    
+class MainActivity2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +30,8 @@ class MainActivity2 : AppCompatActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     BabyTrackerApp()
+
+                    //HomeScreenUI()
                 }
             }
         }
@@ -42,6 +44,7 @@ fun BabyTrackerApp() {
     Scaffold(
         bottomBar = {
             BarraInferior(navController = navController)
+
         }
     ) { innerPadding ->
         BabyTrackerAppNavGraph(
@@ -56,4 +59,5 @@ fun BabyTrackerApp() {
 @Composable
 fun BabyTrackerAppPreview() {
     BabyTrackerApp()
+
 }
