@@ -6,10 +6,20 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.escolanovaeratech.babytracker.ui.screens.Screen1
+import com.escolanovaeratech.babytracker.home.ui.HomeScreenUI
+import com.escolanovaeratech.babytracker.profile.ui.ProfileScreen
 import com.escolanovaeratech.babytracker.ui.screens.Screen3
-import com.escolanovaeratech.babytracker.ui.screens.Screen4
+import kotlinx.serialization.Serializable
 
+
+@Serializable
+object Home
+@Serializable
+object Insights
+@Serializable
+object Timeline
+@Serializable
+object Profile
 @Composable
 fun BabyTrackerAppNavGraph(
     navController: NavHostController,
@@ -18,16 +28,16 @@ fun BabyTrackerAppNavGraph(
     //val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "Screen1",
+        startDestination = Home,
         modifier = modifier
     ) {
 
-        composable(route = "Screen1") { Screen1() }
+        composable<Home> { HomeScreenUI() }
 
-        composable(route = "Timeline") { TimelineScreen() }
+        composable<Insights> { Screen3() }
 
-        composable(route = "Screen3") { Screen3() }
+        composable<Timeline> { TimelineScreen() }
 
-        composable(route = "Screen4") { Screen4() }
+        composable<Profile> { ProfileScreen() }
     }
 }
