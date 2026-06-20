@@ -15,15 +15,27 @@ final class AuthenticationViewModel: ObservableObject {
     @Published var signInPassword = ""
     
     // Estado de autenticação
+    @Published private(set) var registeredUser: AuthUser?
     @Published private(set) var authenticatedUser: AuthUser?
     @Published private(set) var authToken: String?
+    @Published private(set) var didCreateAccount = false
     @Published private(set) var isLoading = false
     @Published var errorMessage: String?
 
-    private let authService: AuthServiceProtocol
+    var isAuthenticated: Bool {
+        authenticatedUser != nil && authToken != nil
+    }
 
-    init(authService: AuthServiceProtocol = AuthService()) {
+    private let authService: AuthServiceProtocol
+    private let tokenStorage: TokenStorageProtocol
+
+    init(
+        authService: AuthServiceProtocol = MockAuthService(),
+        tokenStorage: TokenStorageProtocol = KeychainTokenStorage()
+    ) {
         self.authService = authService
+        self.tokenStorage = tokenStorage
+        self.authToken = try? tokenStorage.loadToken()
     }
     
     // Regra para permitir criação da conta
@@ -47,7 +59,8 @@ final class AuthenticationViewModel: ObservableObject {
                     email: self.createEmail,
                     password: self.createPassword
                 )
-                self.authenticatedUser = user
+                self.registeredUser = user
+                self.didCreateAccount = true
             }
         }
     }
@@ -61,10 +74,24 @@ final class AuthenticationViewModel: ObservableObject {
                     email: self.signInEmail,
                     password: self.signInPassword
                 )
+                try self.tokenStorage.saveToken(response.token)
                 self.authenticatedUser = response.user
                 self.authToken = response.token
             }
         }
+    }
+    
+    func signOut() {
+        do {
+            try tokenStorage.clearToken()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+
+        registeredUser = nil
+        authenticatedUser = nil
+        authToken = nil
+        didCreateAccount = false
     }
     
     func continueWithGoogle() {

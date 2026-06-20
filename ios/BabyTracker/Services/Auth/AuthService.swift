@@ -24,3 +24,16 @@ final class AuthService: AuthServiceProtocol {
         return try await networkClient.request(endpoint, body: request)
     }
 }
+
+final class MockAuthService: AuthServiceProtocol {
+    func register(name: String, email: String, password: String) async throws -> AuthUser {
+        AuthUser(id: UUID().uuidString, name: name, email: email)
+    }
+
+    func login(email: String, password: String) async throws -> LoginResponse {
+        LoginResponse(
+            token: "mock-auth-token",
+            user: AuthUser(id: UUID().uuidString, name: "Mock User", email: email)
+        )
+    }
+}
