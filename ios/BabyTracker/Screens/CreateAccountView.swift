@@ -233,3 +233,11 @@ struct CreateAccountView: View {
     }
     
 }
+
+#Preview {
+    CreateAccountView(
+        viewModel: AuthenticationViewModel(),
+        onSignInTap: {}
+    )
+}
+
