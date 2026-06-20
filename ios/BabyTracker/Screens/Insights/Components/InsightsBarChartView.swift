@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct InsightsBarChartView: View {
-    
     let data: [Double]
     let labels: [String]
     let scale: [Int]
@@ -17,8 +16,6 @@ struct InsightsBarChartView: View {
         static let minBarHeight: CGFloat = 4
         static let xLabelsTopPadding: CGFloat = 6
         static let barCornerRadius: CGFloat = 4
-        static let xLabelFontSize: CGFloat = 11
-        static let yLabelFontSize: CGFloat = 10
     }
 
     var body: some View {
@@ -37,7 +34,7 @@ struct InsightsBarChartView: View {
             ForEach(scale.reversed(), id: \.self) { level in
                 VStack(spacing: 0) {
                     Text("\(level)")
-                        .font(.system(size: Layout.yLabelFontSize, weight: .medium))
+                        .font(AppTypography.overline)
                         .foregroundStyle(AppColors.textTertiary)
                     
                     if level != scale.first {
@@ -68,7 +65,7 @@ struct InsightsBarChartView: View {
             HStack(spacing: Layout.barGap) {
                 ForEach(labels, id: \.self) { day in
                     Text(day)
-                        .font(.system(size: Layout.xLabelFontSize, weight: .medium))
+                        .font(AppTypography.overline)
                         .foregroundStyle(AppColors.textTertiary)
                         .frame(width: Layout.barColumnWidth)
                 }
@@ -83,7 +80,6 @@ struct InsightsBarChartView: View {
         let percentage = value / maxLevel
         let height = (percentage * chartHeight)
         return max(Layout.minBarHeight, height)
-        
     }
 }
 
