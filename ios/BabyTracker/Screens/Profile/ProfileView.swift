@@ -1,12 +1,10 @@
 import SwiftUI
 
 struct ProfileView: View {
-   
     @StateObject private var viewModel = ProfileViewModel()
     
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 // Background
                 LinearGradient(
@@ -18,7 +16,6 @@ struct ProfileView: View {
                 
                 ScrollView() {
                     VStack(alignment: .leading, spacing: AppSpacing.large) {
-                        
                         // --- HEADER ---
                         headerSection
                         
@@ -28,11 +25,11 @@ struct ProfileView: View {
                         // --- SETTINGS LIST ---
                         VStack(alignment: .leading, spacing: AppSpacing.large) {
                             Text("SETTINGS")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(AppTypography.bodyStrong)
                                 .foregroundStyle(AppColors.textSecondary)
                                 .padding(.top, AppSpacing.medium)
                             
-                            VStack(spacing: AppSpacing.xSmall){
+                            VStack(spacing: AppSpacing.xSmall) {
                                 ForEach(viewModel.settingItems) { item in
                                     SettingsCard(item: item) {
                                         viewModel.handleTap(item: item)
@@ -46,7 +43,7 @@ struct ProfileView: View {
                             }
                             .padding(.horizontal, AppSpacing.medium)
                             .background(AppColors.surface)
-                            .cornerRadius(20)
+                            .cornerRadius(AppTheme.cornerRadius)
                         }
                     }
                     .padding(.horizontal, AppSpacing.medium)
@@ -61,17 +58,17 @@ struct ProfileView: View {
         HStack {
             VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
                 Text("Profile")
-                    .font(.system(size: 24, weight: .bold))
+                    .font(AppTypography.screenTitle)
                     .foregroundStyle(AppColors.textPrimary)
                 
                 Text("Your baby's information.")
-                    .font(.system(size: 14, weight: .medium))
+                    .font(AppTypography.body)
                     .foregroundStyle(AppColors.textSecondary)
             }
             Spacer()
             Button {} label: {
                 Image(systemName: "gear.badge")
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(AppTypography.iconMedium)
                     .foregroundStyle(AppColors.textPrimary)
                     .frame(width: 40, height: 40)
                     .background(AppColors.surfaceStrong)
@@ -87,25 +84,25 @@ struct ProfileView: View {
             
             Circle()
                 .fill(
-            LinearGradient(
-                colors: [AppColors.accent, AppColors.mint],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
+                    LinearGradient(
+                        colors: [AppColors.accent, AppColors.mint],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
                 )
-            )
                 .frame(width: 90, height: 90)
                 .overlay(
                     Image(systemName: "person.fill.viewfinder")
-                        .font(.system(size: 40, weight: .bold))
+                        .font(AppTypography.iconExtraLarge)
                         .foregroundStyle(AppColors.surface)
                 )
             
             VStack(alignment: .center, spacing: AppSpacing.xxSmall) {
                 Text("Emma Rose")
-                    .font(.system(size: 24, weight: .bold))
+                    .font(AppTypography.screenTitle)
                     .foregroundStyle(AppColors.surface)
                 Text("Born March 15, 2024")
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(AppTypography.bodyStrong)
                     .foregroundStyle(AppColors.surface)
             }
             Spacer()
@@ -126,18 +123,19 @@ struct ProfileView: View {
             LinearGradient(
                 colors: [AppColors.lavander, AppColors.accent],
                 startPoint: .topLeading,
-                endPoint: .bottomTrailing)
+                endPoint: .bottomTrailing
+            )
         )
-        .cornerRadius(20)
+        .cornerRadius(AppTheme.cornerRadius)
     }
     
     private func statItem(value: String, label: String) -> some View {
         VStack(spacing: AppSpacing.xxSmall) {
             Text(value)
-                .font((.system(size: 18, weight: .bold)))
+                .font(AppTypography.headline)
                 .foregroundStyle(AppColors.surface)
             Text(label)
-                .font((.system(size: 14, weight: .semibold)))
+                .font(AppTypography.bodyStrong)
                 .foregroundStyle(AppColors.surface)
         }
     }

@@ -1,11 +1,9 @@
 import SwiftUI
 
 struct TrackingView: View {
-    
     @StateObject var viewModel = TrackingViewModel()
     
     var body: some View {
-        
         NavigationStack {
             ZStack {
                 LinearGradient(colors: [AppColors.backgroundTop, AppColors.backgroundBottom], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -13,13 +11,13 @@ struct TrackingView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: AppSpacing.medium) {
                         HStack(alignment: .top) {
-                            VStack (alignment: .leading, spacing: AppSpacing.xxSmall) {
+                            VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
                                 Text("Today's Timeline")
-                                    .font(.system(size: 24, weight: .bold))
+                                    .font(AppTypography.screenTitle)
                                     .foregroundStyle(AppColors.textPrimary)
                                 
                                 Text("January 26, 2026")
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(AppTypography.body)
                                     .foregroundStyle(AppColors.textSecondary)
                             }
                             
@@ -28,7 +26,7 @@ struct TrackingView: View {
                             Button {
                             } label: {
                                 Image(systemName: "line.3.horizontal.decrease")
-                                    .font(.system(size: 14, weight: .bold))
+                                    .font(AppTypography.iconSmall)
                                     .foregroundStyle(AppColors.textSecondary)
                                     .frame(width: 30, height: 30)
                                     .background(AppColors.surfaceMuted)
@@ -50,7 +48,6 @@ struct TrackingView: View {
                                 }
                             }
                         }
-                        
                     }
                     .padding(AppSpacing.large)
                 }
