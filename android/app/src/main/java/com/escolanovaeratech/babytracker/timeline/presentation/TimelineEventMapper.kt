@@ -18,9 +18,6 @@ fun TimelineEventModel.toUiModel(): TimelineEventUiModel {
         title = type.toDisplayTitle(),
         formattedTime = occurredAt.format(timelineTimeFormat),
         subtitle = description,
-        tag = amountMl?.let { amount ->
-            "$amount ml"
-        }
     )
 }
 

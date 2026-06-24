@@ -15,6 +15,5 @@ data class TimelineEventModel (
     val id: String,
     val type: TimelineEventType,
     val occurredAt: LocalDateTime,
-    val description: String? = null,
-    val amountMl: Int? = null
+    val description: String,
 )

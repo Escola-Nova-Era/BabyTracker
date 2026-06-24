@@ -27,7 +27,6 @@ internal val sampleEvents = listOf(
         title = "Diaper Change",
         formattedTime = "1:45 PM",
         subtitle = "\uD83D\uDCA7 Pee",
-        //tagColor = Color(0xFFB3E5FC)
     ),
     TimelineEventUiModel(
         id = "3",
@@ -56,6 +55,5 @@ internal val sampleEvents = listOf(
         title = "Diaper Change",
         formattedTime = "9:30 AM",
         subtitle = "\uD83D\uDCA9 Poop",
-        //tagColor = Color(0xFFFFCC80)
     )
 )
