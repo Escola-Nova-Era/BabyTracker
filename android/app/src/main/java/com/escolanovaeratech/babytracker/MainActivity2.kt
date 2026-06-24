@@ -29,7 +29,7 @@ class MainActivity2 : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //BabyTrackerApp()
+                    BabyTrackerApp()
                 }
             }
         }

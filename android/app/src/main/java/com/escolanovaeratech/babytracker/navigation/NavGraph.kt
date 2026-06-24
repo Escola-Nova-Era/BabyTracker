@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.escolanovaeratech.babytracker.timeline.presentation.TimelineScreen
 import com.escolanovaeratech.babytracker.ui.screens.Screen1
 import com.escolanovaeratech.babytracker.ui.screens.Screen3
 import com.escolanovaeratech.babytracker.ui.screens.Screen4
@@ -23,7 +24,7 @@ fun BabyTrackerAppNavGraph(
 
         composable(route = "Screen1") { Screen1() }
 
-        composable(route = "Timeline") { Screen1() }
+        composable(route = "Timeline") { TimelineScreen() }
 
         composable(route = "Screen3") { Screen3() }
 
