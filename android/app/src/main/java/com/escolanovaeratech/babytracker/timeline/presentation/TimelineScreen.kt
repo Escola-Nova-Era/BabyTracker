@@ -18,102 +18,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.escolanovaeratech.babytracker.timeline.presentation.preview.sampleEvents
 
-// ─── Data model ──────────────────────────────────────────────────────────────
-
-enum class TimelineEventType {
-    BOTTLE_FEEDING,
-    WOKE_UP,
-    DIAPER_CHANGE,
-    FELL_ASLEEP,
-    BREASTFEEDING,
-    BATH_TIME
-}
-
-data class TimelineEvent(
-    val type: TimelineEventType,
-    val title: String,
-    val time: String,
-    val subtitle: String? = null,
-    val tag: String? = null,
-    val tagColor: Color? = null
-)
-
-// ─── Sample data ─────────────────────────────────────────────────────────────
-
-private val sampleEvents = listOf(
-    TimelineEvent(
-        type = TimelineEventType.BOTTLE_FEEDING,
-        title = "Bottle Feeding",
-        time = "2:30 PM",
-        subtitle = "🍼 120 ml   🕐 15 min"
-    ),
-    TimelineEvent(
-        type = TimelineEventType.WOKE_UP,
-        title = "Woke Up",
-        time = "2:00 PM",
-        subtitle = "💤 Slept for 2h 15min"
-    ),
-    TimelineEvent(
-        type = TimelineEventType.DIAPER_CHANGE,
-        title = "Diaper Change",
-        time = "1:45 PM",
-        tag = "Pee",
-        tagColor = Color(0xFFB3E5FC)
-    ),
-    TimelineEvent(
-        type = TimelineEventType.FELL_ASLEEP,
-        title = "Fell Asleep",
-        time = "11:45 AM",
-        subtitle = "🌙 Nap time"
-    ),
-    TimelineEvent(
-        type = TimelineEventType.BREASTFEEDING,
-        title = "Breastfeeding",
-        time = "11:15 AM",
-        subtitle = "Left side   🕐 20 min"
-    ),
-    TimelineEvent(
-        type = TimelineEventType.BATH_TIME,
-        title = "Bath Time",
-        time = "10:00 AM",
-        subtitle = "🛁 Warm bath"
-    ),
-    TimelineEvent(
-        type = TimelineEventType.DIAPER_CHANGE,
-        title = "Diaper Change",
-        time = "9:30 AM",
-        tag = "Poop",
-        tagColor = Color(0xFFFFCC80)
-    )
-)
-
-// ─── Icon helpers ─────────────────────────────────────────────────────────────
-
-private fun eventIconEmoji(type: TimelineEventType): String = when (type) {
-    TimelineEventType.BOTTLE_FEEDING  -> "🍼"
-    TimelineEventType.WOKE_UP         -> "☀️"
-    TimelineEventType.DIAPER_CHANGE   -> "👶"
-    TimelineEventType.FELL_ASLEEP     -> "🌙"
-    TimelineEventType.BREASTFEEDING   -> "🤱"
-    TimelineEventType.BATH_TIME       -> "🛁"
-}
-
-private fun eventIconBg(type: TimelineEventType): Color = when (type) {
-    TimelineEventType.BOTTLE_FEEDING  -> Color(0xFFFFF3E0)
-    TimelineEventType.WOKE_UP         -> Color(0xFFFFF8E1)
-    TimelineEventType.DIAPER_CHANGE   -> Color(0xFFE8F5E9)
-    TimelineEventType.FELL_ASLEEP     -> Color(0xFFEDE7F6)
-    TimelineEventType.BREASTFEEDING   -> Color(0xFFFFEBEE)
-    TimelineEventType.BATH_TIME       -> Color(0xFFE3F2FD)
-}
 
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 @Composable
 fun TimelineScreen(
     date: String = "January 27, 2025",
-    events: List<TimelineEvent> = sampleEvents
+    events: List<TimelineEventUiModel> = sampleEvents
 ) {
     Column(
         modifier = Modifier
@@ -175,7 +88,7 @@ private fun TimelineHeader(date: String) {
 // ─── Event card ───────────────────────────────────────────────────────────────
 
 @Composable
-private fun TimelineEventCard(event: TimelineEvent) {
+private fun TimelineEventCard(event: TimelineEventUiModel) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -189,18 +102,18 @@ private fun TimelineEventCard(event: TimelineEvent) {
             modifier = Modifier
                 .size(44.dp)
                 .clip(RoundedCornerShape(12.dp))
-                .background(eventIconBg(event.type)),
+                .background(event.type.iconBackgroundColor),
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = eventIconEmoji(event.type),
+                text = event.type.iconEmoji,
                 fontSize = 20.sp
             )
         }
 
         Spacer(modifier = Modifier.width(12.dp))
 
-        // Title + subtitle / tag
+        // Title + subtitle
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = event.title,
@@ -209,45 +122,19 @@ private fun TimelineEventCard(event: TimelineEvent) {
                 color = Color(0xFF1A1A2E)
             )
             Spacer(modifier = Modifier.height(2.dp))
-            when {
-                event.subtitle != null -> {
-                    Text(
-                        text = event.subtitle,
-                        fontSize = 12.sp,
-                        color = Color(0xFF9E9E9E)
-                    )
-                }
-                event.tag != null -> {
-                    EventTag(label = event.tag, color = event.tagColor ?: Color(0xFFE0E0E0))
-                }
-            }
+            Text(
+                text = event.subtitle,
+                fontSize = 12.sp,
+                color = Color(0xFF9E9E9E)
+            )
         }
 
         // Time
         Text(
-            text = event.time,
+            text = event.formattedTime,
             fontSize = 12.sp,
             color = Color(0xFF9E9E9E),
             fontWeight = FontWeight.Medium
-        )
-    }
-}
-
-// ─── Tag pill ─────────────────────────────────────────────────────────────────
-
-@Composable
-private fun EventTag(label: String, color: Color) {
-    Box(
-        modifier = Modifier
-            .clip(RoundedCornerShape(20.dp))
-            .background(color)
-            .padding(horizontal = 10.dp, vertical = 3.dp)
-    ) {
-        Text(
-            text = label,
-            fontSize = 11.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF5D4037)
         )
     }
 }
