@@ -4,10 +4,10 @@ struct InsightsHeaderCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
             Text("Great Progress!")
-                .font(.system(size: 22, weight: .semibold))
+                .font(AppTypography.title)
                 .foregroundStyle(.white)
             Text("Emma's pattems are developping beautifull. Her feedind and sleep routines show healthy consistency.")
-                .font(.system(size: 14, weight: .regular))
+                .font(AppTypography.body)
                 .foregroundStyle(.white)
         }
         .padding(AppSpacing.large)
@@ -19,6 +19,6 @@ struct InsightsHeaderCard: View {
                 endPoint: .trailing
             )
         )
-        .cornerRadius(20)
+        .cornerRadius(AppTheme.cornerRadius)
     }
 }

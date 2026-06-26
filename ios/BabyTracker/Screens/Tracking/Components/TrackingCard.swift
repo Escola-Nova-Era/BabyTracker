@@ -1,8 +1,6 @@
 import SwiftUI
 
-
 struct TrackingCard: View {
-    
     let item: TrackingItem
     let isLast: Bool
     
@@ -14,7 +12,7 @@ struct TrackingCard: View {
                     .frame(width: 32, height: 32).opacity(0.5)
                 
                 Image(systemName: item.icon)
-                    .font(.system(size: 16))
+                    .font(AppTypography.subheadline)
                     .foregroundColor(item.tint)
                 
             }
@@ -23,22 +21,22 @@ struct TrackingCard: View {
             VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
                 HStack {
                     Text(item.title)
-                        .font(.system(size: 14, weight: .bold))
+                        .font(AppTypography.bodyStrong)
                         .foregroundStyle(AppColors.textPrimary)
                     
                     Spacer()
                     
                     Text(item.time)
-                        .font(.system(size: 12, weight: .bold))
+                        .font(AppTypography.captionStrong)
                         .foregroundStyle(AppColors.textSecondary)
                 }
                 HStack(spacing: AppSpacing.xSmall) {
                     Image(systemName: "water.waves")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(AppTypography.caption)
                         .foregroundStyle(item.tint)
                     
                     Text(item.detail)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(AppTypography.caption)
                         .foregroundStyle(AppColors.textSecondary)
                 }
             }
