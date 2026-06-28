@@ -1,14 +1,12 @@
 import SwiftUI
 
 struct SummaryCard: View {
-    
     let item: SummaryItem
-    
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
             Image(systemName: item.icon)
-                .font(.system(size: 14, weight: .semibold))
+                .font(AppTypography.iconSmall)
                 .foregroundColor(item.tintIcon)
                 .frame(width: 28, height: 28)
                 .background(item.tint.first ?? AppColors.surface)
@@ -16,15 +14,15 @@ struct SummaryCard: View {
                 .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 6)
             
             Text(item.title)
-                .font(.system(size: 12, weight: .bold))
+                .font(AppTypography.captionStrong)
                 .foregroundStyle(AppColors.textSecondary)
             
             Text(item.value)
-                .font(Font.system(size: 20, weight: .bold))
+                .font(AppTypography.metricValue)
                 .foregroundStyle(AppColors.textPrimary)
             
             Text(item.detail)
-                .font(.system(size: 12, weight: .bold))
+                .font(AppTypography.captionStrong)
                 .foregroundStyle(AppColors.textTertiary)
         }
         .padding(AppSpacing.medium)

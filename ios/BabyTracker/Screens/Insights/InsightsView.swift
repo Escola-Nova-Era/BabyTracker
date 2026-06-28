@@ -11,11 +11,11 @@ struct InsightsView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
                         Text("Insights")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(AppTypography.screenTitle)
                             .foregroundStyle(AppColors.textPrimary)
                         
                         Text("Track Emma's daily activities")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(AppTypography.body)
                             .foregroundStyle(AppColors.textSecondary)
                         
                         Spacer()

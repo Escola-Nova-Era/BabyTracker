@@ -9,25 +9,25 @@ struct InsightsMetricCard: View {
                 Image(systemName: item.iconName)
                     .foregroundStyle(item.iconColor)
                 Text(item.title)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(AppTypography.subheadline)
                     .foregroundStyle(AppColors.textPrimary)
             }
             
             Text(item.subtitle)
-                .font(.system(size: 12, weight: .medium))
+                .font(AppTypography.caption)
                 .foregroundStyle(AppColors.textSecondary)
             
             InsightsBarChartView(data: item.values, labels: item.days, scale: item.yValues, barColor: item.barColor, chartHeight: 180
             )
             
             Text(item.summary)
-                .font(.system(size: 12, weight: .medium))
+                .font(AppTypography.caption)
                 .foregroundStyle(AppColors.textSecondary)
         }
         .padding(AppSpacing.large)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColors.surface)
-        .cornerRadius(20)
+        .cornerRadius(AppTheme.cornerRadius)
     }
 }
 
