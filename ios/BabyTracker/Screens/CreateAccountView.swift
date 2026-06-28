@@ -27,18 +27,18 @@ struct CreateAccountView: View {
                             .frame(width: 96, height: 96)
                         
                         Image(systemName: "heart.fill")
-                            .font(.system(size: 28, weight: .bold))
+                            .font(AppTypography.iconLarge)
                             .foregroundStyle(.white)
                     }
                     .padding(.top, AppSpacing.xxxLarge)
                     
                     VStack(spacing: AppSpacing.xSmall) {
                         Text("Create Account")
-                            .font(.system(size: 32, weight: .bold))
+                            .font(AppTypography.largeTitle)
                             .foregroundStyle(AppColors.textPrimary)
                         
                         Text("Join us on this beautiful journey")
-                            .font(.system(size: 15, weight: .medium))
+                            .font(AppTypography.body)
                             .multilineTextAlignment(.center)
                             .foregroundStyle(AppColors.textSecondary)
                     }
@@ -47,7 +47,7 @@ struct CreateAccountView: View {
                     VStack(alignment: .leading, spacing: AppSpacing.large) {
                         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
                             Text("Parent Name")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(AppTypography.footnoteStrong)
                                 .foregroundStyle(AppColors.textSecondary)
                             
                             TextField("Enter your name", text: $viewModel.createName)
@@ -63,7 +63,7 @@ struct CreateAccountView: View {
                         
                         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
                             Text("Email")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(AppTypography.footnoteStrong)
                                 .foregroundStyle(AppColors.textSecondary)
                             
                             TextField("your@email.com", text: $viewModel.createEmail)
@@ -82,7 +82,7 @@ struct CreateAccountView: View {
                         
                         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
                             Text("Password")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(AppTypography.footnoteStrong)
                                 .foregroundStyle(AppColors.textSecondary)
                             
                             SecureField("Create password", text: $viewModel.createPassword)
@@ -103,11 +103,11 @@ struct CreateAccountView: View {
                         } label: {
                             HStack(alignment: .top, spacing: AppSpacing.small) {
                                 Image(systemName: viewModel.acceptedTerms ? "checkmark.square.fill" : "square")
-                                    .font(.system(size: 18, weight: .semibold))
+                                    .font(AppTypography.headline)
                                     .foregroundStyle(viewModel.acceptedTerms ? AppColors.success : AppColors.textTertiary)
                                 
                                 Text("I agree to the Terms & Privacy Policy")
-                                    .font(.system(size: 13, weight: .medium))
+                                    .font(AppTypography.footnote)
                                     .foregroundStyle(AppColors.textSecondary)
                                     .multilineTextAlignment(.leading)
                             }
@@ -118,7 +118,7 @@ struct CreateAccountView: View {
                             viewModel.createAccount()
                         } label: {
                             Text("Create Account")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(AppTypography.subheadline)
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 54)
@@ -141,7 +141,7 @@ struct CreateAccountView: View {
                                     .frame(height: 1)
                                 
                                 Text("OR SIGN IN WITH")
-                                    .font(.system(size: 11, weight: .bold))
+                                    .font(AppTypography.overline)
                                     .foregroundStyle(AppColors.textTertiary)
                                 Rectangle()
                                     .fill(AppColors.divider)
@@ -159,7 +159,7 @@ struct CreateAccountView: View {
                                             .frame(width: 28, height: 28)
 
                                         Text("Continue with Google")
-                                            .font(.system(size: 16, weight: .semibold))
+                                            .font(AppTypography.subheadline)
                                             .foregroundStyle(AppColors.textPrimary)
                                     }
                                     .padding(.horizontal, AppSpacing.medium)
@@ -180,12 +180,12 @@ struct CreateAccountView: View {
                                 label: {
                                     HStack(spacing: AppSpacing.small) {
                                         Image(systemName: "applelogo")
-                                            .font(.system(size: 16, weight: .semibold))
+                                            .font(AppTypography.subheadline)
                                             .foregroundStyle(.white)
                                             .frame(width: 28, height: 28)
 
                                         Text("Continue with Apple")
-                                            .font(.system(size: 16, weight: .semibold))
+                                            .font(AppTypography.subheadline)
                                             .foregroundStyle(.white)
                                     }
                                     .padding(.horizontal, AppSpacing.medium)
@@ -204,11 +204,11 @@ struct CreateAccountView: View {
                         
                         HStack(spacing: AppSpacing.xxSmall) {
                             Text("Already have an account?")
-                                .font(.system(size: 14, weight: .medium))
+                                .font(AppTypography.body)
                                 .foregroundStyle(AppColors.textSecondary)
                             
                             Button("Sign in", action: onSignInTap)
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(AppTypography.bodyStrong)
                                 .foregroundStyle(AppColors.primary)
                         }
                         .frame(maxWidth: .infinity)
@@ -229,9 +229,7 @@ struct CreateAccountView: View {
             .padding(.bottom, AppSpacing.xLarge)
         }
         .ignoresSafeArea(.all)
-        
     }
-    
 }
 
 #Preview {

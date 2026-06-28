@@ -1,18 +1,16 @@
 import SwiftUI
 
 struct QuickActionButton: View {
-    
     let item: ActionButton
     
     var body: some View {
-        
         Button { }
         label: {
             VStack(spacing: AppSpacing.xSmall) {
                 Image(systemName: item.icon)
-                    .font(.system(size: 16, weight: .bold))
+                    .font(AppTypography.subheadlineBold)
                 Text(item.title)
-                    .font(.system(size: 16, weight: .bold))
+                    .font(AppTypography.subheadlineBold)
             }
             .foregroundStyle(.white)
             .padding(AppSpacing.medium)
