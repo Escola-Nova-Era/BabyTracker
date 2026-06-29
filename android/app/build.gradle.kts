@@ -81,4 +81,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.kotlinx.serialization)
 
+    // kotlin datetime
+    implementation(libs.kotlinx.datetime)
+
 }
