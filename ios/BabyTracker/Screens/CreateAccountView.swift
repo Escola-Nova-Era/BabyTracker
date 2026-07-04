@@ -231,3 +231,11 @@ struct CreateAccountView: View {
         .ignoresSafeArea(.all)
     }
 }
+
+#Preview {
+    CreateAccountView(
+        viewModel: AuthenticationViewModel(),
+        onSignInTap: {}
+    )
+}
+
