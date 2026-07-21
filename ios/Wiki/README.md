@@ -26,6 +26,16 @@ Cada wiki termina com uma **tarefa fake**: um exercício prático que simula uma
   - Exemplo: `[TREINO] Maria — Exercício de setup`
 - PRs de treino **nunca são mergeados** — eles existem para você praticar e receber feedback. Depois do review, eles são fechados.
 
+## 📬 Como entregar as tarefas
+
+Cada wiki tem uma **Issue de entrega** aberta neste repositório (procure em Issues pelo título "Entrega — Wiki 01", "Entrega — Wiki 02" etc.). Ao concluir a tarefa de treino:
+
+1. Abra a Issue de entrega da wiki correspondente.
+2. Poste **um comentário** com: as respostas das perguntas + os prints pedidos (arraste a imagem para o campo de comentário que o GitHub anexa sozinho).
+3. O instrutor responde no próprio comentário com o feedback.
+
+Assim toda a turma pode ver as entregas e aprender com as dúvidas dos colegas. A partir da Wiki 03, algumas entregas passam a ser Pull Requests de treino (a própria wiki avisa quando for o caso).
+
 ## 🗺️ Mapa do repositório
 
 Ao clonar o repositório, você vai ver três projetos. **Você só vai trabalhar dentro de `ios/`** — pode ignorar completamente as outras pastas.

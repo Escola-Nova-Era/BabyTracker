@@ -149,6 +149,16 @@ git log --oneline -5
 - `git status` mostra o estado atual dos seus arquivos (deve dizer que não há nada modificado).
 - `git log --oneline -5` mostra os últimos 5 commits do projeto — o histórico de quem fez o quê.
 
+## 📬 Como entregar
+
+Poste um comentário na Issue **"Entrega — Wiki 01"** deste repositório com:
+
+1. Um **print do app rodando no simulador** (aperte `⌘ + S` dentro do simulador para salvar um screenshot, ou fotografe a tela).
+2. Sua resposta: **qual componente visual se repete** em mais de uma tela?
+3. Um **print do Terminal** mostrando a saída de `git log --oneline -5`.
+
+O instrutor vai responder com o feedback na própria Issue.
+
 ## ✅ Checklist de conclusão
 
 - [ ] Xcode instalado e atualizado
