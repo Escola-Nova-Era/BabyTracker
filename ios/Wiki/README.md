@@ -14,7 +14,7 @@ Se você acabou de entrar no time, siga a trilha abaixo **na ordem**. Cada wiki 
 | 02 | [Arquitetura e Padrões](02-Arquitetura-e-Padroes.md) | Como o código é organizado e quais padrões seguimos | ✅ Disponível |
 | 03 | [Fluxo de Contribuição](03-Fluxo-de-Contribuicao.md) | Branch, commit, Pull Request e code review na prática | ✅ Disponível |
 | 04 | [Criação de UI](04-Criacao-de-UI.md) | Criar componentes visuais usando o tema do app | ✅ Disponível |
-| 05 | Nova Funcionalidade | Criar uma tela completa do zero (Model → ViewModel → View) | 🚧 Em breve |
+| 05 | [Nova Funcionalidade](05-Nova-Funcionalidade.md) | Criar uma tela completa do zero (Model → ViewModel → View) | ✅ Disponível |
 
 ## 🎓 Como funcionam as tarefas de treino
 
