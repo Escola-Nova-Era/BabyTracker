@@ -13,7 +13,7 @@ Se você acabou de entrar no time, siga a trilha abaixo **na ordem**. Cada wiki 
 | 01 | [Setup do Projeto](01-Setup-Projeto.md) | Instalar as ferramentas, clonar o repositório e rodar o app no simulador | ✅ Disponível |
 | 02 | [Arquitetura e Padrões](02-Arquitetura-e-Padroes.md) | Como o código é organizado e quais padrões seguimos | ✅ Disponível |
 | 03 | [Fluxo de Contribuição](03-Fluxo-de-Contribuicao.md) | Branch, commit, Pull Request e code review na prática | ✅ Disponível |
-| 04 | Criação de UI | Criar componentes visuais usando o tema do app | 🚧 Em breve |
+| 04 | [Criação de UI](04-Criacao-de-UI.md) | Criar componentes visuais usando o tema do app | ✅ Disponível |
 | 05 | Nova Funcionalidade | Criar uma tela completa do zero (Model → ViewModel → View) | 🚧 Em breve |
 
 ## 🎓 Como funcionam as tarefas de treino
