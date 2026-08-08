@@ -70,3 +70,8 @@ object DarkColors {
     val onBackground = Color(0xFFE0E0E0)
     val onSurface = Color(0xFFE0E0E0)
 }
+
+val BathOrange = Color(0xFFFFFDE7)
+val DiaperGreen = Color(0xFFE8F5E9)
+val FeedingBlue = Color(0xFFE3F2FD)
+val SleepPurple = Color(0xFFF3E5F5)
