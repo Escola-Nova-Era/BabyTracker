@@ -14,6 +14,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.escolanovaeratech.babytracker.navigation.Home
+import com.escolanovaeratech.babytracker.navigation.Insights
+import com.escolanovaeratech.babytracker.navigation.Profile
+import com.escolanovaeratech.babytracker.navigation.Timeline
 
 
 @Composable
@@ -29,25 +33,25 @@ fun BarraInferior(
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            IconButton(onClick = { navController.navigate("Screen1")}) {
+            IconButton(onClick = { navController.navigate(Home)}) {
                 Icon(
                     imageVector = Icons.Default.Home,
                     contentDescription = "Home"
                 )
             }
-            IconButton(onClick = {navController.navigate("Timeline")}) {
+            IconButton(onClick = {navController.navigate(Insights)}) {
                 Icon(
                     imageVector = Icons.Default.BarChart,
                     contentDescription = "Insights"
                 )
             }
-            IconButton(onClick = {navController.navigate("Screen3")}) {
+            IconButton(onClick = {navController.navigate(Timeline)}) {
                 Icon(
                     imageVector = Icons.Default.History,
                     contentDescription = "Timeline"
                 )
             }
-            IconButton(onClick = {navController.navigate("Screen4")}) {
+            IconButton(onClick = {navController.navigate(Profile)}) {
                 Icon(
                     imageVector = Icons.Default.Person,
                     contentDescription = "Profile"
