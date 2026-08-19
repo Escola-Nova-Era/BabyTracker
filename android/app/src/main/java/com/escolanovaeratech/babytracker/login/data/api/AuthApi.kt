@@ -12,7 +12,7 @@ interface AuthApi {
 
     // POST /auth/login
     @POST("auth/login")
-    suspend fun login(@Body request: RegisterRequest): AuthResponse
+    suspend fun login(@Body request: LoginRequest): AuthResponse
 
     // POST /auth/register
     @POST("auth/register")
