@@ -70,3 +70,5 @@ object DarkColors {
     val onBackground = Color(0xFFE0E0E0)
     val onSurface = Color(0xFFE0E0E0)
 }
+
+// Mudança de treino - Natasha
