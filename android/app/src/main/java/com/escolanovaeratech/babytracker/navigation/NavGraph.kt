@@ -1,11 +1,11 @@
 package com.escolanovaeratech.babytracker.navigation
 
-import TimelineScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.escolanovaeratech.babytracker.timeline.presentation.TimelineScreen
 import com.escolanovaeratech.babytracker.ui.screens.Screen1
 import com.escolanovaeratech.babytracker.ui.screens.Screen3
 import com.escolanovaeratech.babytracker.ui.screens.Screen4
