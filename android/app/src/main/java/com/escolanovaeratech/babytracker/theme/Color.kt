@@ -1,6 +1,7 @@
 package com.escolanovaeratech.babytracker.theme
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
 
 // Cores Primárias e Secundárias
 val PrimaryColor = Color(0xFF7C5ACE)        // Roxo/Lilás principal
@@ -70,3 +71,35 @@ object DarkColors {
     val onBackground = Color(0xFFE0E0E0)
     val onSurface = Color(0xFFE0E0E0)
 }
+// --- GRADIENTES DO APP (DESIGN TOKENS) ---
+val ProfileBackgroundGradient = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFFF8E3FF),
+        Color(0xF5FFFFFF),
+        Color(0xFFD9EEFF)
+    )
+)
+val ProfileCardGradient = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFF927FCC),
+        Color(0xFF66BED0)
+    )
+)
+val HomeBackgroundGradient = Brush.verticalGradient(
+    colors = listOf(
+        Color(0xFFFFF0F5),
+        BackgroundLight,
+        Color(0xFFF4F6FC)
+    )
+)
+val HomeHeaderGradient = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFF7C5ACE),
+        Color(0xFF9575CD)
+    )
+)
+
+val GradientOrange = Brush.linearGradient(listOf(Color(0xFFFEE6CF), Color(0xFFF6B18A)))
+val GradientBlue = Brush.linearGradient(listOf(Color(0xFFCFE7FF), Color(0xFF7FB8FF)))
+val GradientGreen = Brush.linearGradient(listOf(Color(0xFFCEF7DE), Color(0xFF79C18F)))
+val GradientPurple = Brush.linearGradient(listOf(Color(0xFFF6DDFF), Color(0xFFB36BDD)))
