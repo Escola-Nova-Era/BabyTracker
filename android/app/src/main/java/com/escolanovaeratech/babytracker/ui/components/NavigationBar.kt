@@ -22,8 +22,6 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
 import com.escolanovaeratech.babytracker.R
 
-
-
 class NavigationBar : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
