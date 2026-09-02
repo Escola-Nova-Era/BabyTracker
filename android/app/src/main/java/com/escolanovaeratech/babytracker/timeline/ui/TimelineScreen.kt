@@ -1,5 +1,6 @@
+package com.escolanovaeratech.babytracker.timeline.ui
 
-import android.view.ContextThemeWrapper
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,23 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.escolanovaeratech.babytracker.MensagemAdapter
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.TimelineItem
+import android.view.LayoutInflater
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 
 @Composable
-fun TimelineScreen() {
+fun TimelineScreen(modifier: Modifier = Modifier) {
     AndroidView(
-        factory = {
-            val themedContext = ContextThemeWrapper(
-                it,
-                R.style.RecyclerViewCompose
-            )
-            RecyclerView(themedContext).apply {
-
-                layoutManager = LinearLayoutManager(themedContext)
-
-                adapter = MensagemAdapter(
-                    buildTimeline()
-                )
-            }
+        modifier = modifier.fillMaxSize(),
+        factory = { context ->
+            val view = LayoutInflater.from(context).inflate(R.layout.activity_main, null)
+            val recyclerView = view.findViewById<RecyclerView>(R.id.rv_lista)
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = MensagemAdapter(buildTimeline())
+            view
         }
     )
 }
