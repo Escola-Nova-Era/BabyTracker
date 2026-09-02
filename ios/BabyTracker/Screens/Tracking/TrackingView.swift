@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct TrackingView: View {
+    @Environment(\.modelContext) private var modelContext
     @StateObject var viewModel = TrackingViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -16,7 +18,7 @@ struct TrackingView: View {
                                     .font(AppTypography.screenTitle)
                                     .foregroundStyle(AppColors.textPrimary)
                                 
-                                Text("January 26, 2026")
+                                Text(viewModel.todayLabel)
                                     .font(AppTypography.body)
                                     .foregroundStyle(AppColors.textSecondary)
                             }
@@ -54,5 +56,8 @@ struct TrackingView: View {
             }
         }
         .navigationBarHidden(true)
+        .task {
+            viewModel.load(context: modelContext)
+        }
     }
 }
