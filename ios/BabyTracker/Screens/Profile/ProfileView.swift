@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct ProfileView: View {
+    @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = ProfileViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -51,8 +53,11 @@ struct ProfileView: View {
             }
         }
         .navigationBarHidden(true)
+        .task {
+            viewModel.load(context: modelContext)
+        }
     }
-    
+
     // MARK: - Subviews para organização dos elementos da UI.
     private var headerSection: some View {
         HStack {
@@ -98,22 +103,22 @@ struct ProfileView: View {
                 )
             
             VStack(alignment: .center, spacing: AppSpacing.xxSmall) {
-                Text("Emma Rose")
+                Text(viewModel.babyName)
                     .font(AppTypography.screenTitle)
                     .foregroundStyle(AppColors.surface)
-                Text("Born March 15, 2024")
+                Text(viewModel.bornLabel)
                     .font(AppTypography.bodyStrong)
                     .foregroundStyle(AppColors.surface)
             }
             Spacer()
-            
+
             // Stats Row
             HStack(spacing: 30) {
-                statItem(value: "11 weeks", label: "Age")
+                statItem(value: viewModel.ageLabel, label: "Age")
                 Divider()
-                statItem(value: "3.65 kg", label: "Weight")
+                statItem(value: viewModel.weightLabel, label: "Weight")
                 Divider()
-                statItem(value: "58 cm", label: "Height")
+                statItem(value: viewModel.heightLabel, label: "Height")
             }
             Spacer()
         }

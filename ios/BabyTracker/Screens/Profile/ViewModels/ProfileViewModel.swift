@@ -1,15 +1,47 @@
 import Foundation
 import Combine
+import SwiftData
 import SwiftUI
 
+@MainActor
 final class ProfileViewModel: ObservableObject {
-    
-    // Dados do Bebê
-    @Published var babyName: String = "Emma Rose"
-    @Published var babyBirthDate: String = "Born March 15, 2024"
-    @Published var babyImageName: String = "person.fill"
-    
-    // Lembrete: Alterar para @Publisehd private(set) var quando esses dados passarem a mudar.
+
+    // Dados do bebê (derivados do modelo Baby persistido)
+    @Published private(set) var babyName: String = "Your Baby"
+    @Published private(set) var bornLabel: String = "Add birth date"
+    @Published private(set) var ageLabel: String = "—"
+    @Published private(set) var weightLabel: String = "—"
+    @Published private(set) var heightLabel: String = "—"
+
+    private var repository: BabyRepositoryProtocol?
+
+    func load(context: ModelContext) {
+        if repository == nil {
+            repository = BabyRepository(context: context)
+        }
+        reload()
+    }
+
+    func reload() {
+        guard let repository,
+              let baby = (try? repository.currentBaby()) ?? nil else { return }
+
+        babyName = baby.name
+
+        if let birthDate = baby.birthDate {
+            bornLabel = "Born \(birthDate.formatted(.dateTime.month(.wide).day().year()))"
+        }
+        if let weeks = baby.ageInWeeks {
+            ageLabel = "\(weeks) weeks"
+        }
+        if let weight = baby.weightKg {
+            weightLabel = "\(weight.formatted(.number.precision(.fractionLength(0...2)))) kg"
+        }
+        if let height = baby.heightCm {
+            heightLabel = "\(height.formatted(.number.precision(.fractionLength(0...0)))) cm"
+        }
+    }
+
     @Published private(set) var settingItems: [SettingsItem] = [
         SettingsItem(
             title: "Edit Baby's profile",
@@ -18,7 +50,7 @@ final class ProfileViewModel: ObservableObject {
             tint:  [ Color.orange, AppColors.orangeMuted],
             tintIcon: AppColors.surface
         ),
-        
+
         SettingsItem(
             title: "Notifications",
             detail: "Feeding and sleep reminders",
@@ -26,7 +58,7 @@ final class ProfileViewModel: ObservableObject {
             tint: [ Color.blue, AppColors.blueMuted],
             tintIcon: AppColors.surface
         ),
-        
+
         SettingsItem(
             title: "Export Data",
             detail: "Download tracking history",
@@ -34,7 +66,7 @@ final class ProfileViewModel: ObservableObject {
             tint: [ Color.green, AppColors.greenMuted],
             tintIcon: AppColors.surface
         ),
-        
+
         SettingsItem(
             title: "Help & Support",
             detail: "Get help and contact support",
@@ -43,34 +75,9 @@ final class ProfileViewModel: ObservableObject {
             tintIcon: AppColors.surface
         )
     ]
-    
+
     func handleTap(item: SettingsItem){
         print (item.title)
         //navegation
     }
-    
-    @Published private(set) var profileItems: [ProfileItem] = [
-        ProfileItem(
-            title: "AGE",
-            value: "11 weeks",
-            icon: "calendar",
-            tint: [AppColors.blueMuted, AppColors.purpleMuted],
-            tintIcon: .blue
-        ),
-        ProfileItem(
-            title: "WEIGHT",
-            value: "3.65 kg",
-            icon: "scalemass.fill",
-            tint: [AppColors.blueMuted, AppColors.purpleMuted],
-            tintIcon: .green
-        ),
-        ProfileItem(
-            title: "HEIGHT",
-            value: "58 cm",
-            icon: "ruler.fill",
-            tint: [AppColors.blueMuted, AppColors.purpleMuted],
-            tintIcon: .orange
-        )
-    ]
-
 }

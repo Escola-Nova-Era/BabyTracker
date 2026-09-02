@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct BabyTrackerApp: App {
@@ -6,5 +7,6 @@ struct BabyTrackerApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [TrackingEvent.self, Baby.self])
     }
 }

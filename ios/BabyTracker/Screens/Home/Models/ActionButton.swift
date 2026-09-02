@@ -6,4 +6,6 @@ struct ActionButton: Identifiable {
     let title: String
     let icon: String
     let colors: Color
+    /// Tipo de evento que o botão registra (usado para abrir o Quick Action dialog).
+    let kind: TrackingKind
 }

@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct InsightsView: View {
+    @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = InsightsViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -14,7 +16,7 @@ struct InsightsView: View {
                             .font(AppTypography.screenTitle)
                             .foregroundStyle(AppColors.textPrimary)
                         
-                        Text("Track Emma's daily activities")
+                        Text("Track your baby's daily activities")
                             .font(AppTypography.body)
                             .foregroundStyle(AppColors.textSecondary)
                         
@@ -32,9 +34,13 @@ struct InsightsView: View {
                 }
             }
         }
+        .task {
+            viewModel.load(context: modelContext)
+        }
     }
 }
 
 #Preview {
     InsightsView()
+        .modelContainer(for: [TrackingEvent.self, Baby.self], inMemory: true)
 }

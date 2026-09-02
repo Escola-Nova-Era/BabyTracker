@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct HomeView: View {
+    @Environment(\.modelContext) private var modelContext
     @StateObject private var homeViewModel = HomeViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -21,7 +23,7 @@ struct HomeView: View {
                                     .font(AppTypography.screenTitle)
                                     .foregroundStyle(AppColors.textPrimary)
                                 
-                                Text("Let's track Emma's day")
+                                Text("Let's track your baby's day")
                                     .font(AppTypography.body)
                                     .foregroundStyle(AppColors.textSecondary)
                             }
@@ -53,11 +55,11 @@ struct HomeView: View {
                                 )
                             
                             VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
-                                Text("Emma Rose")
+                                Text(homeViewModel.babyName)
                                     .font(AppTypography.screenTitle)
                                     .foregroundStyle(AppColors.textPrimary)
-                                
-                                Text("42 days old • 3.8 kg")
+
+                                Text(homeViewModel.babySubtitle)
                                     .font(AppTypography.bodyStrong)
                                     .foregroundStyle(AppColors.textSecondary)
                             }
@@ -101,5 +103,8 @@ struct HomeView: View {
             }
         }
         .navigationBarHidden(true)
+        .task {
+            homeViewModel.load(context: modelContext)
+        }
     }
 }
