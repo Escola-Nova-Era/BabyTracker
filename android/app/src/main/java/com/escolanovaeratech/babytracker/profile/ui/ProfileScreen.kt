@@ -23,8 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,17 +30,14 @@ import androidx.compose.ui.unit.dp
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.profile.ui.components.ProfileCard
 import com.escolanovaeratech.babytracker.profile.ui.components.SettingsCard
-import com.escolanovaeratech.babytracker.theme.AppTypography
-import com.escolanovaeratech.babytracker.theme.SurfaceColor
-import com.escolanovaeratech.babytracker.theme.SurfaceDark
-import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
+import com.escolanovaeratech.babytracker.theme.*
 
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(brush = backgroundBrush)
+            .background(brush = ProfileBackgroundGradient)
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -55,8 +50,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .padding(end = 0.dp),
+                        .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
@@ -69,8 +63,8 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                         Text(
                             text = stringResource(R.string.profileSubheader),
                             style = AppTypography.bodyLarge,
-                            color = SurfaceDark.copy(alpha = 0.7f),
-                            )
+                            color = SurfaceDark.copy(alpha = 0.7f)
+                        )
                     }
 
                     // ICON SETTINGS
@@ -98,7 +92,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
             item { ProfileCard() }
             item { Spacer(modifier = Modifier.height(16.dp)) }
 
-            // PROFILE CARD
+            // SETTINGS
             item {
                 Text(
                     text = stringResource(R.string.settingsLabel),
@@ -114,25 +108,9 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
     }
 }
 
-// Gradient Colors
-val backgroundBrush = Brush.linearGradient(
-    colors = listOf(
-        Color(0xFFF8E3FF),
-        Color(0xF5FFFFFF),
-        Color(0xFFD9EEFF)
-    )
-)
-val backgroundCard = Brush.linearGradient(
-    colors = listOf(
-        Color(0xFF927FCC),
-        Color(0xFF66BED0)
-    )
-)
-
-
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ProfileScreenPreview (){
+fun ProfileScreenPreview() {
     BabyTrackerTheme {
         ProfileScreen()
     }

@@ -9,13 +9,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.escolanovaeratech.babytracker.theme.CardShapeLarge
-import com.escolanovaeratech.babytracker.theme.SurfaceColor
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
-
+import com.escolanovaeratech.babytracker.theme.*
 
 @Composable
 fun SettingsCard() {
@@ -28,36 +26,35 @@ fun SettingsCard() {
     ) {
         Column {
             SettingsItem(
-                title = "Edit baby profile",
+                title = stringResource(R.string.settings_edit_profile_title),
                 icon = R.drawable.ic_account,
-                subtitle = "Update name, birth date and info",
-                brush = gradientOrange,
+                subtitle = stringResource(R.string.settings_edit_profile_sub),
+                brush = GradientOrange,
                 iconTint = SurfaceColor
             )
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
             SettingsItem(
-                title = "Notifications",
+                title = stringResource(R.string.settings_notifications_title),
                 icon = R.drawable.ic_notifications,
-                subtitle = "Sleep and feeding reminders" ,
-                brush = gradientBlue,
+                subtitle = stringResource(R.string.settings_notifications_sub),
+                brush = GradientBlue,
                 iconTint = SurfaceColor
             )
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
             SettingsItem(
-                title = "Export data",
+                title = stringResource(R.string.settings_export_data_title),
                 icon = R.drawable.ic_privacy,
-                subtitle = "Download tracking history",
-                brush = gradientGreen,
+                subtitle = stringResource(R.string.settings_export_data_sub),
+                brush = GradientGreen,
                 iconTint = SurfaceColor
             )
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
             SettingsItem(
-                title = "Help & Support",
+                title = stringResource(R.string.settings_help_title),
                 icon = R.drawable.ic_help,
-                subtitle = "Get help and contact support" ,
-                brush = gradientPurple,
+                subtitle = stringResource(R.string.settings_help_sub),
+                brush = GradientPurple,
                 iconTint = SurfaceColor
-
             )
         }
     }
@@ -66,7 +63,7 @@ fun SettingsCard() {
 @Preview(showBackground = true)
 @Composable
 fun SettingsCardPreview() {
-    BabyTrackerTheme() {
+    BabyTrackerTheme {
         SettingsCard()
     }
 }

@@ -1,6 +1,5 @@
 package com.escolanovaeratech.babytracker.profile.ui.components
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,11 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.profile.ui.backgroundCard
-import com.escolanovaeratech.babytracker.theme.CardShapeLarge
-import com.escolanovaeratech.babytracker.theme.AppTypography
-import com.escolanovaeratech.babytracker.theme.SurfaceColor
-import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
+import com.escolanovaeratech.babytracker.theme.*
 
 @Composable
 fun ProfileCard() {
@@ -44,7 +39,7 @@ fun ProfileCard() {
     ) {
         Box(
             modifier = Modifier
-                .background(brush = backgroundCard)
+                .background(brush = ProfileCardGradient)
                 .padding(30.dp)
         ) {
             Column(
@@ -114,10 +109,10 @@ fun InfoItem(label: String, value: String) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ProfileCardPreview (){
-    BabyTrackerTheme() {
+fun ProfileCardPreview() {
+    BabyTrackerTheme {
         ProfileCard()
     }
 }

@@ -10,23 +10,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.icons.automirrored.outlined.ArrowForwardIos
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import com.escolanovaeratech.babytracker.R
-import androidx.compose.material3.Text
-import androidx.compose.material.icons.automirrored.outlined.ArrowForwardIos
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
-
+import com.escolanovaeratech.babytracker.theme.GradientGreen
+import com.escolanovaeratech.babytracker.theme.SurfaceColor
 
 @Composable
 fun SettingsItem(
@@ -34,12 +34,14 @@ fun SettingsItem(
     subtitle: String,
     icon: Int,
     brush: Brush,
-    iconTint: Color
+    iconTint: Color,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .clickable {}
+            .clickable { onClick() }
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -66,7 +68,7 @@ fun SettingsItem(
             Text(
                 text = subtitle,
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
         }
 
@@ -74,22 +76,21 @@ fun SettingsItem(
             imageVector = Icons.AutoMirrored.Outlined.ArrowForwardIos,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
-            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
         )
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun SettingsItemPreview() {
-    BabyTrackerTheme() {
+    BabyTrackerTheme {
         SettingsItem(
-            title = "Account",
-            icon = R.drawable.ic_account_box,
-            subtitle = "example",
-            brush = gradientGreen,
-            iconTint = White
+            title = "Edit baby profile",
+            subtitle = "Update name, birth date and info",
+            icon = R.drawable.ic_account,
+            brush = GradientGreen,
+            iconTint = SurfaceColor
         )
     }
 }
