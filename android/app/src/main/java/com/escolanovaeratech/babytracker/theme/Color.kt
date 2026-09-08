@@ -44,8 +44,9 @@ val DividerColorDark = Color(0xFF424242)    // Divisor em dark mode
 val BorderColor = Color(0xFFBDBDBD)         // Borda de inputs
 
 // Cores para Gráfico (Daily Feeding Quantity)
-val ChartBar1 = Color(0xFFFF9800)           // Laranja (primeiro estilo)
-val ChartBar2 = Color(0xFF42A5F5)           // Azul (segundo estilo)
+val ChartBar1 = Color(0xFF9575CD)           // Purple
+val ChartBar2 = Color(0xFF67BCD0)           // Cyan
+val ChartBar3 = Color(0xFF7AA2CE)         // Azul
 
 // Cores Compostas - Temas Light e Dark
 object LightColors {

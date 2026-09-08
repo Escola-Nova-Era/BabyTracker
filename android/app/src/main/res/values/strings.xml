@@ -42,10 +42,21 @@
     <string name="BabyWeight">3.65kg</string>
     <string name="height">Height</string>
     <string name="BabyHeight">58cm</string>
+    <!-- Insights Strings -->
+    <string name="insightsHeader">Insights</string>
+    <string name="insightsSubtitle">Track Emma\'s daily activities</string>
+    <string name="progressHeader">Great Progress!</string>
+    <string name="progressInfo">Emma\'s patterns are developing beautiful. Her feeding and sleeping routines show healthy consistency. </string>
+    <string name="summary_diaper">"Summary: Your daily average over the past week was "</string>
+    <string name="summary_diaper_2">" changes per day."</string>
+    <string name="summary_feeding">"Summary: Your daily average over the past week was "</string>
+    <string name="summary_feeding_2">" ml per day."</string>
+    <string name="summary_sleeping">"Summary: Your daily average over the past week was "</string>
+    <string name="summary_sleeping_2">" per day."</string>
 
     <!-- Settings Items -->
     <string name="settings_edit_profile_title">Edit baby profile</string>
-    <string name="settings_edit_profile_sub">Update name, birth date and info</string>
+    <string name="settings_edit_profile_sub">Update name, birthdate and info</string>
     <string name="settings_notifications_title">Notifications</string>
     <string name="settings_notifications_sub">Sleep and feeding reminders</string>
     <string name="settings_export_data_title">Export data</string>
