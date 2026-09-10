@@ -53,7 +53,7 @@ enum DiaperKind: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .pee: "Pee"
         case .poop: "Poop"
-        case .both: "Pee & Poop"
+        case .both: "Mixed"
         }
     }
 }
@@ -79,6 +79,22 @@ enum SleepState: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+enum WaterTemperature: String, Codable, CaseIterable, Identifiable {
+    case warm
+    case lukewarm
+    case cool
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .warm: "Warm"
+        case .lukewarm: "Lukewarm"
+        case .cool: "Cool"
+        }
+    }
+}
+
 // MARK: - Modelo persistido
 
 /// Modelo único para todos os tipos de evento (o timeline mistura os tipos
@@ -98,34 +114,43 @@ final class TrackingEvent {
 
     // Sleep
     var sleepStateRaw: String?
+    var endDate: Date?
+    
+    // Bath
+    var waterTemperatureRaw: String?
 
     var note: String?
 
     init(
-        id: UUID = UUID(),
-        date: Date,
-        kind: TrackingKind,
-        amountMl: Int? = nil,
-        durationMin: Int? = nil,
-        diaperKind: DiaperKind? = nil,
-        sleepState: SleepState? = nil,
-        note: String? = nil
-    ) {
-        self.id = id
-        self.date = date
-        self.kindRaw = kind.rawValue
-        self.amountMl = amountMl
-        self.durationMin = durationMin
-        self.diaperKindRaw = diaperKind?.rawValue
-        self.sleepStateRaw = sleepState?.rawValue
-        self.note = note
-    }
+            id: UUID = UUID(),
+            date: Date,
+            kind: TrackingKind,
+            amountMl: Int? = nil,
+            durationMin: Int? = nil,
+            diaperKind: DiaperKind? = nil,
+            sleepState: SleepState? = nil,
+            endDate: Date? = nil,
+            waterTemperature: WaterTemperature? = nil,
+            note: String? = nil
+        ) {
+            self.id = id
+            self.date = date
+            self.kindRaw = kind.rawValue
+            self.amountMl = amountMl
+            self.durationMin = durationMin
+            self.diaperKindRaw = diaperKind?.rawValue
+            self.sleepStateRaw = sleepState?.rawValue
+            self.endDate = endDate
+            self.waterTemperatureRaw = waterTemperature?.rawValue
+            self.note = note
+        }
 
     // Acesso tipado — não usar em #Predicate (são computed).
     var kind: TrackingKind { TrackingKind(rawValue: kindRaw) ?? .feeding }
     var diaperKind: DiaperKind? { diaperKindRaw.flatMap(DiaperKind.init) }
     var sleepState: SleepState? { sleepStateRaw.flatMap(SleepState.init) }
-
+    var waterTemperature: WaterTemperature? { waterTemperatureRaw.flatMap(WaterTemperature.init) }
+    
     var displayIcon: String {
         if kind == .sleep, let sleepState { return sleepState.icon }
         return kind.icon
