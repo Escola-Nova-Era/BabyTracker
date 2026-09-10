@@ -21,7 +21,7 @@ Tudo que interessa vive em `android/app/src/main/`:
 
 ```
 java/com/escolanovaeratech/babytracker/
-├── MainActivity2.kt            ← ponto de entrada da app (@main)
+├── MainActivity.kt             ← ponto de entrada da app (@main)
 ├── navigation/
 │   └── NavGraph.kt             ← rotas e navegação (Compose Navigation)
 ├── theme/                      ← design tokens (cores, tipografia, formas)
@@ -65,7 +65,7 @@ res/
 └── drawable/
 ```
 
-**O fluxo**: `MainActivity2` carrega `BabyTrackingTheme`, que configura `BabyTrackerAppNavGraph` (navegação), que monta os `NavHost` com as telas.
+**O fluxo**: `MainActivity` carrega `BabyTrackingTheme`, que configura `BabyTrackerAppNavGraph` (navegação), que monta os `NavHost` com as telas.
 
 ```kotlin
 NavHost(navController = navController, startDestination = "Screen1") {
@@ -295,7 +295,7 @@ O instrutor vai responder com feedback.
 ## ✅ Checklist de conclusão
 
 - [ ] Entendo o mapa de pastas (java, res, theme, navigation, etc.)
-- [ ] Entendo o fluxo: MainActivity2 → BabyTrackingTheme → NavGraph → Screens
+- [ ] Entendo o fluxo: MainActivity → BabyTrackingTheme → NavGraph → Screens
 - [ ] Sei o que é Model, ViewModel, UI (View)
 - [ ] Entendo StateFlow e collectAsState()
 - [ ] Procurei em Color.kt e vi tokens de cor

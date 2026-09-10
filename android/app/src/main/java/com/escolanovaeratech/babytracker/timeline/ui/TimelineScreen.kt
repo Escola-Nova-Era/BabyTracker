@@ -5,9 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.escolanovaeratech.babytracker.MensagemAdapter
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.TimelineItem
+import com.escolanovaeratech.babytracker.timeline.data.TimelineItem
 import android.view.LayoutInflater
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier

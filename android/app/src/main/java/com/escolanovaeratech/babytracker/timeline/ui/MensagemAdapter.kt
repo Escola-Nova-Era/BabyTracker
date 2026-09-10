@@ -1,4 +1,4 @@
-package com.escolanovaeratech.babytracker
+package com.escolanovaeratech.babytracker.timeline.ui
 
 import android.content.res.Resources
 import android.graphics.drawable.GradientDrawable
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.timeline.data.TimelineItem
 import com.google.android.material.card.MaterialCardView
 
 class MensagemAdapter(
@@ -109,17 +111,3 @@ class MensagemAdapter(
     private val density: Float
         get() = Resources.getSystem().displayMetrics.density
 }
-
-data class TimelineItem(
-    val title: String,
-    val time: String,
-    val icon: String,
-    val bubbleColor: Int,
-    val dotColor: Int,
-    val subtitle: String? = null,
-    val metaPrimary: String? = null,
-    val metaSecondary: String? = null,
-    val tag: String? = null,
-    val tagBackgroundColor: Int = R.color.tag_yellow_bg,
-    val tagTextColor: Int = R.color.tag_yellow_text
-)
