@@ -23,11 +23,6 @@
         </activity>
 
 
-        <activity
-            android:name=".ui.components.NavigationBar"
-            android:exported="false"
-            android:label="@string/title_activity_navigation_bar"
-            android:theme="@style/Theme.BabyTracker" />
 
 
     </application>

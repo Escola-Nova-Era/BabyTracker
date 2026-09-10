@@ -360,7 +360,7 @@ fun BabyTrackerAppNavGraph() {
 }
 ```
 
-E no `BarraInferior`, adicione o botão que navega para a tela:
+E no `NavigationBar`, adicione o botão que navega para a tela:
 
 ```kotlin
 NavigationBarItem(

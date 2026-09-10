@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.escolanovaeratech.babytracker.navigation.BabyTrackerAppNavGraph
 import com.escolanovaeratech.babytracker.theme.BabyTrackerTheme
-import com.escolanovaeratech.babytracker.ui.components.BarraInferior
+import com.escolanovaeratech.babytracker.ui.components.NavigationBar
 
 class MainActivity : AppCompatActivity() {    
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ fun BabyTrackerApp() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            BarraInferior(navController = navController)
+            NavigationBar(navController = navController)
         }
     ) { innerPadding ->
         BabyTrackerAppNavGraph(
