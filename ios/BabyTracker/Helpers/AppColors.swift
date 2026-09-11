@@ -84,4 +84,10 @@ enum AppColors {
     
     // Cor de sucesso
     static let success = Color(red: 105.0/255, green: 189.0/255, blue: 145.0/255)
+    
+    // MARK: Marker para paginação
+    
+    //Páginação dot
+    static let dotPurple = Color(red: 131.0/255, green: 68.0/255, blue: 234.0/255)
+    static let dotLight = Color(red: 218.0/255, green: 217.0/255, blue: 224.0/255)
 }
