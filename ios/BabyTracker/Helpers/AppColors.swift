@@ -2,6 +2,12 @@ import SwiftUI
 
 // Catálogos central de cores do app
 
+struct OnboardingGradientColors {
+    let start: Color
+    let mid: Color
+    let end: Color
+}
+
 enum AppColors {
     
     // MARK: Fundo
@@ -20,6 +26,7 @@ enum AppColors {
     
     // Fundo neutro suave usado em cards secundários e blocos internos
     static let surfaceMuted = Color(red: 245.0/255.0, green: 247.0/255.0, blue: 251.0/255.0)
+    
     
     // MARK: Cores de Identidade
     
@@ -90,4 +97,27 @@ enum AppColors {
     //Páginação dot
     static let dotPurple = Color(red: 131.0/255, green: 68.0/255, blue: 234.0/255)
     static let dotLight = Color(red: 218.0/255, green: 217.0/255, blue: 224.0/255)
-}
+    
+    
+    // MARK: Gradientes onboarding
+        
+        static let onboardingGradients: [OnboardingGradientColors] = [
+            // Tela 1: #FDEFF5 -> #FDF8FA -> #F8FBFD
+            OnboardingGradientColors(
+                start: Color(red: 253.0/255.0, green: 239.0/255.0, blue: 245.0/255.0),
+                mid: Color(red: 253.0/255.0, green: 248.0/255.0, blue: 250.0/255.0),
+                end: Color(red: 248.0/255.0, green: 251.0/255.0, blue: 253.0/255.0)
+            ),
+            // Tela 2: #FDF1F6 -> #FDF9FA -> #F7FAFD
+            OnboardingGradientColors(
+                start: Color(red: 253.0/255.0, green: 241.0/255.0, blue: 246.0/255.0),
+                mid: Color(red: 253.0/255.0, green: 249.0/255.0, blue: 250.0/255.0),
+                end: Color(red: 247.0/255.0, green: 250.0/255.0, blue: 253.0/255.0)
+            ),
+            // Tela 3: #EFF7FD -> #FDFDFD -> #F5F9FD
+            OnboardingGradientColors(
+                start: Color(red: 239.0/255.0, green: 247.0/255.0, blue: 253.0/255.0),
+                mid: Color(red: 253.0/255.0, green: 253.0/255.0, blue: 253.0/255.0),
+                end: Color(red: 245.0/255.0, green: 249.0/255.0, blue: 253.0/255.0)
+            )
+        ]}

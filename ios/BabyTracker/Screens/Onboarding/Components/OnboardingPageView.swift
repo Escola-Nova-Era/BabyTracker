@@ -42,14 +42,32 @@ struct OnboardingPageView: View {
         }
         .frame(maxWidth: .infinity)
         .background(
-            LinearGradient(
-                colors: [
-                    AppColors.purpleSoft,
-                    AppColors.surface
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
+            ZStack {
+                let gradient = AppColors.onboardingGradients[currentPage]
+                // Gradiente base com 3 cores
+                LinearGradient(
+                    stops: [
+                        .init(color: gradient.start, location: 0.0),
+                        .init(color: gradient.mid, location: 0.55),
+                        .init(color: gradient.end, location: 1.0)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+
+                // Glow superior
+                RadialGradient(
+                    colors: [
+                        gradient.start.opacity(0.45),
+                        gradient.mid.opacity(0.20),
+                        Color.clear
+                    ],
+                    center: UnitPoint(x: 0.5, y: 0.18),
+                    startRadius: 0,
+                    endRadius: 330
+                )
+            }
+            .ignoresSafeArea()
         )
     }
 }
@@ -59,7 +77,7 @@ struct OnboardingPageView: View {
             page: OnboardingPage(
                 title: "Welcome to BabyCare",
                 description: "Track feeding, sleep, diaper changes, and daily moments with ease",
-                imageName: "insights"
+                imageName: "mommyBaby"
             ),
             pageIndex: 0,
             currentPage: 0,
