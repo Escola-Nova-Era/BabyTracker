@@ -18,6 +18,19 @@ val AccentOrange = Color(0xFFFF9800)        // Laranja (em progresso)
 val AccentRed = Color(0xFFEF5350)           // Vermelho/Pink (não feito)
 val AccentBlue = Color(0xFF42A5F5)          // Azul (informação)
 val AccentYellow = Color(0xFFFFC107)        // Amarelo (aviso)
+val AccentBrown = Color(0xFF8D6E63)         // Marrom (diaper / poop)
+val AccentViolet = Color(0xFFAB47BC)        // Violeta (diaper / mixed)
+
+// Variantes suaves dos acentos (fundos de ícones/seleção)
+val AccentGreenSoft = AccentGreen.copy(alpha = 0.12f)
+val AccentOrangeSoft = AccentOrange.copy(alpha = 0.12f)
+val AccentBlueSoft = AccentBlue.copy(alpha = 0.12f)
+val AccentBrownSoft = AccentBrown.copy(alpha = 0.12f)
+val AccentVioletSoft = AccentViolet.copy(alpha = 0.12f)
+val PrimarySoft = PrimaryColor.copy(alpha = 0.12f)
+
+/** Alpha da borda quando uma opção está selecionada. */
+const val SelectionBorderAlpha = 0.55f
 
 // Cores de Fundo
 val BackgroundLight = Color(0xFFFAFAFA)     // Fundo principal - cinza muito claro
@@ -31,6 +44,7 @@ val TextSecondary = Color(0xFF757575)       // Texto secundário - cinza médio
 val TextTertiary = Color(0xFF9E9E9E)        // Texto terciário - cinza claro
 val TextOnPrimary = Color(0xFFFFFFFF)       // Texto sobre cor primária
 val TextHint = Color(0xFFBDBDBD)            // Hint/placeholder
+val TextSecondarySoft = TextSecondary.copy(alpha = 0.12f)
 
 // Cores de Estado
 val SuccessColor = Color(0xFF4CAF50)        // Sucesso - verde

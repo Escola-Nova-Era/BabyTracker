@@ -11,6 +11,10 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,10 +27,40 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.escolanovaeratech.babytracker.R
+import com.escolanovaeratech.babytracker.home.ui.components.AddBathBottomSheet
+import com.escolanovaeratech.babytracker.home.ui.components.AddDiaperBottomSheet
+import com.escolanovaeratech.babytracker.home.ui.components.AddFeedingBottomSheet
+import com.escolanovaeratech.babytracker.home.ui.components.SleepWakeBottomSheet
 import com.escolanovaeratech.babytracker.theme.*
 
 @Composable
 fun HomeScreenUI(modifier: Modifier = Modifier) {
+    var showAddFeedingSheet by remember { mutableStateOf(false) }
+    var showAddDiaperSheet by remember { mutableStateOf(false) }
+    var showSleepWakeSheet by remember { mutableStateOf(false) }
+    var showAddBathSheet by remember { mutableStateOf(false) }
+
+    if (showAddFeedingSheet) {
+        AddFeedingBottomSheet(
+            onDismiss = { showAddFeedingSheet = false },
+        )
+    }
+    if (showAddDiaperSheet) {
+        AddDiaperBottomSheet(
+            onDismiss = { showAddDiaperSheet = false },
+        )
+    }
+    if (showSleepWakeSheet) {
+        SleepWakeBottomSheet(
+            onDismiss = { showSleepWakeSheet = false },
+        )
+    }
+    if (showAddBathSheet) {
+        AddBathBottomSheet(
+            onDismiss = { showAddBathSheet = false },
+        )
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -230,14 +264,16 @@ fun HomeScreenUI(modifier: Modifier = Modifier) {
                     text = stringResource(R.string.add_feeding),
                     color = AccentBlue,
                     iconRes = R.drawable.ic_bottle,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onClick = { showAddFeedingSheet = true },
                 )
 
                 ActionButton(
                     text = stringResource(R.string.add_diaper),
                     color = AccentGreen,
                     iconRes = R.drawable.ic_heart,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onClick = { showAddDiaperSheet = true },
                 )
             }
 
@@ -252,14 +288,16 @@ fun HomeScreenUI(modifier: Modifier = Modifier) {
                     text = stringResource(R.string.sleep_wake),
                     color = PrimaryColor,
                     iconRes = R.drawable.ic_moon,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onClick = { showSleepWakeSheet = true },
                 )
 
                 ActionButton(
                     text = stringResource(R.string.add_bath),
                     color = AccentOrange,
                     iconRes = R.drawable.ic_bath,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onClick = { showAddBathSheet = true },
                 )
             }
         }
@@ -340,10 +378,11 @@ fun ActionButton(
     text: String,
     color: Color,
     iconRes: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     Button(
-        onClick = { },
+        onClick = onClick,
         modifier = modifier.height(100.dp),
         shape = CardShapeLarge,
         contentPadding = PaddingValues(0.dp),

@@ -30,6 +30,57 @@
     <string name="add_diaper">Add Diaper</string>
     <string name="sleep_wake">Sleep/Wake</string>
     <string name="add_bath">Add Bath</string>
+
+    <!-- Add Feeding Bottom Sheet -->
+    <string name="add_feeding_subtitle">Track %1$s\'s feeding</string>
+    <string name="feeding_time_label">TIME</string>
+    <string name="feeding_amount_label">AMOUNT (ML)</string>
+    <string name="feeding_amount_hint">e.g. 120</string>
+    <string name="feeding_notes_optional_label">NOTES (OPTIONAL)</string>
+    <string name="feeding_notes_hint">Add a note...</string>
+    <string name="feeding_notes_counter">%1$d/%2$d</string>
+
+    <!-- Add Diaper Bottom Sheet -->
+    <string name="add_diaper_change">Add Diaper Change</string>
+    <string name="add_diaper_subtitle">Track %1$s\'s diaper change</string>
+    <string name="diaper_result_label">RESULT</string>
+    <string name="diaper_type_pee">Pee</string>
+    <string name="diaper_type_poop">Poop</string>
+    <string name="diaper_type_mixed">Mixed</string>
+    <string name="diaper_time_label">TIME</string>
+    <string name="diaper_notes_optional_label">NOTES (OPTIONAL)</string>
+    <string name="diaper_notes_hint">Add a note...</string>
+    <string name="diaper_notes_counter">%1$d/%2$d</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+
+    <!-- Sleep/Wake Bottom Sheet -->
+    <string name="add_sleep_mode">Add Sleep Mode</string>
+    <string name="sleep_wake_subtitle">Track %1$s\'s sleep session</string>
+    <string name="sleep_status_label">STATUS</string>
+    <string name="sleep_state_asleep">Asleep</string>
+    <string name="sleep_state_awake">Awake</string>
+    <string name="sleep_start_time_label">START TIME</string>
+    <string name="sleep_end_time_label">END TIME (OPTIONAL)</string>
+    <string name="sleep_end_time_hint">Select end time</string>
+    <string name="sleep_notes_optional_label">NOTES (OPTIONAL)</string>
+    <string name="sleep_notes_hint">Add a note...</string>
+    <string name="sleep_notes_counter">%1$d/%2$d</string>
+
+    <!-- Add Bath Bottom Sheet -->
+    <string name="add_bath_subtitle">Track %1$s\'s bath time</string>
+    <string name="bath_time_label">TIME</string>
+    <string name="bath_duration_label">DURATION (OPTIONAL)</string>
+    <string name="bath_duration_hint">Select duration</string>
+    <string name="bath_duration_value">%1$d min</string>
+    <string name="bath_duration_clear">Clear</string>
+    <string name="bath_temp_label">WATER TEMPERATURE (OPTIONAL)</string>
+    <string name="bath_temp_warm">Warm</string>
+    <string name="bath_temp_lukewarm">Lukewarm</string>
+    <string name="bath_temp_cool">Cool</string>
+    <string name="bath_notes_optional_label">NOTES (OPTIONAL)</string>
+    <string name="bath_notes_hint">Add a note...</string>
+    <string name="bath_notes_counter">%1$d/%2$d</string>
     <!-- Profile Strings -->
     <string name="profileLabel">Profile</string>
     <string name="profileSubheader">Your baby\'s information</string>
