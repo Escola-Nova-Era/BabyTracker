@@ -49,6 +49,12 @@ val FABShape = RoundedCornerShape(50.dp)
 // Input fields
 val InputShape = RoundedCornerShape(10.dp)
 
+// Bottom sheets
+val BottomSheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+
+// Campos e opções dentro de bottom sheets
+val SheetFieldShape = RoundedCornerShape(14.dp)
+
 // Cards de timeline/atividades com borda superior arredondada
 val TimelineCardShape = RoundedCornerShape(
     topStart = 12.dp,
