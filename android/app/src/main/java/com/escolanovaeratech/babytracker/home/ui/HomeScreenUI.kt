@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,50 +21,99 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.home.ui.components.AddBathBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.AddDiaperBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.AddFeedingBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.SleepWakeBottomSheet
 import com.escolanovaeratech.babytracker.theme.*
+import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun HomeScreenUI(modifier: Modifier = Modifier) {
+fun HomeScreenUI(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.provideFactory(LocalContext.current.applicationContext)
+    )
+) {
+    HomeScreenContent(
+        modifier = modifier,
+        onSaveFeeding = viewModel::saveFeeding,
+        onSaveDiaper = viewModel::saveDiaper,
+        onSaveSleep = viewModel::saveSleep,
+        onSaveBath = viewModel::saveBath,
+        uiEvent = viewModel.uiEvent
+    )
+}
+
+@Composable
+fun HomeScreenContent(
+    modifier: Modifier = Modifier,
+    onSaveFeeding: (hour: Int, minute: Int, amountMl: String, notes: String) -> Unit = { _, _, _, _ -> },
+    onSaveDiaper: (diaperType: String, hour: Int, minute: Int, notes: String) -> Unit = { _, _, _, _ -> },
+    onSaveSleep: (sleepStatus: String, startHour: Int, startMinute: Int, endHour: Int?, endMinute: Int?, notes: String) -> Unit = { _, _, _, _, _, _ -> },
+    onSaveBath: (hour: Int, minute: Int, durationMinutes: Int?, waterTemperature: String?, notes: String) -> Unit = { _, _, _, _, _ -> },
+    uiEvent: Flow<HomeUiEvent>? = null
+) {
     var showAddFeedingSheet by remember { mutableStateOf(false) }
     var showAddDiaperSheet by remember { mutableStateOf(false) }
     var showSleepWakeSheet by remember { mutableStateOf(false) }
     var showAddBathSheet by remember { mutableStateOf(false) }
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val context = LocalContext.current
+
+    if (uiEvent != null) {
+        LaunchedEffect(uiEvent) {
+            uiEvent.collect { event ->
+                when (event) {
+                    is HomeUiEvent.ShowSnackbar -> {
+                        snackbarHostState.showSnackbar(
+                            message = context.getString(event.messageResId)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     if (showAddFeedingSheet) {
         AddFeedingBottomSheet(
             onDismiss = { showAddFeedingSheet = false },
+            onSave = onSaveFeeding,
         )
     }
     if (showAddDiaperSheet) {
         AddDiaperBottomSheet(
             onDismiss = { showAddDiaperSheet = false },
+            onSave = onSaveDiaper,
         )
     }
     if (showSleepWakeSheet) {
         SleepWakeBottomSheet(
             onDismiss = { showSleepWakeSheet = false },
+            onSave = onSaveSleep,
         )
     }
     if (showAddBathSheet) {
         AddBathBottomSheet(
             onDismiss = { showAddBathSheet = false },
+            onSave = onSaveBath,
         )
     }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
+    Box(modifier = modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
             .background(brush = HomeBackgroundGradient)
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp, vertical = 20.dp),
@@ -304,6 +354,14 @@ fun HomeScreenUI(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(8.dp))
     }
+
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 16.dp)
+        )
+    }
 }
 
 // --- COMPONENTE DO CARD DE RESUMO (TODAY'S SUMMARY) ---
@@ -420,6 +478,6 @@ fun ActionButton(
 @Composable
 fun HomeScreenUIPreview() {
     BabyTrackerTheme {
-        HomeScreenUI()
+        HomeScreenContent()
     }
 }

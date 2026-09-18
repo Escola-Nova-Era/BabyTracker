@@ -8,55 +8,147 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.theme.*
 import com.escolanovaeratech.babytracker.timeline.data.TimelineItem
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Composable
-fun TimelineScreen(modifier: Modifier = Modifier) {
-    val items = buildTimeline()
+fun TimelineScreen(
+    modifier: Modifier = Modifier,
+    viewModel: TimelineViewModel = viewModel(
+        factory = TimelineViewModel.provideFactory(LocalContext.current.applicationContext)
+    )
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    TimelineScreenContent(
+        modifier = modifier,
+        uiState = uiState
+    )
+}
 
+@Composable
+fun TimelineScreenContent(
+    modifier: Modifier = Modifier,
+    uiState: TimelineUiState
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(brush = HomeBackgroundGradient)
     ) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp)
-        ) {
-            // Header da Timeline
-            item {
-                TimelineHeader()
-                Spacer(modifier = Modifier.height(20.dp))
+        when (uiState) {
+            is TimelineUiState.Loading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(color = PrimaryColor)
+                }
             }
+            is TimelineUiState.Success -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp)
+                ) {
+                    // Header da Timeline
+                    item {
+                        TimelineHeader()
+                        Spacer(modifier = Modifier.height(20.dp))
+                    }
 
-            // Lista de eventos da Timeline
-            itemsIndexed(items) { index, item ->
-                TimelineRow(
-                    item = item,
-                    isLastItem = index == items.lastIndex
-                )
+                    if (uiState.items.isEmpty()) {
+                        item {
+                            TimelineEmptyState()
+                        }
+                    } else {
+                        // Lista de eventos da Timeline
+                        itemsIndexed(uiState.items) { index, item ->
+                            TimelineRow(
+                                item = item,
+                                isLastItem = index == uiState.items.lastIndex
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 }
 
 @Composable
+private fun TimelineEmptyState(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 40.dp, bottom = 32.dp, start = 16.dp, end = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .size(72.dp)
+                .clip(CircleShape)
+                .background(PrimaryColor.copy(alpha = 0.12f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.CalendarToday,
+                contentDescription = null,
+                tint = PrimaryColor,
+                modifier = Modifier.size(32.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = stringResource(R.string.timeline_empty_title),
+            style = AppTypography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = TextPrimary,
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = stringResource(R.string.timeline_empty_subtitle),
+            style = AppTypography.bodyMedium,
+            color = TextSecondary,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
 private fun TimelineHeader() {
+    val currentDateFormatted = remember {
+        SimpleDateFormat("MMMM d, yyyy", Locale.getDefault()).format(Date())
+    }
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -71,7 +163,7 @@ private fun TimelineHeader() {
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
-                text = "January 27, 2025",
+                text = currentDateFormatted,
                 style = AppTypography.bodyMedium,
                 color = TextSecondary
             )
@@ -265,7 +357,7 @@ private fun IntrinsicRow(
     )
 }
 
-private fun buildTimeline(): List<TimelineItem> {
+private fun buildMockTimeline(): List<TimelineItem> {
     return listOf(
         TimelineItem(
             title = "Bottle Feeding",
@@ -330,10 +422,22 @@ private fun buildTimeline(): List<TimelineItem> {
     )
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Timeline with Items")
 @Composable
 fun TimelineScreenPreview() {
     BabyTrackerTheme {
-        TimelineScreen()
+        TimelineScreenContent(
+            uiState = TimelineUiState.Success(buildMockTimeline())
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Timeline Empty State")
+@Composable
+fun TimelineScreenEmptyPreview() {
+    BabyTrackerTheme {
+        TimelineScreenContent(
+            uiState = TimelineUiState.Success(emptyList())
+        )
     }
 }
