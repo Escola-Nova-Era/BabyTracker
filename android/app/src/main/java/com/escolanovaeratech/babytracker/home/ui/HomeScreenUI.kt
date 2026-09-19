@@ -35,6 +35,7 @@ import com.escolanovaeratech.babytracker.home.ui.components.AddDiaperBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.AddFeedingBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.SleepWakeBottomSheet
 import com.escolanovaeratech.babytracker.theme.*
+import com.escolanovaeratech.babytracker.ui.components.BabyTrackerSnackbar
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -359,7 +360,10 @@ fun HomeScreenContent(
             hostState = snackbarHostState,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 16.dp)
+                .padding(bottom = 16.dp),
+            snackbar = { snackbarData ->
+                BabyTrackerSnackbar(snackbarData = snackbarData)
+            }
         )
     }
 }

@@ -14,12 +14,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.insights.ui.components.ChangingCard
 import com.escolanovaeratech.babytracker.insights.ui.components.ChangingData
@@ -36,10 +40,30 @@ import com.escolanovaeratech.babytracker.theme.SurfaceDark
 @Composable
 fun InsightsScreen(
     modifier: Modifier = Modifier,
+    viewModel: InsightsViewModel = viewModel(
+        factory = InsightsViewModel.provideFactory(LocalContext.current.applicationContext)
+    )
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    InsightsContent(
+        modifier = modifier,
+        feedingDataList = uiState.feedingDataList,
+        sleepingDataList = uiState.sleepingDataList,
+        changingDataList = uiState.changingDataList,
+        averageHours = uiState.averageHours,
+        averageMl = uiState.averageMl,
+        averageChanges = uiState.averageChanges
+    )
+}
+
+@Composable
+fun InsightsContent(
+    modifier: Modifier = Modifier,
     feedingDataList: List<FeedingData> = emptyList(),
     sleepingDataList: List<SleepData> = emptyList(),
     changingDataList: List<ChangingData> = emptyList(),
-    averageHours : Float = 0f,
+    averageHours: Float = 0f,
     averageMl: Float = 0f,
     averageChanges: Float = 0f
 ) {
@@ -136,7 +160,7 @@ fun InsightsScreenPreview() {
     val averageChanges = sampleChangingData.map { it.count }.average().toFloat()
 
     BabyTrackerTheme {
-        InsightsScreen(
+        InsightsContent(
             feedingDataList = sampleFeedingData,
             averageMl = averageFeed,
             sleepingDataList = sampleSleepData,
