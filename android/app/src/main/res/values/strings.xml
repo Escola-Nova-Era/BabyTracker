@@ -118,4 +118,9 @@
     <string name="emma_rose">Emma Rose</string>
     <string name="your_baby_s_information">Your baby\'s information</string>
     <string name="filter">Filtrar timeline</string>
+
+    <!-- Feedback & Timeline Empty State -->
+    <string name="event_saved_success">Event saved successfully!</string>
+    <string name="timeline_empty_title">No activities recorded today</string>
+    <string name="timeline_empty_subtitle">Use the quick actions on the home screen to log feedings, diapers, sleep and baths.</string>
 </resources>
