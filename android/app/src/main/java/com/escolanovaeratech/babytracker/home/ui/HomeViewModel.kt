@@ -6,68 +6,102 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.data.local.BabyTrackerDatabase
+import com.escolanovaeratech.babytracker.data.local.EventDao
 import com.escolanovaeratech.babytracker.data.local.EventEntity
 import com.escolanovaeratech.babytracker.data.local.EventType
-import com.escolanovaeratech.babytracker.data.repository.EventRepository
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.receiveAsFlow
+import com.escolanovaeratech.babytracker.util.calculateDurationMinutes
+import com.escolanovaeratech.babytracker.util.getTimestampForToday
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 sealed interface HomeUiEvent {
     data class ShowSnackbar(val messageResId: Int) : HomeUiEvent
 }
+// --- EVENTOS DE ENTRADA DA UI ---
+sealed class BabyTrackerEvent {
+    data class SaveFeeding(
+        val hour: Int,
+        val minute: Int,
+        val amountMl: String,
+        val notes: String
+    ) : BabyTrackerEvent()
+    data class SaveDiaper(
+        val diaperType: String,
+        val hour: Int,
+        val minute: Int,
+        val notes: String
+    ) : BabyTrackerEvent()
+    data class SaveSleep(
+        val sleepStatus: String,
+        val startHour: Int,
+        val startMinute: Int,
+        val endHour: Int?,
+        val endMinute: Int?,
+        val notes: String
+    ) : BabyTrackerEvent()
+    data class SaveBath(
+        val hour: Int,
+        val minute: Int,
+        val durationMinutes: Int?,
+        val waterTemperature: String?,
+        val notes: String
+    ) : BabyTrackerEvent()
+}
 
 /**
- * ViewModel responsável pelo gerenciamento de estado e ações da HomeScreen,
- * incluindo o registro de eventos de ações rápidas no banco de dados local.
+ * ViewModel responsável pelo gerenciamento de ações da HomeScreen,
+ * persistindo diretamente no EventDao do Room.
  */
 class HomeViewModel(
-    private val repository: EventRepository
+    private val eventDao: EventDao,
+    private val context: Context
 ) : ViewModel() {
 
-    private val _uiEvent = Channel<HomeUiEvent>()
-    val uiEvent: Flow<HomeUiEvent> = _uiEvent.receiveAsFlow()
+    fun onEvent(event: BabyTrackerEvent) {
+        when (event) {
+            is BabyTrackerEvent.SaveFeeding -> saveFeeding(event.hour, event.minute, event.amountMl, event.notes)
+            is BabyTrackerEvent.SaveDiaper -> saveDiaper(event.diaperType, event.hour, event.minute, event.notes)
+            is BabyTrackerEvent.SaveSleep -> saveSleep(event.sleepStatus, event.startHour, event.startMinute, event.endHour, event.endMinute, event.notes)
+            is BabyTrackerEvent.SaveBath -> saveBath(event.hour, event.minute, event.durationMinutes, event.waterTemperature, event.notes)
+        }
+    }
 
-    fun saveFeeding(hour: Int, minute: Int, amountMl: String, notes: String) {
+    val uiEvent: SharedFlow<HomeUiEvent>
+        field = MutableSharedFlow()
+
+    private fun saveFeeding(hour: Int, minute: Int, amountMl: String, notes: String) {
         viewModelScope.launch {
             val timestamp = getTimestampForToday(hour, minute)
             val parsedAmount = amountMl.toIntOrNull()
             val event = EventEntity(
                 type = EventType.FEEDING,
-                title = "Bottle Feeding",
+                title = context.getString(R.string.bottle_feeding),
                 timestamp = timestamp,
                 amountMl = parsedAmount,
-                notes = notes.trim().ifEmpty { null }
+                notes = notes.trim()
             )
-            repository.insertEvent(event)
-            _uiEvent.send(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
+            eventDao.insert(event)
+            uiEvent.emit(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
         }
     }
 
-    fun saveDiaper(diaperType: String, hour: Int, minute: Int, notes: String) {
+    private fun saveDiaper(diaperType: String, hour: Int, minute: Int, notes: String) {
         viewModelScope.launch {
             val timestamp = getTimestampForToday(hour, minute)
             val cleanNotes = notes.trim()
-            val finalNotes = if (cleanNotes.isNotEmpty()) {
-                "[$diaperType] $cleanNotes"
-            } else {
-                "[$diaperType]"
-            }
-
             val event = EventEntity(
                 type = EventType.DIAPER,
-                title = "Diaper Change",
+                title = diaperType,
                 timestamp = timestamp,
-                notes = finalNotes
+                notes = cleanNotes
             )
-            repository.insertEvent(event)
-            _uiEvent.send(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
+            eventDao.insert(event)
+            uiEvent.emit(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
         }
     }
 
-    fun saveSleep(
+    private fun saveSleep(
         sleepStatus: String,
         startHour: Int,
         startMinute: Int,
@@ -78,20 +112,26 @@ class HomeViewModel(
         viewModelScope.launch {
             val startTimestamp = getTimestampForToday(startHour, startMinute)
             val durationMinutes = calculateDurationMinutes(startHour, startMinute, endHour, endMinute)
-            val title = if (sleepStatus.equals("Asleep", ignoreCase = true)) "Fell Asleep" else "Woke Up"
+            val isAsleep = sleepStatus.equals("Asleep", ignoreCase = true)
+            val title = if (isAsleep) {
+                context.getString(R.string.fell_asleep)
+            } else {
+                context.getString(R.string.woke_up)
+            }
+
             val event = EventEntity(
                 type = EventType.SLEEP,
                 title = title,
                 timestamp = startTimestamp,
                 durationMinutes = durationMinutes,
-                notes = notes.trim().ifEmpty { null }
+                notes = notes.trim()
             )
-            repository.insertEvent(event)
-            _uiEvent.send(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
+            eventDao.insert(event)
+            uiEvent.emit(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
         }
     }
 
-    fun saveBath(
+    private fun saveBath(
         hour: Int,
         minute: Int,
         durationMinutes: Int?,
@@ -105,44 +145,19 @@ class HomeViewModel(
             val combinedNotes = when {
                 tempPart != null && cleanNotes.isNotEmpty() -> "$tempPart • $cleanNotes"
                 tempPart != null -> tempPart
-                cleanNotes.isNotEmpty() -> cleanNotes
-                else -> null
+                else -> cleanNotes
             }
 
             val event = EventEntity(
                 type = EventType.BATH,
-                title = "Bath Time",
+                title = context.getString(R.string.bath_time),
                 timestamp = timestamp,
                 durationMinutes = durationMinutes,
                 notes = combinedNotes
             )
-            repository.insertEvent(event)
-            _uiEvent.send(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
+            eventDao.insert(event)
+            uiEvent.emit(HomeUiEvent.ShowSnackbar(R.string.event_saved_success))
         }
-    }
-
-    private fun getTimestampForToday(hour: Int, minute: Int): Long {
-        return Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, hour)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }.timeInMillis
-    }
-
-    private fun calculateDurationMinutes(
-        startHour: Int,
-        startMinute: Int,
-        endHour: Int?,
-        endMinute: Int?
-    ): Int? {
-        if (endHour == null || endMinute == null) return null
-        val startTotalMinutes = startHour * 60 + startMinute
-        var endTotalMinutes = endHour * 60 + endMinute
-        if (endTotalMinutes < startTotalMinutes) {
-            endTotalMinutes += 24 * 60
-        }
-        return (endTotalMinutes - startTotalMinutes).coerceAtLeast(0)
     }
 
     companion object {
@@ -151,8 +166,10 @@ class HomeViewModel(
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     val db = BabyTrackerDatabase.getInstance(context)
-                    val repository = EventRepository(db.eventDao())
-                    return HomeViewModel(repository) as T
+                    return HomeViewModel(
+                        eventDao = db.eventDao(),
+                        context = context.applicationContext
+                    ) as T
                 }
             }
     }

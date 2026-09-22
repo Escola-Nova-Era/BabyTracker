@@ -47,10 +47,7 @@ fun HomeScreenUI(
 ) {
     HomeScreenContent(
         modifier = modifier,
-        onSaveFeeding = viewModel::saveFeeding,
-        onSaveDiaper = viewModel::saveDiaper,
-        onSaveSleep = viewModel::saveSleep,
-        onSaveBath = viewModel::saveBath,
+        onEvent = viewModel::onEvent,
         uiEvent = viewModel.uiEvent
     )
 }
@@ -58,10 +55,7 @@ fun HomeScreenUI(
 @Composable
 fun HomeScreenContent(
     modifier: Modifier = Modifier,
-    onSaveFeeding: (hour: Int, minute: Int, amountMl: String, notes: String) -> Unit = { _, _, _, _ -> },
-    onSaveDiaper: (diaperType: String, hour: Int, minute: Int, notes: String) -> Unit = { _, _, _, _ -> },
-    onSaveSleep: (sleepStatus: String, startHour: Int, startMinute: Int, endHour: Int?, endMinute: Int?, notes: String) -> Unit = { _, _, _, _, _, _ -> },
-    onSaveBath: (hour: Int, minute: Int, durationMinutes: Int?, waterTemperature: String?, notes: String) -> Unit = { _, _, _, _, _ -> },
+    onEvent: (BabyTrackerEvent) -> Unit = {},
     uiEvent: Flow<HomeUiEvent>? = null
 ) {
     var showAddFeedingSheet by remember { mutableStateOf(false) }
@@ -89,25 +83,50 @@ fun HomeScreenContent(
     if (showAddFeedingSheet) {
         AddFeedingBottomSheet(
             onDismiss = { showAddFeedingSheet = false },
-            onSave = onSaveFeeding,
+            onSave = { hour, minute, amountMl, notes ->
+                onEvent(BabyTrackerEvent.SaveFeeding(hour, minute, amountMl, notes))
+            },
         )
     }
     if (showAddDiaperSheet) {
         AddDiaperBottomSheet(
             onDismiss = { showAddDiaperSheet = false },
-            onSave = onSaveDiaper,
+            onSave = { diaperType, hour, minute, notes ->
+                onEvent(BabyTrackerEvent.SaveDiaper(diaperType, hour, minute, notes))
+            },
         )
     }
     if (showSleepWakeSheet) {
         SleepWakeBottomSheet(
             onDismiss = { showSleepWakeSheet = false },
-            onSave = onSaveSleep,
+            onSave = { sleepStatus, startHour, startMinute, endHour, endMinute, notes ->
+                onEvent(
+                    BabyTrackerEvent.SaveSleep(
+                        sleepStatus = sleepStatus,
+                        startHour = startHour,
+                        startMinute = startMinute,
+                        endHour = endHour,
+                        endMinute = endMinute,
+                        notes = notes
+                    )
+                )
+            },
         )
     }
     if (showAddBathSheet) {
         AddBathBottomSheet(
             onDismiss = { showAddBathSheet = false },
-            onSave = onSaveBath,
+            onSave = { hour, minute, durationMinutes, waterTemperature, notes ->
+                onEvent(
+                    BabyTrackerEvent.SaveBath(
+                        hour = hour,
+                        minute = minute,
+                        durationMinutes = durationMinutes,
+                        waterTemperature = waterTemperature,
+                        notes = notes
+                    )
+                )
+            },
         )
     }
 
