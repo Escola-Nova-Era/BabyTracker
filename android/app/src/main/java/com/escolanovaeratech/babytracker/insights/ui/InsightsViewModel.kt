@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.escolanovaeratech.babytracker.data.local.BabyTrackerDatabase
 import com.escolanovaeratech.babytracker.data.local.EventEntity
 import com.escolanovaeratech.babytracker.data.local.EventType
-import com.escolanovaeratech.babytracker.data.repository.EventRepository
+import com.escolanovaeratech.babytracker.data.local.EventDao
 import com.escolanovaeratech.babytracker.insights.ui.components.ChangingData
 import com.escolanovaeratech.babytracker.insights.ui.components.FeedingData
 import com.escolanovaeratech.babytracker.insights.ui.components.SleepData
@@ -31,12 +31,12 @@ data class InsightsUiState(
  * da tela de Insights a partir dos eventos registrados no banco de dados Room.
  */
 class InsightsViewModel(
-    private val repository: EventRepository
+    private val eventDao: EventDao
 ) : ViewModel() {
 
     private val weekDays = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
-    val uiState: StateFlow<InsightsUiState> = repository.observeAllEvents()
+    val uiState: StateFlow<InsightsUiState> = eventDao.observeAll()
         .map { events -> processEvents(events) }
         .stateIn(
             scope = viewModelScope,
@@ -120,8 +120,7 @@ class InsightsViewModel(
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     val db = BabyTrackerDatabase.getInstance(context)
-                    val repository = EventRepository(db.eventDao())
-                    return InsightsViewModel(repository) as T
+                    return InsightsViewModel(db.eventDao()) as T
                 }
             }
     }

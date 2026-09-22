@@ -3,7 +3,6 @@ package com.escolanovaeratech.babytracker.insights.ui
 import com.escolanovaeratech.babytracker.data.local.EventDao
 import com.escolanovaeratech.babytracker.data.local.EventEntity
 import com.escolanovaeratech.babytracker.data.local.EventType
-import com.escolanovaeratech.babytracker.data.repository.EventRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert.assertEquals
@@ -25,8 +24,8 @@ class InsightsViewModelTest {
 
     @Test
     fun processEvents_emptyList_returnsZeroValues() {
-        val repository = EventRepository(FakeEventDao())
-        val viewModel = InsightsViewModel(repository)
+        val fakeDao = FakeEventDao()
+        val viewModel = InsightsViewModel(fakeDao)
 
         val state = viewModel.processEvents(emptyList())
 
@@ -40,8 +39,8 @@ class InsightsViewModelTest {
 
     @Test
     fun processEvents_aggregatesCorrectDayValues() {
-        val repository = EventRepository(FakeEventDao())
-        val viewModel = InsightsViewModel(repository)
+        val fakeDao = FakeEventDao()
+        val viewModel = InsightsViewModel(fakeDao)
 
         // Criar um timestamp de uma Segunda-feira
         val mondayCalendar = Calendar.getInstance().apply {
