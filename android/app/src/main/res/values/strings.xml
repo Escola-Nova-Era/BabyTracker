@@ -123,4 +123,13 @@
     <string name="event_saved_success">Event saved successfully!</string>
     <string name="timeline_empty_title">No activities recorded today</string>
     <string name="timeline_empty_subtitle">Use the quick actions on the home screen to log feedings, diapers, sleep and baths.</string>
+    <string name="todays_timeline">Today\'s Timeline</string>
+    <string name="bottle_feeding">Bottle Feeding</string>
+    <string name="diaper_change">Diaper Change</string>
+    <string name="fell_asleep">Fell Asleep</string>
+    <string name="woke_up">Woke Up</string>
+    <string name="bath_time">Bath Time</string>
+    <string name="activity">Activity</string>
+    <string name="sleep">Sleep</string>
+    <string name="slept_for">Slept for %1$s</string>
 </resources>
