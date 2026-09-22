@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.data.local.BabyTrackerDatabase
+import com.escolanovaeratech.babytracker.data.local.EventDao
 import com.escolanovaeratech.babytracker.data.local.EventEntity
 import com.escolanovaeratech.babytracker.data.local.EventType
-import com.escolanovaeratech.babytracker.data.repository.EventRepository
 import com.escolanovaeratech.babytracker.timeline.data.TimelineItem
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +19,8 @@ import java.util.Date
 import java.util.Locale
 
 sealed interface TimelineUiState {
-    object Loading : TimelineUiState
+    data object Loading : TimelineUiState
+    data object Empty : TimelineUiState
     data class Success(val items: List<TimelineItem>) : TimelineUiState
 }
 
@@ -28,13 +29,17 @@ sealed interface TimelineUiState {
  * dinamicamente em itens da Timeline com estilização e metadados.
  */
 class TimelineViewModel(
-    private val repository: EventRepository
+    private val eventDao: EventDao,
+    private val context: Context
 ) : ViewModel() {
 
-    val uiState: StateFlow<TimelineUiState> = repository.observeAllEvents()
-        .map<List<EventEntity>, TimelineUiState> { entities ->
-            val items = entities.map { entity -> entity.toTimelineItem() }
-            TimelineUiState.Success(items)
+    val uiState: StateFlow<TimelineUiState> = eventDao.observeAll()
+        .map { entities ->
+            if (entities.isEmpty()) {
+                TimelineUiState.Empty
+            } else {
+                TimelineUiState.Success(entities.map { it.toTimelineItem() })
+            }
         }
         .stateIn(
             scope = viewModelScope,
@@ -48,21 +53,21 @@ class TimelineViewModel(
         return when (type) {
             EventType.FEEDING -> {
                 TimelineItem(
-                    title = title.ifBlank { "Bottle Feeding" },
+                    title = title.ifBlank { context.getString(R.string.bottle_feeding) },
                     time = timeFormatted,
                     icon = "\uD83C\uDF7C", // 🍼
                     bubbleColor = R.color.feed_bubble,
                     dotColor = R.color.feed_dot,
                     metaPrimary = amountMl?.let { "\u2195 $it ml" },
                     metaSecondary = durationMinutes?.let { "\u25F4 $it min" },
-                    subtitle = notes
+                    subtitle = notes?.ifBlank { null }
                 )
             }
             EventType.DIAPER -> {
                 val tag = when {
-                    notes?.contains("[Pee]") == true -> "Pee"
-                    notes?.contains("[Poop]") == true -> "Poop"
-                    notes?.contains("[Mixed]") == true -> "Mixed"
+                    title.contains("Pee", ignoreCase = true) || notes?.contains("[Pee]") == true -> "Pee"
+                    title.contains("Poop", ignoreCase = true) || notes?.contains("[Poop]") == true -> "Poop"
+                    title.contains("Mixed", ignoreCase = true) || notes?.contains("[Mixed]") == true -> "Mixed"
                     else -> null
                 }
                 val (tagBg, tagText) = when (tag) {
@@ -78,13 +83,17 @@ class TimelineViewModel(
                     ?.trim()
                     ?.ifEmpty { null }
 
+                val displayTitle = if (title in listOf("Pee", "Poop", "Mixed")) {
+                    context.getString(R.string.diaper_change)
+                } else title.ifBlank { context.getString(R.string.diaper_change) }
+
                 TimelineItem(
-                    title = title.ifBlank { "Diaper Change" },
+                    title = displayTitle,
                     time = timeFormatted,
                     icon = "\uD83D\uDC76", // 👶
                     bubbleColor = R.color.diaper_bubble,
                     dotColor = R.color.diaper_dot,
-                    tag = tag,
+                    tag = tag ?: title.takeIf { it in listOf("Pee", "Poop", "Mixed") },
                     tagBackgroundColor = tagBg,
                     tagTextColor = tagText,
                     subtitle = cleanSubtitle
@@ -98,40 +107,40 @@ class TimelineViewModel(
                         val hours = durationMinutes / 60
                         val mins = durationMinutes % 60
                         val durationFormatted = if (hours > 0) "${hours}h ${mins}min" else "${mins}min"
-                        "Slept for $durationFormatted"
+                        context.getString(R.string.slept_for, durationFormatted)
                     }
-                    else -> notes
+                    else -> notes?.ifBlank { null }
                 }
 
                 TimelineItem(
-                    title = title.ifBlank { "Sleep" },
+                    title = title.ifBlank { context.getString(R.string.sleep) },
                     time = timeFormatted,
                     icon = icon,
                     bubbleColor = R.color.sleep_bubble,
                     dotColor = R.color.sleep_dot,
                     subtitle = subtitleText,
-                    metaPrimary = if (durationMinutes != null && notes != null) notes else null
+                    metaPrimary = if (durationMinutes != null && !notes.isNullOrBlank()) notes else null
                 )
             }
             EventType.BATH -> {
                 TimelineItem(
-                    title = title.ifBlank { "Bath Time" },
+                    title = title.ifBlank { context.getString(R.string.bath_time) },
                     time = timeFormatted,
                     icon = "\uD83D\uDEC1", // 🛁
                     bubbleColor = R.color.bath_bubble,
                     dotColor = R.color.bath_dot,
                     metaPrimary = durationMinutes?.let { "\u25F4 $it min" },
-                    subtitle = notes
+                    subtitle = notes?.ifBlank { null }
                 )
             }
             EventType.OTHER -> {
                 TimelineItem(
-                    title = title.ifBlank { "Activity" },
+                    title = title.ifBlank { context.getString(R.string.activity) },
                     time = timeFormatted,
                     icon = "✨",
                     bubbleColor = R.color.feed_bubble,
                     dotColor = R.color.feed_dot,
-                    subtitle = notes
+                    subtitle = notes?.ifBlank { null }
                 )
             }
         }
@@ -143,8 +152,10 @@ class TimelineViewModel(
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     val db = BabyTrackerDatabase.getInstance(context)
-                    val repository = EventRepository(db.eventDao())
-                    return TimelineViewModel(repository) as T
+                    return TimelineViewModel(
+                        eventDao = db.eventDao(),
+                        context = context.applicationContext
+                    ) as T
                 }
             }
     }

@@ -68,29 +68,34 @@ fun TimelineScreenContent(
                     CircularProgressIndicator(color = PrimaryColor)
                 }
             }
+            is TimelineUiState.Empty -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp)
+                ) {
+                    item {
+                        TimelineHeader()
+                        Spacer(modifier = Modifier.height(20.dp))
+                    }
+                    item {
+                        TimelineEmptyState()
+                    }
+                }
+            }
             is TimelineUiState.Success -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp)
                 ) {
-                    // Header da Timeline
                     item {
                         TimelineHeader()
                         Spacer(modifier = Modifier.height(20.dp))
                     }
-
-                    if (uiState.items.isEmpty()) {
-                        item {
-                            TimelineEmptyState()
-                        }
-                    } else {
-                        // Lista de eventos da Timeline
-                        itemsIndexed(uiState.items) { index, item ->
-                            TimelineRow(
-                                item = item,
-                                isLastItem = index == uiState.items.lastIndex
-                            )
-                        }
+                    itemsIndexed(uiState.items) { index, item ->
+                        TimelineRow(
+                            item = item,
+                            isLastItem = index == uiState.items.lastIndex
+                        )
                     }
                 }
             }
@@ -156,9 +161,8 @@ private fun TimelineHeader() {
     ) {
         Column {
             Text(
-                text = "Today's Timeline",
+                text = stringResource(R.string.todays_timeline),
                 style = AppTypography.headlineLarge,
-                fontWeight = FontWeight.Bold,
                 color = TextPrimary
             )
             Spacer(modifier = Modifier.height(2.dp))
@@ -250,7 +254,7 @@ private fun TimelineRow(
                 .weight(1f)
                 .padding(bottom = 4.dp),
             shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = SurfaceColor),
             elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
             border = androidx.compose.foundation.BorderStroke(1.dp, colorResource(R.color.card_stroke))
         ) {
@@ -268,8 +272,7 @@ private fun TimelineRow(
                     Text(
                         text = item.title,
                         style = AppTypography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1E1E1E)
+                        color = TextPrimary
                     )
                     Text(
                         text = item.time,
@@ -315,8 +318,7 @@ private fun TimelineRow(
                     ) {
                         Text(
                             text = item.tag,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
+                            style = AppTypography.labelSmall,
                             color = colorResource(item.tagTextColor)
                         )
                     }
@@ -337,7 +339,7 @@ private fun MetaPill(text: String) {
     ) {
         Text(
             text = text,
-            fontSize = 12.sp,
+            style = AppTypography.labelSmall,
             color = TextSecondary
         )
     }
@@ -437,7 +439,7 @@ fun TimelineScreenPreview() {
 fun TimelineScreenEmptyPreview() {
     BabyTrackerTheme {
         TimelineScreenContent(
-            uiState = TimelineUiState.Success(emptyList())
+            uiState = TimelineUiState.Empty
         )
     }
 }
