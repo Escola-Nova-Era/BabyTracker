@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InitialOnboardingBannerView: View {
-    let image: String
+    let image: ImageResource
     
     var body: some View {
         ZStack{
@@ -23,6 +23,6 @@ struct InitialOnboardingBannerView: View {
 }
 
 #Preview {
-    InitialOnboardingBannerView(image: "mommyBaby")
+    InitialOnboardingBannerView(image: .mommyBaby)
 }
 

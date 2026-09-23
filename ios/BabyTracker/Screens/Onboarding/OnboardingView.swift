@@ -14,9 +14,14 @@ struct OnboardingView: View {
         TabView(selection: $viewModel.currentPage){
             ForEach(Array(viewModel.pages.enumerated()), id: \.element.id) { index, page in
                 
-                OnboardingPageView(page: page, pageIndex:  index, currentPage: viewModel.currentPage,numberOfPages: viewModel.pages.count).tag(index)
+                OnboardingPageView(page: page,
+                                   pageIndex:  index,
+                                   currentPage: viewModel.currentPage,
+                                   numberOfPages: viewModel.totalPages).tag(index)
                 
             }
+            //OnboardingFormView()
+              //     .tag(3)
         }.tabViewStyle(.page(indexDisplayMode: .never))
             .ignoresSafeArea()
     }

@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import DeveloperToolsSupport
 
 
 struct OnboardingPage: Identifiable{
     let id = UUID()
     let title: String
     let description: String
-    let imageName: String
+    let image: ImageResource
 }

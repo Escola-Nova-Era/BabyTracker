@@ -19,7 +19,7 @@ struct OnboardingPageView: View {
             Spacer()
             
             // MARK: - Image
-            InitialOnboardingBannerView(image: page.imageName)
+            InitialOnboardingBannerView(image: page.image)
             
             Spacer()
                 .frame(height: AppSpacing.xxxLarge)
@@ -43,7 +43,7 @@ struct OnboardingPageView: View {
         .frame(maxWidth: .infinity)
         .background(
             ZStack {
-                let gradient = AppColors.onboardingGradients[currentPage]
+                let gradient = AppColors.onboardingGradients[pageIndex]
                 // Gradiente base com 3 cores
                 LinearGradient(
                     stops: [
@@ -77,10 +77,10 @@ struct OnboardingPageView: View {
             page: OnboardingPage(
                 title: "Welcome to BabyCare",
                 description: "Track feeding, sleep, diaper changes, and daily moments with ease",
-                imageName: "mommyBaby"
+                image: .mommyBaby
             ),
             pageIndex: 0,
             currentPage: 0,
-            numberOfPages: 3
+            numberOfPages: 4
         )
 }
