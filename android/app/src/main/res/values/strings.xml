@@ -118,4 +118,27 @@
     <string name="emma_rose">Emma Rose</string>
     <string name="your_baby_s_information">Your baby\'s information</string>
     <string name="filter">Filtrar timeline</string>
+
+    <!-- Feedback & Timeline Empty State -->
+    <string name="event_saved_success">Event saved successfully!</string>
+    <string name="timeline_empty_title">No activities recorded today</string>
+    <string name="timeline_empty_subtitle">Use the quick actions on the home screen to log feedings, diapers, sleep and baths.</string>
+    <string name="todays_timeline">Today\'s Timeline</string>
+    <string name="bottle_feeding">Bottle Feeding</string>
+    <string name="diaper_change">Diaper Change</string>
+    <string name="fell_asleep">Fell Asleep</string>
+    <string name="woke_up">Woke Up</string>
+    <string name="bath_time">Bath Time</string>
+    <string name="activity">Activity</string>
+    <string name="sleep">Sleep</string>
+    <string name="slept_for">Slept for %1$s</string>
+
+    <!-- Weekdays for Insights -->
+    <string name="weekday_mon">Mon</string>
+    <string name="weekday_tue">Tue</string>
+    <string name="weekday_wed">Wed</string>
+    <string name="weekday_thu">Thu</string>
+    <string name="weekday_fri">Fri</string>
+    <string name="weekday_sat">Sat</string>
+    <string name="weekday_sun">Sun</string>
 </resources>
