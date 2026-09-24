@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingDescriptionTextView: View {
-    let description: String;
+    let description: LocalizedStringResource;
     
     var body: some View {
         Text(description)

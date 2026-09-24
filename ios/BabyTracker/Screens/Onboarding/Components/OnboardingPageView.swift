@@ -75,8 +75,8 @@ struct OnboardingPageView: View {
 #Preview {
     OnboardingPageView(
             page: OnboardingPage(
-                title: "Welcome to BabyCare",
-                description: "Track feeding, sleep, diaper changes, and daily moments with ease",
+                title: .welcomeToBabyCare,
+                description: .trackFeedingSleepDiaperChangesAndDailyMomentsWithEase,
                 image: .mommyBaby
             ),
             pageIndex: 0,

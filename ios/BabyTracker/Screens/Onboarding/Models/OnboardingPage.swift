@@ -11,7 +11,7 @@ import DeveloperToolsSupport
 
 struct OnboardingPage: Identifiable{
     let id = UUID()
-    let title: String
-    let description: String
+    let title: LocalizedStringResource
+    let description: LocalizedStringResource
     let image: ImageResource
 }
