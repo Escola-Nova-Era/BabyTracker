@@ -1,4 +1,4 @@
-package com.escolanovaeratech.babytracker.onboarding.data.model
+package com.escolanovaeratech.babytracker.onboarding.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

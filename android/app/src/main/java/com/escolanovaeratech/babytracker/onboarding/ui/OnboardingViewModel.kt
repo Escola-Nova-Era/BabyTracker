@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.onboarding.data.model.OnboardingPage
 import com.escolanovaeratech.babytracker.onboarding.local.OnboardingPreferences
+import com.escolanovaeratech.babytracker.onboarding.model.OnboardingPage
 import kotlinx.coroutines.launch
 
 class OnboardingViewModel(application: Application) : AndroidViewModel(application) {

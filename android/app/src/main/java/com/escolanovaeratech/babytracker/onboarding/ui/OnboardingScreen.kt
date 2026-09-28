@@ -1,10 +1,12 @@
 package com.escolanovaeratech.babytracker.onboarding.ui
 
+import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.escolanovaeratech.babytracker.onboarding.ui.components.OnboardingPageContent
 
@@ -30,5 +32,6 @@ fun OnboardingScreen(
         )
     }
 }
+
 
 

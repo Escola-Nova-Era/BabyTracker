@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.onboarding.data.model.OnboardingPage
+import com.escolanovaeratech.babytracker.onboarding.model.OnboardingPage
 import com.escolanovaeratech.babytracker.theme.ComponentSize
 import com.escolanovaeratech.babytracker.theme.Spacing
 
