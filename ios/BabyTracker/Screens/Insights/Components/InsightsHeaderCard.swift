@@ -6,7 +6,7 @@ struct InsightsHeaderCard: View {
             Text("Great Progress!")
                 .font(AppTypography.title)
                 .foregroundStyle(.white)
-            Text("Emma's pattems are developping beautifull. Her feedind and sleep routines show healthy consistency.")
+            Text("Emma's patterns are developing beautifully. Her feeding and sleep routines show healthy consistency.")
                 .font(AppTypography.body)
                 .foregroundStyle(.white)
         }
