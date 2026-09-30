@@ -15,17 +15,20 @@ final class OnboardingViewModel {
         OnboardingPage(
             title: .welcomeToBabyCare,
             description: .trackFeedingSleepDiaperChangesAndDailyMomentsWithEase,
-                image: .mommyBaby
+                image: .mommyBaby,
+            gradient: AppColors.onboardingGradients[0]
         ),
         OnboardingPage(
             title: .stayOnTopOfEveryRoutine,
             description: .logActivitiesQuicklyAndKeepYourBabysDayOrganized,
-            image: .trackIcons
+            image: .trackIcons,
+            gradient: AppColors.onboardingGradients[1]
         ),
         OnboardingPage(
             title: .seePatternsAndGrowWithConfidence,
             description: .understandYourBabysHabitsAndGetHelpfulInsightsOverTime,
-            image: .insights
+            image: .insights,
+            gradient: AppColors.onboardingGradients[2]
         )
     ]
     

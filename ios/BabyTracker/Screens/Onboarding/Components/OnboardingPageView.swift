@@ -43,7 +43,7 @@ struct OnboardingPageView: View {
         .frame(maxWidth: .infinity)
         .background(
             ZStack {
-                let gradient = AppColors.onboardingGradients[pageIndex]
+                let gradient = page.gradient
                 // Gradiente base com 3 cores
                 LinearGradient(
                     stops: [
@@ -77,7 +77,8 @@ struct OnboardingPageView: View {
             page: OnboardingPage(
                 title: .welcomeToBabyCare,
                 description: .trackFeedingSleepDiaperChangesAndDailyMomentsWithEase,
-                image: .mommyBaby
+                image: .mommyBaby,
+                gradient: AppColors.onboardingGradients[0]
             ),
             pageIndex: 0,
             currentPage: 0,

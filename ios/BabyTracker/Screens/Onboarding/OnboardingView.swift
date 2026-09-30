@@ -20,8 +20,7 @@ struct OnboardingView: View {
                                    numberOfPages: viewModel.totalPages).tag(index)
                 
             }
-            //OnboardingFormView()
-              //     .tag(3)
+            
         }.tabViewStyle(.page(indexDisplayMode: .never))
             .ignoresSafeArea()
     }

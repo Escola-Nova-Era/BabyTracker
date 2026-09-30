@@ -14,4 +14,5 @@ struct OnboardingPage: Identifiable{
     let title: LocalizedStringResource
     let description: LocalizedStringResource
     let image: ImageResource
+    let gradient: OnboardingGradientColors
 }

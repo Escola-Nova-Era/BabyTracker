@@ -17,8 +17,8 @@ struct OnboardingPageIndicatorView: View {
                     Circle()
                         .fill(
                             index == currentPage
-                                ? AppColors.dotPurple
-                                : AppColors.dotLight.opacity(0.3)
+                                ? AppColors.pageIndicatorActive
+                                : AppColors.pageIndicatorInactive.opacity(0.3)
                         )
                         .frame(width: 10, height: 10)
                 }
