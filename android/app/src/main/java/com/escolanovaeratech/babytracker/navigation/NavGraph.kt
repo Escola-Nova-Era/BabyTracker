@@ -12,32 +12,30 @@ import com.escolanovaeratech.babytracker.onboarding.ui.OnboardingScreen
 import com.escolanovaeratech.babytracker.profile.ui.ProfileScreen
 import com.escolanovaeratech.babytracker.timeline.ui.TimelineScreen
 
-// Constantes centralizadas para evitar erros de digitação
-object Routes {
-    const val ONBOARDING = "onboarding"
-    const val HOME = "home"
-    const val TIMELINE = "timeline"
-    const val INSIGHTS = "insights"
-    const val PROFILE = "profile"
+enum class Routes(val route: String) {
+    ONBOARDING("onboarding"),
+    HOME("home"),
+    TIMELINE("timeline"),
+    INSIGHTS("insights"),
+    PROFILE("profile")
 }
 @Composable
 fun BabyTrackerAppNavGraph(
     navController: NavHostController,
-    startDestination: String,
+    startDestination: Routes,
     modifier: Modifier = Modifier
 ){
-    //val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = startDestination,
+        startDestination = startDestination.route,
         modifier = modifier
     ) {
         // 1. Onboarding (Introdução)
-        composable(route = Routes.ONBOARDING) {
+        composable(route = Routes.ONBOARDING.route) {
             OnboardingScreen(
                 onFinish = {
-                    navController.navigate(Routes.HOME) {
-                        popUpTo(Routes.ONBOARDING) {
+                    navController.navigate(Routes.HOME.route) {
+                        popUpTo(Routes.ONBOARDING.route) {
                             inclusive = true
                         }
                     }
@@ -46,19 +44,19 @@ fun BabyTrackerAppNavGraph(
         }
 
         // 2. Home (Quick Actions)
-        composable(route = Routes.HOME) {
+        composable(route = Routes.HOME.route) {
             HomeScreenUI()
         }
         // 3. Timeline (Histórico de Atividades)
-        composable(route = Routes.TIMELINE) {
+        composable(route = Routes.TIMELINE.route) {
             TimelineScreen()
         }
         // 4. Insights (Métricas e Gráficos)
-        composable(route = Routes.INSIGHTS) {
+        composable(route = Routes.INSIGHTS.route) {
             InsightsScreen()
         }
         // 5. Profile (Perfil do Bebê e Configurações)
-        composable(route = Routes.PROFILE) {
+        composable(route = Routes.PROFILE.route) {
             ProfileScreen()
         }
     }
