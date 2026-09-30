@@ -14,6 +14,27 @@
 
     <string name="onboarding_finish_button">Get Started</string>
 
+
+    <!-- Form -->
+    <string name="onboarding_form_title">Tell us about your baby</string>
+    <string name="onboarding_form_subtitle">Let\'s personalize BabyCare for you</string>
+
+    <string name="onboarding_form_name_label">Baby\'s name</string>
+    <string name="onboarding_form_name_placeholder">Enter baby\'s name</string>
+
+    <string name="onboarding_form_birthdate_label">Date of birth</string>
+    <string name="onboarding_form_birthdate_placeholder">Select a date</string>
+
+    <string name="onboarding_form_gender_label">Gender</string>
+    <string name="onboarding_form_gender_placeholder">Select gender</string>
+    <string name="onboarding_form_gender_girl">Girl</string>
+    <string name="onboarding_form_gender_boy">Boy</string>
+    <string name="onboarding_form_gender_not_specified">Prefer not to say</string>
+
+    <string name="onboarding_form_continue_button">Continue</string>
+    <string name="onboarding_form_action_confirm">OK</string>
+    <string name="onboarding_form_action_cancel">Cancel</string>
+
     <!-- Home Header -->
     <string name="home_greeting">Hello, Parents 👋</string>
     <string name="home_subtitle">Let\'s track Emma\'s day</string>
@@ -36,6 +57,7 @@
     <string name="last_bath">Last Bath</string>
     <string name="last_bath_time">Yesterday</string>
     <string name="last_bath_detail">7:30 PM</string>
+
     <!-- Quick Actions -->
     <string name="quick_actions">QUICK ACTIONS</string>
     <string name="add_feeding">Add Feeding</string>
