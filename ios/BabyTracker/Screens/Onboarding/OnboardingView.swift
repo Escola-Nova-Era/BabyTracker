@@ -15,7 +15,6 @@ struct OnboardingView: View {
             ForEach(Array(viewModel.pages.enumerated()), id: \.element.id) { index, page in
                 
                 OnboardingPageView(page: page,
-                                   pageIndex:  index,
                                    currentPage: viewModel.currentPage,
                                    numberOfPages: viewModel.totalPages).tag(index)
                 

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct OnboardingPageView: View {
     let page: OnboardingPage
-    let pageIndex: Int
     let currentPage: Int
     let numberOfPages: Int
     
@@ -78,10 +77,9 @@ struct OnboardingPageView: View {
                 title: .welcomeToBabyCare,
                 description: .trackFeedingSleepDiaperChangesAndDailyMomentsWithEase,
                 image: .mommyBaby,
-                gradient: AppColors.onboardingGradients[0]
+                gradient: AppColors.onboardingGradientWelcome
             ),
-            pageIndex: 0,
             currentPage: 0,
-            numberOfPages: 4
+            numberOfPages: 3
         )
 }

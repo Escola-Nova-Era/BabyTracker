@@ -16,24 +16,23 @@ final class OnboardingViewModel {
             title: .welcomeToBabyCare,
             description: .trackFeedingSleepDiaperChangesAndDailyMomentsWithEase,
                 image: .mommyBaby,
-            gradient: AppColors.onboardingGradients[0]
+            gradient: AppColors.onboardingGradientWelcome
         ),
         OnboardingPage(
             title: .stayOnTopOfEveryRoutine,
             description: .logActivitiesQuicklyAndKeepYourBabysDayOrganized,
             image: .trackIcons,
-            gradient: AppColors.onboardingGradients[1]
+            gradient: AppColors.onboardingGradientRoutine
         ),
         OnboardingPage(
             title: .seePatternsAndGrowWithConfidence,
             description: .understandYourBabysHabitsAndGetHelpfulInsightsOverTime,
             image: .insights,
-            gradient: AppColors.onboardingGradients[2]
+            gradient: AppColors.onboardingGradientInsights
         )
     ]
     
     var totalPages: Int {
-//        pages.count + 1
         pages.count
     }
    

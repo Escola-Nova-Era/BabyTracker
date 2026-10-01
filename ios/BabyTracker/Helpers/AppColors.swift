@@ -46,24 +46,24 @@ enum AppColors {
     static let mint = Color(red: 196.0/255, green: 239.0/255, blue: 220.0/255)
     
     // MARK: Variações suaves extras
-
+    
     // Blue
     static let blueSoft = Color(red: 214.0/255, green: 238.0/255, blue: 250.0/255)
     static let blueMuted = Color(red: 186.0/255, green: 226.0/255, blue: 245.0/255)
-
+    
     // Green
     static let greenSoft = Color(red: 220.0/255, green: 243.0/255, blue: 230.0/255)
     static let greenMuted = Color(red: 196.0/255, green: 230.0/255, blue: 208.0/255)
-
+    
     // Purple
     static let purpleSoft = Color(red: 229.0/255, green: 220.0/255, blue: 250.0/255)
     static let purpleMuted = Color(red: 210.0/255, green: 196.0/255, blue: 242.0/255)
     static let lavander = Color(red: 145/255, green: 129/255, blue: 202/255)
-
+    
     // Orange
     static let orangeSoft = Color(red: 255.0/255, green: 232.0/255, blue: 214.0/255)
     static let orangeMuted = Color(red: 250.0/255, green: 214.0/255, blue: 181.0/255)
-
+    
     // Yellow
     static let yellowSoft = Color(red: 255.0/255, green: 244.0/255, blue: 204.0/255)
     static let yellowMuted = Color(red: 250.0/255, green: 232.0/255, blue: 170.0/255)
@@ -99,25 +99,21 @@ enum AppColors {
     static let pageIndicatorInactive = Color(red: 218.0/255, green: 217.0/255, blue: 224.0/255)
     
     
-    // MARK: Gradientes onboarding
-        
-        static let onboardingGradients: [OnboardingGradientColors] = [
-            // Tela 1: #FDEFF5 -> #FDF8FA -> #F8FBFD
-            OnboardingGradientColors(
-                start: Color(red: 253.0/255.0, green: 239.0/255.0, blue: 245.0/255.0),
-                mid: Color(red: 253.0/255.0, green: 248.0/255.0, blue: 250.0/255.0),
-                end: Color(red: 248.0/255.0, green: 251.0/255.0, blue: 253.0/255.0)
-            ),
-            // Tela 2: #FDF1F6 -> #FDF9FA -> #F7FAFD
-            OnboardingGradientColors(
-                start: Color(red: 253.0/255.0, green: 241.0/255.0, blue: 246.0/255.0),
-                mid: Color(red: 253.0/255.0, green: 249.0/255.0, blue: 250.0/255.0),
-                end: Color(red: 247.0/255.0, green: 250.0/255.0, blue: 253.0/255.0)
-            ),
-            // Tela 3: #EFF7FD -> #FDFDFD -> #F5F9FD
-            OnboardingGradientColors(
-                start: Color(red: 239.0/255.0, green: 247.0/255.0, blue: 253.0/255.0),
-                mid: Color(red: 253.0/255.0, green: 253.0/255.0, blue: 253.0/255.0),
-                end: Color(red: 245.0/255.0, green: 249.0/255.0, blue: 253.0/255.0)
-            )
-        ]}
+    static let onboardingGradientWelcome = OnboardingGradientColors(
+        start: Color(red: 253/255, green: 239/255, blue: 245/255),
+        mid: Color(red: 253/255, green: 248/255, blue: 250/255),
+        end: Color(red: 248/255, green: 251/255, blue: 253/255)
+    )
+    
+    static let onboardingGradientRoutine = OnboardingGradientColors(
+        start: Color(red: 253/255, green: 241/255, blue: 246/255),
+        mid: Color(red: 253/255, green: 249/255, blue: 250/255),
+        end: Color(red: 247/255, green: 250/255, blue: 253/255)
+    )
+    
+    static let onboardingGradientInsights = OnboardingGradientColors(
+        start: Color(red: 239/255, green: 247/255, blue: 253/255),
+        mid: Color(red: 253/255, green: 253/255, blue: 253/255),
+        end: Color(red: 245/255, green: 249/255, blue: 253/255)
+    )
+}
