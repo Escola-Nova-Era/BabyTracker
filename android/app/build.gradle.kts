@@ -40,6 +40,12 @@ android {
 
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
+    }
+}
+
 // Exporta os schemas do Room (útil para versionar e testar migrações)
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
