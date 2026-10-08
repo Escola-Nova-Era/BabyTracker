@@ -220,8 +220,6 @@ fun OnboardingFormScreen(
             listOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary)
         )
 
-        val isContinueEnabled = true
-
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
