@@ -64,6 +64,10 @@
     <color name="tag_yellow_text">#FFD88A17</color>
     <color name="tag_blue_bg">#FFEAF2FF</color>
     <color name="tag_blue_text">#FF4D8EED</color>
+    <color name="tag_brown_bg">#FFF7F2EE</color>
+    <color name="tag_brown_text">#FF8D6E63</color>
+    <color name="tag_violet_bg">#FFF8EAFA</color>
+    <color name="tag_violet_text">#FFAB47BC</color>
     <color name="meta_bg">#FFFBFCFF</color>
 
 </resources>
