@@ -15,7 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.escolanovaeratech.babytracker.navigation.Routes
@@ -40,28 +39,28 @@ fun NavigationBar(
                 Icon(
                     imageVector = Icons.Default.Home,
                     contentDescription = "Home",
-                    tint = if (currentRoute == Routes.HOME) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = if (currentRoute == Routes.HOME.route) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             IconButton(onClick = { navigateToTab(navController, Routes.TIMELINE) }) {
                 Icon(
                     imageVector = Icons.Default.History,
                     contentDescription = "Timeline",
-                    tint = if (currentRoute == Routes.TIMELINE) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = if (currentRoute == Routes.TIMELINE.route) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             IconButton(onClick = { navigateToTab(navController, Routes.INSIGHTS) }) {
                 Icon(
                     imageVector = Icons.Default.BarChart,
                     contentDescription = "Insights",
-                    tint = if (currentRoute == Routes.INSIGHTS) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = if (currentRoute == Routes.INSIGHTS.route) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             IconButton(onClick = { navigateToTab(navController, Routes.PROFILE) }) {
                 Icon(
                     imageVector = Icons.Default.Person,
                     contentDescription = "Profile",
-                    tint = if (currentRoute == Routes.PROFILE) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = if (currentRoute == Routes.PROFILE.route) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -69,9 +68,9 @@ fun NavigationBar(
 }
 
 // Navegação segura evitando acúmulo de instâncias no backstack
-private fun navigateToTab(navController: NavHostController, route: String) {
-    navController.navigate(route) {
-        popUpTo(navController.graph.findStartDestination().id) {
+private fun navigateToTab(navController: NavHostController, route: Routes) {
+    navController.navigate(route.route) {
+        popUpTo(Routes.HOME.route) {
             saveState = true
         }
         launchSingleTop = true
