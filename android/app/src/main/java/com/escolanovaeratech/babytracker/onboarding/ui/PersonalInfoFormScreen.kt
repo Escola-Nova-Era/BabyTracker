@@ -1,5 +1,6 @@
 package com.escolanovaeratech.babytracker.onboarding.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -12,22 +13,22 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.outlined.CalendarMonth
-import androidx.compose.material.icons.outlined.ChildCare
-import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Wc
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -46,9 +47,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.escolanovaeratech.babytracker.R
@@ -63,223 +68,328 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+
 @Composable
 fun PersonalInfoFormScreen(
     onContinueClick: (BabyProfileFormData) -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var formData by remember { mutableStateOf(BabyProfileFormData()) }
     var showDatePicker by remember { mutableStateOf(false) }
-    var showGenderPicker by remember { mutableStateOf(false) }
+    //var showGenderPicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
     val isContinueEnabled = formData.name.isNotBlank()
 
+    // Telas baixas (ex.: 360x640dp) recebem avatar e espaçamentos menores
+    val isShortScreen = LocalConfiguration.current.screenHeightDp < 700
+    val avatarSize = if (isShortScreen) 72.dp else 96.dp
+    val sectionSpacing = if (isShortScreen) Spacing.md else Spacing.xl
+
+    val continueGradient = Brush.horizontalGradient(
+        listOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary)
+    )
+    val continueBackground = if (isContinueEnabled) {
+        continueGradient
+    } else {
+        SolidColor(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f))
+    }
+    val continueContentColor = if (isContinueEnabled) {
+        Color.White
+    } else {
+        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+    }
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(OnboardingGradients.forPage(3))
-            .verticalScroll(rememberScrollState())
             .padding(horizontal = Spacing.xl),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        Spacer(Modifier.height(Spacing.xxl))
-
-        Icon(
-            imageVector = Icons.Outlined.ChildCare,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(48.dp)
-        )
-
-        Spacer(Modifier.height(Spacing.sm))
-
-        Text(
-            text = stringResource(R.string.onboarding_form_title),
-            style = MaterialTheme.typography.headlineSmall,
-            textAlign = TextAlign.Center
-        )
-
-        Spacer(Modifier.height(Spacing.xxs))
-
-        Text(
-            text = stringResource(R.string.onboarding_form_subtitle),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
-        )
-
-        Spacer(Modifier.height(Spacing.xl))
-
-        // Nome do bebê
-        FormField(
-            label = stringResource(R.string.onboarding_form_name_label),
-            icon = Icons.Outlined.Person
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val nameInteractionSource = remember { MutableInteractionSource() }
-            BasicTextField(
-                value = formData.name,
-                onValueChange = { formData = formData.copy(name = it) },
-                singleLine = true,
-                textStyle = MaterialTheme.typography.bodyLarge.copy(
-                    color = MaterialTheme.colorScheme.onSurface
-                ),
-                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                interactionSource = nameInteractionSource,
-                modifier = Modifier.fillMaxWidth()
-            ) { innerTextField ->
-                TextFieldDefaults.DecorationBox(
-                    value = formData.name,
-                    innerTextField = innerTextField,
-                    enabled = true,
-                    singleLine = true,
-                    visualTransformation = VisualTransformation.None,
-                    interactionSource = nameInteractionSource,
-                    placeholder = { Text(stringResource(R.string.onboarding_form_name_placeholder)) },
-                    contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(start = 0.dp),
-                    colors = TextFieldDefaults.colors(
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent
+            Spacer(Modifier.height(Spacing.md))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surface)
+                        .clickable(onClick = onBackClick),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                        contentDescription = stringResource(R.string.onboarding_form_back_button_description),
+                        tint = MaterialTheme.colorScheme.onSurface
                     )
+                }
+
+                Spacer(modifier = Modifier.weight(1f))
+                OnboardingPageIndicator(numberOfPages = 4, currentPage = 3)
+
+                /*
+                Espaçador invisível do mesmo tamanho do botão, pra manter o indicador centralizado em relação à tela, não só entre os dois lados do botão.
+                * */
+                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.size(40.dp))
+            }
+            Spacer(modifier = Modifier.height(sectionSpacing))
+
+            Box(
+                modifier = Modifier
+                    .size(avatarSize)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surface),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.onboarding_routine),
+                    contentDescription = null,
+                    modifier = Modifier.size(avatarSize * 2 / 3)
                 )
             }
-        }
 
-        // Data de nascimento
-        FormField(
-            label = stringResource(R.string.onboarding_form_birthdate_label),
-            icon = Icons.Outlined.CalendarMonth,
-            modifier = Modifier.padding(top = Spacing.lg),
-            onClick = { showDatePicker = true }
-        ) {
+            Spacer(Modifier.height(sectionSpacing))
+
             Text(
-                text = formData.dateOfBirthMillis?.let(::formatDate)
-                    ?: stringResource(R.string.onboarding_form_birthdate_placeholder),
-                color = if (formData.dateOfBirthMillis != null) {
-                    MaterialTheme.colorScheme.onSurface
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                }
+                text = stringResource(R.string.onboarding_form_title),
+                style = MaterialTheme.typography.headlineSmall,
+                textAlign = TextAlign.Center
             )
-        }
 
-        //Gênero
-        Box(modifier = Modifier.fillMaxWidth()){
+            Spacer(Modifier.height(Spacing.lg))
+
+            Text(
+                text = stringResource(R.string.onboarding_form_subtitle),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(Modifier.height(sectionSpacing))
+
+            // Nome do bebê
             FormField(
-                label = stringResource(R.string.onboarding_form_gender_label),
-                icon = Icons.Outlined.Wc,
+                label = stringResource(R.string.onboarding_form_name_label),
+                icon = Icons.Outlined.Person
+            ) {
+                val nameInteractionSource = remember { MutableInteractionSource() }
+                BasicTextField(
+                    value = formData.name,
+                    onValueChange = { formData = formData.copy(name = it) },
+                    singleLine = true,
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(
+                        color = MaterialTheme.colorScheme.onSurface
+                    ),
+                    cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                    interactionSource = nameInteractionSource,
+                    modifier = Modifier.fillMaxWidth()
+                ) { innerTextField ->
+                    TextFieldDefaults.DecorationBox(
+                        value = formData.name,
+                        innerTextField = innerTextField,
+                        enabled = true,
+                        singleLine = true,
+                        visualTransformation = VisualTransformation.None,
+                        interactionSource = nameInteractionSource,
+                        placeholder = { Text(stringResource(R.string.onboarding_form_name_placeholder)) },
+                        contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(start = 0.dp),
+                        colors = TextFieldDefaults.colors(
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent
+                        )
+                    )
+                }
+            }
+
+            // Data de nascimento
+            FormField(
+                label = stringResource(R.string.onboarding_form_birthdate_label),
+                icon = Icons.Outlined.CalendarMonth,
                 modifier = Modifier.padding(top = Spacing.lg),
-                onClick = { showGenderPicker = true }
+                onClick = { showDatePicker = true }
             ) {
                 Text(
-                    text = formData.gender?.let { stringResource(it.labelRes) }
-                        ?:stringResource(R.string.onboarding_form_gender_placeholder),
-                    color = if (formData.gender != null) {
+                    text = formData.dateOfBirthMillis?.let(::formatDate)
+                        ?: stringResource(R.string.onboarding_form_birthdate_placeholder),
+                    color = if (formData.dateOfBirthMillis != null) {
                         MaterialTheme.colorScheme.onSurface
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
-                    },
-
-                    modifier = Modifier.weight(1f)
+                    }
                 )
-
-                Icon(
-                    imageVector = Icons.Outlined.KeyboardArrowDown,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-
             }
 
-            DropdownMenu (
-                expanded = showGenderPicker,
-                onDismissRequest = { showGenderPicker = false }
+            Spacer(Modifier.height(Spacing.lg))
 
-            ){
-                BabyGender.entries.forEach {  option ->
-                    DropdownMenuItem(
-                        text = { Text(stringResource(option.labelRes)) },
-                        onClick = {
-                            formData = formData.copy(gender = option)
-                            showGenderPicker = false
-                        }
-                    )
+            //Gênero
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Spacing.xs)
+            ) {
+                Text(
+                    text = stringResource(R.string.onboarding_form_gender_label).uppercase(),
+                    style = MaterialTheme.typography.labelLarge
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.sm)
+                ) {
+                    BabyGender.entries.forEach { option ->
+                        GenderOptionChip(
+                            option = option,
+                            isSelected = formData.gender == option,
+                            onClick = { formData = formData.copy(gender = option) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
-
             }
         }
 
-        Spacer(Modifier.height(Spacing.xxl))
+        Spacer(Modifier.height(Spacing.md))
 
-
-        val continueGradient = Brush.horizontalGradient(
-            listOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary)
-        )
-
-        Box(
-            contentAlignment = Alignment.Center,
+        // Botão de continuar
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(ComponentSize.primaryButtonHeight)
                 .clip(RoundedCornerShape(18.dp))
-                .background(
-                    if (isContinueEnabled) continueGradient
-                    else Brush.horizontalGradient(
-                        listOf(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.surfaceVariant)
-                    )
-                )
+                .background(continueBackground)
                 .clickable(enabled = isContinueEnabled) { onContinueClick(formData) }
         ) {
             Text(
                 text = stringResource(R.string.onboarding_form_continue_button),
-                color = Color.White,
+                color = continueContentColor,
                 style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(Modifier.width(Spacing.lg))
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.ArrowForward,
+                contentDescription = null,
+                tint = continueContentColor
             )
         }
 
-        Spacer(Modifier.height(Spacing.lg))
-
+        // Indicador de página abaixo do botao de continuar
+        Spacer(Modifier.height(Spacing.md))
         OnboardingPageIndicator(numberOfPages = 4, currentPage = 3)
+        Spacer(Modifier.height(Spacing.xxl))
 
-        Spacer(Modifier.height(Spacing.lg))
+        if (showDatePicker) {
+            DatePickerDialog(
+                onDismissRequest = { showDatePicker = false },
+                confirmButton = {
+                    TextButton(onClick = {
+                        formData =
+                            formData.copy(dateOfBirthMillis = datePickerState.selectedDateMillis)
+                        showDatePicker = false
+                    }) {
+                        Text(text = stringResource(R.string.onboarding_form_action_confirm))
 
-    }
-
-    if (showDatePicker) {
-        DatePickerDialog(
-            onDismissRequest = { showDatePicker = false },
-            confirmButton = {
-                TextButton(onClick = {
-                    formData = formData.copy(dateOfBirthMillis = datePickerState.selectedDateMillis)
-                    showDatePicker = false
-                }) {
-                    Text(text = stringResource(R.string.onboarding_form_action_confirm))
-
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showDatePicker = false }) {
+                        Text(text = stringResource(R.string.onboarding_form_action_cancel))
+                    }
                 }
-            },
-            dismissButton = {
-                TextButton(onClick = { showDatePicker = false }) {
-                    Text(text = stringResource(R.string.onboarding_form_action_cancel))
-                }
+            ) {
+                DatePicker(state = datePickerState)
             }
-        ) {
-            DatePicker(state = datePickerState)
         }
     }
+
 }
 
-
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, name = "Página de formulário de perfil")
 @Composable
 private fun PersonalInfoFormScreenPreview() {
     BabyTrackerTheme {
-        PersonalInfoFormScreen(onContinueClick = {})
+        PersonalInfoFormScreen(
+            onContinueClick = {},
+            onBackClick = {}
+        )
     }
 }
+
+
+private data class GenderOptionStyle(
+    val emoji: String,
+    val selectedContainer: Color,
+    val selectedContent: Color
+)
+
+
+@Composable
+private fun genderOptionStyle(option: BabyGender): GenderOptionStyle = when (option) {
+    BabyGender.GIRL -> GenderOptionStyle(
+        emoji = "👧",
+        selectedContainer = colorResource(R.color.tag_violet_bg),
+        selectedContent = colorResource(R.color.tag_violet_text)
+    )
+
+    BabyGender.BOY -> GenderOptionStyle(
+        emoji = "👦",
+        selectedContainer = colorResource(R.color.tag_blue_bg),
+        selectedContent = colorResource(R.color.tag_blue_text)
+    )
+
+    BabyGender.NOT_SPECIFIED -> GenderOptionStyle(
+        emoji = "🎁",
+        selectedContainer = colorResource(R.color.tag_yellow_bg),
+        selectedContent = colorResource(R.color.tag_yellow_text)
+    )
+}
+
+@Composable
+private fun GenderOptionChip(
+    option: BabyGender,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val style = genderOptionStyle(option)
+
+    // Emoji em cima do texto, para o rótulo usar toda a largura do chip em telas estreitas
+    Column(
+        modifier = modifier
+            .heightIn(min = 64.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .background(if (isSelected) style.selectedContainer else MaterialTheme.colorScheme.surface)
+            .clickable(onClick = onClick)
+            .padding(horizontal = Spacing.xs, vertical = Spacing.xs),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = style.emoji)
+        Spacer(Modifier.height(Spacing.xxs))
+        Text(
+            text = stringResource(option.labelRes),
+            style = MaterialTheme.typography.labelLarge,
+            color = if (isSelected) style.selectedContent else MaterialTheme.colorScheme.onSurface,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
+}
+
 
 @Composable
 fun FormField(
@@ -287,6 +397,7 @@ fun FormField(
     icon: ImageVector,
     onClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
+    trailingLabel: String? = null,
     content: @Composable RowScope.() -> Unit
 ) {
     Column(
@@ -294,11 +405,22 @@ fun FormField(
         verticalArrangement = Arrangement.spacedBy(Spacing.xs)
 
     ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.labelLarge,
-
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = label.uppercase(),
+                style = MaterialTheme.typography.labelLarge
+            )
+            if (trailingLabel != null) {
+                Text(
+                    text = trailingLabel,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
         val shellModifier = Modifier
             .fillMaxWidth()
             .height(58.dp)
@@ -319,8 +441,11 @@ fun FormField(
             )
             content()
         }
+
     }
 }
 
+
 fun formatDate(millis: Long): String =
     SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(millis))
+

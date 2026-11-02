@@ -3,7 +3,7 @@
     <string name="app_name">BabyTracker</string>
 
     <!-- Onboarding -->
-    <string name="onboarding_page1_title">Welcome to BabyCare</string>
+    <string name="onboarding_page1_title">Welcome to BabyTracker</string>
     <string name="onboarding_page1_description">Track feeding, sleep, diaper changes, and daily moments with ease.</string>
 
     <string name="onboarding_page2_title">Stay on top of every routine</string>
@@ -17,21 +17,23 @@
 
     <!-- Form -->
     <string name="onboarding_form_title">Tell us about your baby</string>
-    <string name="onboarding_form_subtitle">Let\'s personalize BabyCare for you</string>
+    <string name="onboarding_form_subtitle">Personalize BabyTracker for your little one</string>
 
     <string name="onboarding_form_name_label">Baby\'s name</string>
     <string name="onboarding_form_name_placeholder">Enter baby\'s name</string>
 
     <string name="onboarding_form_birthdate_label">Date of birth</string>
-    <string name="onboarding_form_birthdate_placeholder">Select a date</string>
+    <string name="onboarding_form_birthdate_due_date_label">or due date</string>
+    <string name="onboarding_form_birthdate_placeholder">Select a date or due date</string>
 
     <string name="onboarding_form_gender_label">Gender</string>
-    <string name="onboarding_form_gender_placeholder">Select gender</string>
     <string name="onboarding_form_gender_girl">Girl</string>
     <string name="onboarding_form_gender_boy">Boy</string>
-    <string name="onboarding_form_gender_not_specified">Prefer not to say</string>
+    <string name="onboarding_form_gender_not_specified">Surprise</string>
+    <string name="onboarding_form_gender_placeholder">Select gender</string>
 
     <string name="onboarding_form_continue_button">Continue</string>
+    <string name="onboarding_form_back_button_description">Back</string>
     <string name="onboarding_form_action_confirm">OK</string>
     <string name="onboarding_form_action_cancel">Cancel</string>
 

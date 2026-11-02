@@ -39,11 +39,7 @@ fun BabyTrackerAppNavGraph(
         composable(route = Routes.ONBOARDING.route) {
             OnboardingHostScreen(
                 onFinish = {
-                    navController.navigate(Routes.ONBOARDING_FORM.route) {
-                        popUpTo(Routes.ONBOARDING.route) {
-                            inclusive = true
-                        }
-                    }
+                    navController.navigate(Routes.ONBOARDING_FORM.route)
                 }
             )
       }
@@ -52,11 +48,12 @@ fun BabyTrackerAppNavGraph(
         composable(route = Routes.ONBOARDING_FORM.route) {
             val onboardingViewModel: OnboardingViewModel = viewModel()
             PersonalInfoFormScreen(
+                onBackClick = { navController.popBackStack() },
                 onContinueClick = { formData ->
                     // TODO: salvar formData quando existir o repositório de perfil
                     onboardingViewModel.completeOnboarding {
                         navController.navigate(Routes.HOME.route) {
-                            popUpTo(Routes.ONBOARDING_FORM.route) { inclusive = true }
+                            popUpTo(Routes.ONBOARDING.route) { inclusive = true }
                         }
                     }
                 }
