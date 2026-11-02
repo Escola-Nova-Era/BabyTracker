@@ -8,9 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.escolanovaeratech.babytracker.home.ui.HomeScreenUI
 import com.escolanovaeratech.babytracker.insights.ui.InsightsScreen
-import com.escolanovaeratech.babytracker.onboarding.ui.OnboardingFormScreen
-import com.escolanovaeratech.babytracker.onboarding.ui.OnboardingScreen
+import com.escolanovaeratech.babytracker.onboarding.ui.OnboardingHostScreen
 import com.escolanovaeratech.babytracker.onboarding.ui.OnboardingViewModel
+import com.escolanovaeratech.babytracker.onboarding.ui.PersonalInfoFormScreen
 import com.escolanovaeratech.babytracker.profile.ui.ProfileScreen
 import com.escolanovaeratech.babytracker.timeline.ui.TimelineScreen
 
@@ -27,7 +27,7 @@ enum class Routes(val route: String) {
 @Composable
 fun BabyTrackerAppNavGraph(
     navController: NavHostController,
-    startDestination: Routes,
+    startDestination: Routes = Routes.HOME,
     modifier: Modifier = Modifier
 ){
     NavHost(
@@ -37,7 +37,7 @@ fun BabyTrackerAppNavGraph(
     ) {
         // 1. Onboarding (Introdução)
         composable(route = Routes.ONBOARDING.route) {
-            OnboardingScreen(
+            OnboardingHostScreen(
                 onFinish = {
                     navController.navigate(Routes.ONBOARDING_FORM.route) {
                         popUpTo(Routes.ONBOARDING.route) {
@@ -51,7 +51,7 @@ fun BabyTrackerAppNavGraph(
         //Formulário de perfil do bebê
         composable(route = Routes.ONBOARDING_FORM.route) {
             val onboardingViewModel: OnboardingViewModel = viewModel()
-            OnboardingFormScreen(
+            PersonalInfoFormScreen(
                 onContinueClick = { formData ->
                     // TODO: salvar formData quando existir o repositório de perfil
                     onboardingViewModel.completeOnboarding {

@@ -23,14 +23,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.escolanovaeratech.babytracker.R
-import com.escolanovaeratech.babytracker.onboarding.model.OnboardingPage
+import com.escolanovaeratech.babytracker.onboarding.model.OnboardingPageRes
 import com.escolanovaeratech.babytracker.theme.ComponentSize
 import com.escolanovaeratech.babytracker.theme.Spacing
 
 
 @Composable
 fun OnboardingPageContent(
-    page: OnboardingPage,
+    page: OnboardingPageRes,
     pageIndex: Int,
     numberOfPages: Int,
     currentPage: Int,
@@ -110,7 +110,7 @@ fun OnboardingPageContent(
 @Preview(showBackground = true, name = "Página de onboarding")
 @Composable
 fun OnboardingPageContentPreview() {
-    val samplePage = OnboardingPage(
+    val samplePage = OnboardingPageRes(
         descriptionRes = R.string.onboarding_page1_description,
         titleRes = R.string.onboarding_page1_title,
         imageRes = R.drawable.onboarding_welcome

@@ -9,7 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.escolanovaeratech.babytracker.onboarding.ui.components.OnboardingPageContent
 
 @Composable
-fun OnboardingScreen(
+fun OnboardingHostScreen(
     onFinish: () -> Unit,
     viewModel: OnboardingViewModel = viewModel()
 ) {

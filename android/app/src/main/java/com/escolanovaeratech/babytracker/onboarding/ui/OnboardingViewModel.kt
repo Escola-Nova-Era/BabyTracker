@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.onboarding.local.OnboardingPreferences
-import com.escolanovaeratech.babytracker.onboarding.model.OnboardingPage
+import com.escolanovaeratech.babytracker.onboarding.model.OnboardingPageRes
 import kotlinx.coroutines.launch
 
 class OnboardingViewModel(application: Application) : AndroidViewModel(application) {
@@ -13,17 +13,17 @@ class OnboardingViewModel(application: Application) : AndroidViewModel(applicati
     private val preferences = OnboardingPreferences(application)
 
     val pages = listOf(
-        OnboardingPage(
+        OnboardingPageRes(
             imageRes = R.drawable.onboarding_welcome,
             titleRes = R.string.onboarding_page1_title,
             descriptionRes = R.string.onboarding_page1_description
         ),
-        OnboardingPage(
+        OnboardingPageRes(
             imageRes = R.drawable.onboarding_routine,
             titleRes = R.string.onboarding_page2_title,
             descriptionRes = R.string.onboarding_page2_description
         ),
-        OnboardingPage(
+        OnboardingPageRes(
             imageRes = R.drawable.onboarding_insights,
             titleRes = R.string.onboarding_page3_title,
             descriptionRes = R.string.onboarding_page3_description

@@ -15,7 +15,7 @@ class OnboardingPreferences(private val context: Context) {
         val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
     }
 
-    val onboardingCompleted: Flow<Boolean> =
+    val isOnboardingCompleted: Flow<Boolean> =
         context.onboardingDataStore.data.map { prefs ->
             prefs[Keys.ONBOARDING_COMPLETED] ?: false
         }

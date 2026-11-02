@@ -48,7 +48,7 @@ fun BabyTrackerApp() {
     val onboardingPreferences = remember { OnboardingPreferences(context) }
 
     val onboardingCompleted by produceState<Boolean?>(initialValue = null) {
-        value = onboardingPreferences.onboardingCompleted.first()
+        value = onboardingPreferences.isOnboardingCompleted.first()
     }
 
     val completed = onboardingCompleted ?: return

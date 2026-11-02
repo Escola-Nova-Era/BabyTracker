@@ -64,7 +64,7 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun OnboardingFormScreen(
+fun PersonalInfoFormScreen(
     onContinueClick: (BabyProfileFormData) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -275,9 +275,9 @@ fun OnboardingFormScreen(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun OnboardingFormScreenPreview() {
+private fun PersonalInfoFormScreenPreview() {
     BabyTrackerTheme {
-        OnboardingFormScreen(onContinueClick = {})
+        PersonalInfoFormScreen(onContinueClick = {})
     }
 }
 
