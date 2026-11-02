@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,50 +21,119 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.escolanovaeratech.babytracker.R
 import com.escolanovaeratech.babytracker.home.ui.components.AddBathBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.AddDiaperBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.AddFeedingBottomSheet
 import com.escolanovaeratech.babytracker.home.ui.components.SleepWakeBottomSheet
 import com.escolanovaeratech.babytracker.theme.*
+import com.escolanovaeratech.babytracker.ui.components.BabyTrackerSnackbar
+import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun HomeScreenUI(modifier: Modifier = Modifier) {
+fun HomeScreenUI(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = viewModel(
+        factory = HomeViewModel.provideFactory(LocalContext.current.applicationContext)
+    )
+) {
+    HomeScreenContent(
+        modifier = modifier,
+        onEvent = viewModel::onEvent,
+        uiEvent = viewModel.uiEvent
+    )
+}
+
+@Composable
+fun HomeScreenContent(
+    modifier: Modifier = Modifier,
+    onEvent: (BabyTrackerEvent) -> Unit = {},
+    uiEvent: Flow<HomeUiEvent>? = null
+) {
     var showAddFeedingSheet by remember { mutableStateOf(false) }
     var showAddDiaperSheet by remember { mutableStateOf(false) }
     var showSleepWakeSheet by remember { mutableStateOf(false) }
     var showAddBathSheet by remember { mutableStateOf(false) }
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val context = LocalContext.current
+
+    if (uiEvent != null) {
+        LaunchedEffect(uiEvent) {
+            uiEvent.collect { event ->
+                when (event) {
+                    is HomeUiEvent.ShowSnackbar -> {
+                        snackbarHostState.showSnackbar(
+                            message = context.getString(event.messageResId)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     if (showAddFeedingSheet) {
         AddFeedingBottomSheet(
             onDismiss = { showAddFeedingSheet = false },
+            onSave = { hour, minute, amountMl, notes ->
+                onEvent(BabyTrackerEvent.SaveFeeding(hour, minute, amountMl, notes))
+            },
         )
     }
     if (showAddDiaperSheet) {
         AddDiaperBottomSheet(
             onDismiss = { showAddDiaperSheet = false },
+            onSave = { diaperType, hour, minute, notes ->
+                onEvent(BabyTrackerEvent.SaveDiaper(diaperType, hour, minute, notes))
+            },
         )
     }
     if (showSleepWakeSheet) {
         SleepWakeBottomSheet(
             onDismiss = { showSleepWakeSheet = false },
+            onSave = { sleepStatus, startHour, startMinute, endHour, endMinute, notes ->
+                onEvent(
+                    BabyTrackerEvent.SaveSleep(
+                        sleepStatus = sleepStatus,
+                        startHour = startHour,
+                        startMinute = startMinute,
+                        endHour = endHour,
+                        endMinute = endMinute,
+                        notes = notes
+                    )
+                )
+            },
         )
     }
     if (showAddBathSheet) {
         AddBathBottomSheet(
             onDismiss = { showAddBathSheet = false },
+            onSave = { hour, minute, durationMinutes, waterTemperature, notes ->
+                onEvent(
+                    BabyTrackerEvent.SaveBath(
+                        hour = hour,
+                        minute = minute,
+                        durationMinutes = durationMinutes,
+                        waterTemperature = waterTemperature,
+                        notes = notes
+                    )
+                )
+            },
         )
     }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
+    Box(modifier = modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
             .background(brush = HomeBackgroundGradient)
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp, vertical = 20.dp),
@@ -304,6 +374,17 @@ fun HomeScreenUI(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(8.dp))
     }
+
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 16.dp),
+            snackbar = { snackbarData ->
+                BabyTrackerSnackbar(snackbarData = snackbarData)
+            }
+        )
+    }
 }
 
 // --- COMPONENTE DO CARD DE RESUMO (TODAY'S SUMMARY) ---
@@ -420,6 +501,6 @@ fun ActionButton(
 @Composable
 fun HomeScreenUIPreview() {
     BabyTrackerTheme {
-        HomeScreenUI()
+        HomeScreenContent()
     }
 }

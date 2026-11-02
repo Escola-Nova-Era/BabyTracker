@@ -2,6 +2,12 @@ import SwiftUI
 
 // Catálogos central de cores do app
 
+struct OnboardingGradientColors {
+    let start: Color
+    let mid: Color
+    let end: Color
+}
+
 enum AppColors {
     
     // MARK: Fundo
@@ -21,6 +27,7 @@ enum AppColors {
     // Fundo neutro suave usado em cards secundários e blocos internos
     static let surfaceMuted = Color(red: 245.0/255.0, green: 247.0/255.0, blue: 251.0/255.0)
     
+    
     // MARK: Cores de Identidade
     
     // Azul principal do app (Azul Bebê)
@@ -39,24 +46,24 @@ enum AppColors {
     static let mint = Color(red: 196.0/255, green: 239.0/255, blue: 220.0/255)
     
     // MARK: Variações suaves extras
-
+    
     // Blue
     static let blueSoft = Color(red: 214.0/255, green: 238.0/255, blue: 250.0/255)
     static let blueMuted = Color(red: 186.0/255, green: 226.0/255, blue: 245.0/255)
-
+    
     // Green
     static let greenSoft = Color(red: 220.0/255, green: 243.0/255, blue: 230.0/255)
     static let greenMuted = Color(red: 196.0/255, green: 230.0/255, blue: 208.0/255)
-
+    
     // Purple
     static let purpleSoft = Color(red: 229.0/255, green: 220.0/255, blue: 250.0/255)
     static let purpleMuted = Color(red: 210.0/255, green: 196.0/255, blue: 242.0/255)
     static let lavander = Color(red: 145/255, green: 129/255, blue: 202/255)
-
+    
     // Orange
     static let orangeSoft = Color(red: 255.0/255, green: 232.0/255, blue: 214.0/255)
     static let orangeMuted = Color(red: 250.0/255, green: 214.0/255, blue: 181.0/255)
-
+    
     // Yellow
     static let yellowSoft = Color(red: 255.0/255, green: 244.0/255, blue: 204.0/255)
     static let yellowMuted = Color(red: 250.0/255, green: 232.0/255, blue: 170.0/255)
@@ -84,4 +91,29 @@ enum AppColors {
     
     // Cor de sucesso
     static let success = Color(red: 105.0/255, green: 189.0/255, blue: 145.0/255)
+    
+    // MARK: Marker para paginação
+    
+    //Páginação dot
+    static let pageIndicatorActive = Color(red: 131.0/255, green: 68.0/255, blue: 234.0/255)
+    static let pageIndicatorInactive = Color(red: 218.0/255, green: 217.0/255, blue: 224.0/255)
+    
+    
+    static let onboardingGradientWelcome = OnboardingGradientColors(
+        start: Color(red: 253/255, green: 239/255, blue: 245/255),
+        mid: Color(red: 253/255, green: 248/255, blue: 250/255),
+        end: Color(red: 248/255, green: 251/255, blue: 253/255)
+    )
+    
+    static let onboardingGradientRoutine = OnboardingGradientColors(
+        start: Color(red: 253/255, green: 241/255, blue: 246/255),
+        mid: Color(red: 253/255, green: 249/255, blue: 250/255),
+        end: Color(red: 247/255, green: 250/255, blue: 253/255)
+    )
+    
+    static let onboardingGradientInsights = OnboardingGradientColors(
+        start: Color(red: 239/255, green: 247/255, blue: 253/255),
+        mid: Color(red: 253/255, green: 253/255, blue: 253/255),
+        end: Color(red: 245/255, green: 249/255, blue: 253/255)
+    )
 }
