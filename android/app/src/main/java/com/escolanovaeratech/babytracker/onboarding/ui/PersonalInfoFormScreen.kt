@@ -2,6 +2,7 @@ package com.escolanovaeratech.babytracker.onboarding.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +28,7 @@ import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material3.ButtonDefaults.shape
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.Icon
@@ -46,6 +48,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
@@ -77,7 +80,6 @@ fun PersonalInfoFormScreen(
 ) {
     var formData by remember { mutableStateOf(BabyProfileFormData()) }
     var showDatePicker by remember { mutableStateOf(false) }
-    //var showGenderPicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
     val isContinueEnabled = formData.name.isNotBlank()
 
@@ -341,19 +343,26 @@ private data class GenderOptionStyle(
 private fun genderOptionStyle(option: BabyGender): GenderOptionStyle = when (option) {
     BabyGender.GIRL -> GenderOptionStyle(
         emoji = "👧",
-        selectedContainer = colorResource(R.color.tag_violet_bg),
-        selectedContent = colorResource(R.color.tag_violet_text)
+        selectedContainer = colorResource(R.color.tag_violet_bg)
+            .copy(alpha = 0.18f)
+            .compositeOver(MaterialTheme.colorScheme.surface),
+        selectedContent = colorResource(R.color.tag_violet_text),
+
     )
 
     BabyGender.BOY -> GenderOptionStyle(
         emoji = "👦",
-        selectedContainer = colorResource(R.color.tag_blue_bg),
+        selectedContainer = colorResource(R.color.tag_blue_bg)
+        .copy(alpha = 0.18f)
+        .compositeOver(MaterialTheme.colorScheme.surface),
         selectedContent = colorResource(R.color.tag_blue_text)
     )
 
     BabyGender.NOT_SPECIFIED -> GenderOptionStyle(
         emoji = "🎁",
-        selectedContainer = colorResource(R.color.tag_yellow_bg),
+        selectedContainer = colorResource(R.color.tag_yellow_bg)
+        .copy(alpha = 0.18f)
+        .compositeOver(MaterialTheme.colorScheme.surface),
         selectedContent = colorResource(R.color.tag_yellow_text)
     )
 }
@@ -367,12 +376,17 @@ private fun GenderOptionChip(
 ) {
     val style = genderOptionStyle(option)
 
-    // Emoji em cima do texto, para o rótulo usar toda a largura do chip em telas estreitas
+    // Emoji centralizado, para usar toda a largura do chip em telas estreitas
     Column(
         modifier = modifier
             .heightIn(min = 64.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(if (isSelected) style.selectedContainer else MaterialTheme.colorScheme.surface)
+            .border(
+                width = 1.5.dp,
+                color = if (isSelected) style.selectedContent else Color.Transparent,
+                shape = shape
+            )
             .clickable(onClick = onClick)
             .padding(horizontal = Spacing.xs, vertical = Spacing.xs),
         verticalArrangement = Arrangement.Center,
