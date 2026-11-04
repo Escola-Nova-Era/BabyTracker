@@ -1,17 +1,15 @@
 package com.escolanovaeratech.babytracker.onboarding.ui
 
-import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.escolanovaeratech.babytracker.onboarding.ui.components.OnboardingPageContent
 
 @Composable
-fun OnboardingScreen(
+fun OnboardingHostScreen(
     onFinish: () -> Unit,
     viewModel: OnboardingViewModel = viewModel()
 ) {
@@ -28,7 +26,7 @@ fun OnboardingScreen(
             numberOfPages = pages.size,
             currentPage = pagerState.currentPage,
             isLastPage = pageIndex == pages.lastIndex,
-            onFinishClick = { viewModel.completeOnboarding(onFinish) }
+            onFinishClick = onFinish
         )
     }
 }

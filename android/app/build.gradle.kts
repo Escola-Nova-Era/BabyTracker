@@ -7,11 +7,12 @@ plugins {
 
 android {
     namespace = "com.escolanovaeratech.babytracker"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.escolanovaeratech.babytracker"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +53,8 @@ ksp {
 }
 
 dependencies {
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
